@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>PruebaSync</title>
+ </head>
+ <body>
+  <div id="connectionStatus"></div>
+  <p>Pagina de prueba para notificaciones encoladas!<p>
+  <button id="requestButton">Genera una notificacion al servidor</button>
+
+
+  <script>
+  	if ('serviceWorker' in navigator) {
+	  navigator.serviceWorker
+	    .register('./service-worker.js')
+	    .then(registration => {
+	    	
+	    	console.log("Service Worker registrado");
+	    	return navigator.serviceWorker.ready;
+	    })
+	    .then(registration => { // register sync
+	      document.getElementById('requestButton').addEventListener('click', () => {
+	        registration.sync.register('image-fetch').then(() => {
+	            console.log('Sync registrado');
+	        });
+	      });
+	    });
+	} else {
+	  document.getElementById('requestButton').addEventListener('click', () => {
+	    console.log('Busco la imagen');
+	  });
+	}
+
+
+
+	  // Connection Status
+	function isOnline () {
+	  var connectionStatus = document.getElementById('connectionStatus');
+
+	  if (navigator.onLine){
+	    connectionStatus.innerHTML = 'Usted esta online!';
+	  } else {
+	    connectionStatus.innerHTML = 'Usted no tiene conexion, pelotu! :P';
+	  }
+	}
+
+	window.addEventListener('online', isOnline);
+	window.addEventListener('offline', isOnline);
+	isOnline();
+  </script>
+ </body>
+</html>

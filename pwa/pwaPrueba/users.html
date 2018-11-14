@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="theme-color" content="#2196F3"/>
+	<meta name = "Description" content = "autor:Rodrigo Molina   Este es el documento de usuarios de una pagina de prueba que forma parte de mi PPS" > 
+	<link rel="icon" type="image/png" sizes="16x16" href="icons/images.png" async disable>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="manifest" href="manifest.json" async>
+	
+	<script type="text/javascript" src="init.js" defer async></script>
+ 
+	<title>Usuarios</title>
+	<link rel="stylesheet" type="text/css" href="styles/stylesheet.css" media="all" disable  async>
+
+<meta name="viewport" content="width=device-width, initial-scal
+
+	  <!-- Add to home screen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Weather PWA">
+	<link rel="apple-touch-icon" href="images/icons/icon-152x152.png"  async>
+
+	<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+	<meta name="msapplication-TileColor" content="#2F3BA2">
+</head>
+<body>
+
+	<img alt= "jobbier" src="icons/1.svg">
+
+	<ul class="topnav">
+      <li><a class="active" href="index.html">Posts</a></li>
+      <li><a href="albums.html">Todos los albumes</a></li>
+    
+    </ul>
+
+
+  
+     <container class = "cont" id="miContainer">
+       
+     </container>
+
+
+
+
+
+	<script  defer async>
+		fetch('https://jsonplaceholder.typicode.com/users')
+	        .then( function(response ){
+	          return response.json();
+	        }).then(function (json){
+	          for (var i = 0; i < json.length; i++) {
+	           
+	              
+	                document.getElementById('miContainer').innerHTML += "<div ><h1>Nombre: "+ json[i].name + "</h1>" ;
+	                document.getElementById('miContainer').innerHTML += "<h2>Nombre de usuario: "+ json[i].username + "</h2>" ;
+
+	                document.getElementById('miContainer').innerHTML += "<h3>Email: "+ json[i].email + "</h3>" ;
+	                document.getElementById('miContainer').innerHTML += "<h3>Direccion: </h3>" ;
+	                document.getElementById('miContainer').innerHTML += "<h4>     -Calle: "+ json[i].address.street + "</h4>" ;
+	                document.getElementById('miContainer').innerHTML += "<h4>     -Suite: "+ json[i].address.suite + "</h4>" ;
+	                document.getElementById('miContainer').innerHTML += "<h4>     -Ciudad: "+ json[i].address.city + "</h4>" ;
+	                
+	                document.getElementById('miContainer').innerHTML += "<h4>    -Codigo postal: "+ json[i].address.zipcode + "</h4>" ;
+	                document.getElementById('miContainer').innerHTML += "<h4>     -Posicion:    latitud==> "+ json[i].address.geo.lat +" Longitud==> "+ json[i].address.geo.lng+"</h4>" ;
+
+	                document.getElementById('miContainer').innerHTML += "<h3>Telefono: "+ json[i].phone + "</h3>" ;
+
+	                document.getElementById('miContainer').innerHTML += "<h3>Sitio web: "+ json[i].website + "</h3>" ;
+	             
+	                document.getElementById('miContainer').innerHTML += "<h3>Compañia: "+ json[i].company.name + "</h3>" ;
+					document.getElementById('miContainer').innerHTML += "<h4>Frase de captura: "+ json[i].company.catchPhrase + "</h4>" ;
+					document.getElementById('miContainer').innerHTML += "<h4>Bs: "+ json[i].company.bs + "</h4>" ;
+
+					document.getElementById('miContainer').innerHTML += "<button onclick = 'verAlbums(" + json[i].id + ")' >Ver sus Albumes</button>" ;
+	                document.getElementById('miContainer').innerHTML += "</div ><div id='mi_div"+json[i].id +"'></div></br></br>";
+
+
+	          } 
+	          });
+
+	        function verAlbums(id_user){
+	        
+
+	        	fetch('https://jsonplaceholder.typicode.com/albums').then(function(response){
+	        		return response.json();
+	        	}).then(function(albumes){
+
+	 				document.getElementById('mi_div' + id_user).innerHTML = "<form action = 'albums.html'> <select id = 'mi_select' name='id_albums'  multiple>";
+
+	        		for (var i = 0; i < albumes.length; i++) {
+
+	        			if (albumes[i].userId == id_user) {
+
+	        				document.getElementById('mi_select' ).innerHTML += "<option value='"+ albumes[i].id+"'>" + albumes[i].title +"</option>";
+	        	
+	        			}
+	        			
+	        		}
+	        		document.getElementById('mi_div' + id_user).innerHTML += "<br><br></select><input type='submit' value='Ver album seleccionado'></form>"; 
+
+
+	        	});
+
+
+	        }
+
+
+	</script>
+
+
+</body>
+</html>
