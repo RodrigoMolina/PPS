@@ -1,0 +1,7 @@
+<%% case params[:source] %>
+<%% when '<%= singular_table_name %>_index' %>
+$('#<%= singular_table_name %>_<%%= @<%= singular_table_name %>.id %>').toggle("highlight", {color: '#FFBBBB'}, 1000, function(){ $(this).remove(); });
+<%% end %>
+
+$(document).trigger('flash:send', <%%= raw flash.to_hash.to_json %>);
+<%% flash.clear %>

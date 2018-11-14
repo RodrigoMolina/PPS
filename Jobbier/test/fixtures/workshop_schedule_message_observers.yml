@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workshop_schedule_message: one
+  profile: one
+  state: MyString
+
+two:
+  workshop_schedule_message: two
+  profile: two
+  state: MyString

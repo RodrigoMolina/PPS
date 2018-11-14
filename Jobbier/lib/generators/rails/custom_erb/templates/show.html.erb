@@ -1,0 +1,29 @@
+<%% locale_set = 'activerecord.attributes.<%= singular_table_name %>' %>
+
+<div class="box box-success">
+  <div class="box-body">
+
+    <h1 class="page-header">
+      <%%= icon(:square)%> <%%= t :<%= singular_table_name %> %>
+      <%%= link_to icon(:reply), backend_<%= plural_table_name %>_path, class: 'pull-right text-grey button', data: {toggle: 'tooltip'}, title: t(:back) %>  
+    </h1>
+
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <% attributes.each do |attribute| %>
+          <div class="form-group">
+            <%%= label_tag :<%= attribute.column_name %>, t(:<%= attribute.column_name %>, scope: locale_set),class: 'control-label' %>
+            <p class="form-control-static"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></p>
+          </div>
+        <% end %>
+
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,15 @@
+I"7(function() {
+  window.SweetAlert || (window.SweetAlert = {});
+
+  $(function() {
+    return SweetAlert.initConfig = function() {
+      return window.sweetAlertConfirmConfig = {
+        type: 'warning',
+        confirmButtonColor: '#ad2fad',
+        confirmButtonText: 'Ok'
+      };
+    };
+  });
+
+}).call(this);
+:ET

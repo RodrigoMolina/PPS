@@ -1,0 +1,13 @@
+<div class="box box-success">
+  <div class="box-body">
+
+    <h1 class="page-header">
+      <%%= icon(:square)%> <%%= t :<%= singular_table_name %>, scope: :edit %>
+      <%%= link_to icon(:trash), [:backend, @<%= singular_table_name %>], method: :delete, class: 'pull-right text-danger button', data: {confirm: t(:confirm), toggle: 'tooltip'}, title: t(:delete) if @<%= singular_table_name %>.destroyable? %>  
+      <%%= link_to icon(:reply), backend_<%= plural_table_name %>_path, class: 'pull-right text-grey button', data: {toggle: 'tooltip'}, title: t(:back) %>  
+    </h1>
+
+    <%%= render 'form', modal: false %>
+
+  </div>
+</div>

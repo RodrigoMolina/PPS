@@ -1,0 +1,5 @@
+User.create(email: 'mauro.labattaglia@snappler.com', password: 'mauro.labattaglia@snappler.com', password_confirmation: 'mauro.labattaglia@snappler.com', normal_profile: NormalProfile.new(name: 'Mauro', surname: 'La Battaglia'))
+User.create(email: 'carlosperez@jobbier.com', password: 'carlosperez@jobbier.com', password_confirmation: 'carlosperez@jobbier.com', normal_profile: NormalProfile.new(name: 'Carlos', surname: 'Perez'))
+User.create(email: 'juanperez@jobbier.com', password: 'juanperez@jobbier.com', password_confirmation: 'juanperez@jobbier.com', normal_profile: NormalProfile.new(name: 'Juan', surname: 'Perez'))
+User.create(email: 'miriamlopez@jobbier.com', password: 'miriamlopez@jobbier.com', password_confirmation: 'miriamlopez@jobbier.com', normal_profile: NormalProfile.new(name: 'Miriam', surname: 'Lopez'))
+User.create(email: 'emilialodigiani@jobbier.com', password: 'emilialodigiani@jobbier.com', password_confirmation: 'emilialodigiani@jobbier.com', normal_profile: NormalProfile.new(name: 'Emilia', surname: 'Lodigiani'))

@@ -1,0 +1,8 @@
+<%%= form_for @filter, as: :filter, url: backend_<%= plural_table_name %>_path, html: {class: 'form-inline filter'}, enforce_utf8: false, method: :get do |f| %>
+    <div class="form-group">
+      <%%= f.text_field :query, class: 'form-control', placeholder: t(:search) %>
+    </div>
+    <div class="form-group">
+      <%%= button_tag(icon(:search), type: 'submit', class: 'btn btn-block btn-info', data: {'disable-with' => icon('circle-o-notch', class: 'fa-spin')}) %>
+    </div>
+<%% end %>

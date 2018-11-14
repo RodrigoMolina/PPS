@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  normal_profile: one
+  kind: MyString
+  content: MyText
+  state: MyString
+
+two:
+  normal_profile: two
+  kind: MyString
+  content: MyText
+  state: MyString

@@ -1,0 +1,7 @@
+$('#modal_one').modal('toggle');
+$('#<%= singular_table_name %>_container').prepend('<%%= j render partial: '<%= singular_table_name %>', locals: {<%= singular_table_name %>: @<%= singular_table_name %>, visible: false} %>');
+$('#<%= singular_table_name %>_<%%= @<%= singular_table_name %>.id %>').toggle("highlight", {color: '#BBFFBB'}, 1000);
+
+$(document).trigger('flash:send', <%%= raw flash.to_hash.to_json %>);
+<%% flash.clear %>
+App.init();

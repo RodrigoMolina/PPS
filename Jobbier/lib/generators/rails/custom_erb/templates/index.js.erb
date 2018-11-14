@@ -1,0 +1,16 @@
+$('#<%= singular_table_name %>_container').append('<%%= j render(@<%= plural_table_name %>, visible: true) %>');
+<%- if @will_paginate_instaled -%>
+<%% if @<%= plural_table_name %>.next_page %>
+  $('#paginate_container').removeClass('show').html('<%%= j will_paginate(@<%= plural_table_name %>) %>');
+<%% else %>
+  $('#paginate_container').remove();
+<%% end %>
+<%- end -%>
+<%- if @kaminari_instaled -%>
+<%% if @<%= plural_table_name %>.next_page %>
+  $('#paginate_container').removeClass('show').html('<%%= j paginate(@<%= plural_table_name %>) %>');
+<%% else %>
+  $('#paginate_container').remove();
+<%% end %>
+<%- end -%>    
+App.init();

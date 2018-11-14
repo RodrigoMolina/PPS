@@ -1,0 +1,71 @@
+<%% form_params = (modal) ? {remote: true} : {} %>
+<%% locale_set = 'activerecord.attributes.<%= singular_table_name %>' %>
+
+<%%= form_for([:backend, @<%= singular_table_name %>], form_params) do |f| %>
+  <%%= hidden_field_tag :source, params[:source] %>
+
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%- attributes.each do |attribute| -%>
+        <%- case attribute.type -%>
+        <%- when :date -%>
+        <div class="form-group">
+          <%%= f.label :<%= attribute.column_name %>, class: 'control-label' %>
+          <div class="input-group">
+          <%%= f.text_field :<%= attribute.column_name %>, class: ['form-control datepicker'] %>
+          <span class="input-group-addon extend-input"><%%= icon(:calendar) %></span>
+          </div>
+        </div>
+        <%- when :datetime -%>
+        <div class="form-group">
+          <%%= f.label :<%= attribute.column_name %>, class: 'control-label' %>
+          <div class="input-group">
+          <%%= f.text_field :<%= attribute.column_name %>, class: ['form-control datetimepicker'] %>
+          <span class="input-group-addon extend-input"><%%= icon(:calendar) %></span>
+          </div>
+        </div>        
+        <%- when :time -%>
+        <div class="form-group">
+          <%%= f.label :<%= attribute.column_name %>, class: 'control-label' %>
+          <div class="input-group">
+          <%%= f.text_field :<%= attribute.column_name %>, class: ['form-control timepicker'] %>
+          <span class="input-group-addon extend-input"><%%= icon('clock-o') %></span>
+          </div>
+        </div>
+        <%- when :boolean -%>
+        <div class="form-group">
+          <%%= f.label :<%= attribute.column_name %>, class: 'control-label' do %>
+            <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, class: ['form-control'] %> <%%= t :<%= attribute.column_name %>, scope: locale_set %>
+          <%% end %>
+        </div>
+
+        <%- else -%>
+        <div class="form-group">
+          <%%= f.label :<%= attribute.column_name %>, class: 'control-label' %>
+          <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, class: ['form-control'] %>
+        </div>
+        <%- end -%>
+
+      <%- end -%>
+
+    </div>
+
+    <div class="panel-footer">
+      <div class="actions text-right">
+        <%%= button_tag(t(:submit), type: 'submit', class: 'btn btn-success btn-ok btn-lg', data: {'disable-with' => t(:submiting)}) %>
+      </div>
+    </div>
+
+  </div>
+
+<%% end %>
+
+
+
+
+
+
+
+
+

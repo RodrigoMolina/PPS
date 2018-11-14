@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_profile: one
+  destination_profile: one
+  body: MyText
+
+two:
+  source_profile: two
+  destination_profile: two
+  body: MyText

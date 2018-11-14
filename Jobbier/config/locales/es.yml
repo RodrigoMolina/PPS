@@ -1,0 +1,113 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  home: 'Inicio'
+  submit:                     'Guardar'
+  submiting:                  'Guardando'
+  delete:                     'Borrar'
+  confirm_workshop:           '¿Está seguro que quiere borrar el taller?'
+  confirm:                    '¿Está seguro'
+  success:                    'Acción realizada con éxito'
+  error:                      'Acción fallida'
+  action_edit:                'Editar'
+  show:                       'Ver'
+  back:                       'Volver'
+  active:                     'Activar'
+  actived:                    'Activado'
+  disable:                    'Desactivar'
+  disabled:                   'Desactivado'
+  all:                        'Todas'
+  'false':                    'No'
+  'true':                     'Si'
+  login: 'Iniciar Sesión'
+  logging: 'Iniciando'
+  logout: 'Cerrar Sesión'
+  edit_profile: 'Editar perfíl'
+  remember_me: 'Recordarme'
+  sign_up: 'Registrarse'
+  forgot_password: '¿Olvidó su contraseña?'
+  recover_password: 'Recuperar contraseña'
+  change_password: 'Cambiar contraseña'
+  changing: 'Cambiando'
+  leave_blank_if_you_dont_want_to_change_it: 'Dejar en blanco si no deseas cambiarlo'
+  we_need_your_current_password_to_confirm_your_changes: 'Contraseña actual para confirmar'
+  send_me_instructions: 'Envíame instrucciones'
+  sending: 'Envíando'
+  search: 'Buscar'
+  searching: 'Buscando'
+
+
+
+  
+
+  workshop_place:
+    omitir: "Omitir"
+    institucion: "Institución; Centro cultural; o similar."
+    pub: 'En un Bar, o algún otro espacio público.'
+    casa: "En la casa, taller, o espacio de trabajo del instructor"
+    aire_libre: "Al aire libre"
+    a_domicilio: "A domicilio"
+    other: 'Otro'
+
+  
+
+
+  gender_kind_types:
+    male: 'Masculino'
+    female: 'Femenino'
+    other: 'Indiferente'
+  level_kind_types:
+    beginners: 'Principiante'
+    medium: 'Medio'
+    advanced: 'Avanzado'
+  price_unit_types:
+    por_hora: 'Por hora'
+    por_clase: 'Por clase'
+    por_mes: 'Por mes'
+    taller_completo: 'Taller completo'
+  preference_place_types:
+    out_door: 'Aire libre'
+    in_door: 'Puertas adentro'
+    other: 'Indiferente'
+  preference_assistance_types:
+    single: 'Individual'
+    group: 'En grupo'
+    twice: 'Ambas'
+  preference_time_types:
+    day: 'De día'
+    night: 'De noche'
+    always: 'Siempre'
+
+
+
+  will_paginate:
+    previous_label: '<<'
+    next_label: '>>'
+
+  views:
+    pagination:
+      truncate: '...'
+      first: '|<'
+      previous: '<<'
+      next: '>>'
+      last: '>|'
+

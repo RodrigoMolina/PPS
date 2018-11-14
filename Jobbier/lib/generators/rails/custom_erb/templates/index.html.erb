@@ -1,0 +1,62 @@
+
+<div class="box box-success">
+  <div class="box-body">
+
+    <h1 class="page-header">
+      <%%= icon(:square)%> <%%= t :<%= plural_table_name %> %>
+    </h1>
+    
+    <div class="box box-success box-solid">
+      <div class="box-header">
+        <h3 class="box-title"></h3>
+        <div class="box-tools pull-right">
+          <%%= link_to icon(:filter), 'javascript:;', class: 'btn btn-box-tool btn-default', data: {target: '#panel-filter', toggle: 'toggle-filter'} %>
+          <%- if @selected_form_mode == '0' -%>
+            <%%= link_to t(:<%= singular_table_name %>, scope: :new), new_backend_<%= singular_table_name %>_path, class: 'btn btn-box-tool btn-primary btn-add' %>
+          <%- end -%>
+          <%- if @selected_form_mode == '1' -%>
+            <%%= link_to t(:<%= singular_table_name %>, scope: :new), new_backend_<%= singular_table_name %>_path({source: '<%= singular_table_name %>_index'}), class: 'btn btn-box-tool btn-primary btn-add', data: {behavior: 'ajax-modal'} %>          
+          <%- end -%>
+          <%- if @selected_form_mode == '2' -%>
+            <%%= link_to "(NORMAL)#{t(:<%= singular_table_name %>, scope: :new)}", new_backend_<%= singular_table_name %>_path, class: 'btn btn-box-tool btn-primary btn-add' %>
+            <%%= link_to "(AJAX)#{t(:<%= singular_table_name %>, scope: :new)}", new_backend_<%= singular_table_name %>_path({source: '<%= singular_table_name %>_index'}), class: 'btn btn-box-tool btn-primary btn-add', data: {behavior: 'ajax-modal'} %>
+          <%- end -%>
+        </div>
+      </div>
+      <div id="panel-filter" class="text-right <%% if from_filter? %>visible<%% end %>">
+        <%%= render 'filter' %>
+      </div>
+
+        <div class="responsive-table">
+          <table id="<%= plural_table_name %>" class="table table-bordered" style="margin-bottom: 0;">
+            <thead>
+              <tr>
+                <%% [:id, <%= attributes.reject(&:password_digest?).collect{|x| ":#{x.name}"}.join(', ') %>].each do |field_name| %>
+                <th><%%= link_to t(field_name, scope: :<%= singular_table_name %>_filter), backend_<%= plural_table_name %>_path(order_url(field_name, params[:filter])) %></th>
+                <%% end %>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody id="<%= singular_table_name %>_container">
+              <%%= render @<%= plural_table_name %>, visible: true %>
+            </tbody>
+          </table>
+        </div>
+
+        <%- if @will_paginate_instaled -%>
+        <div id="paginate_container"<%- if @selected_pagination_mode == '1' -%> class="infinite"<%- end -%>>
+          <%%= will_paginate @<%= plural_table_name %> %>
+        </div>
+        <%- end -%>
+        <%- if @kaminari_instaled -%>
+        <div id="paginate_container"<%- if @selected_pagination_mode == '1' -%> class="infinite"<%- end -%>>
+          <%%= paginate @<%= plural_table_name %> %>
+        </div>
+        <%- end -%>        
+
+    </div>
+
+
+  </div>
+</div>
+

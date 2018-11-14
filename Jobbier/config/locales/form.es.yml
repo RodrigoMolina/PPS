@@ -1,0 +1,99 @@
+es:
+  activemodel:
+    attributes:
+
+
+  activerecord:
+    attributes:
+      user:
+        login: 'Usuario'
+        email: 'Email'
+        password: 'Contraseña'
+        current_password: 'Contraseña actual'
+        password_confirmation: 'Confirmar contraseña'
+      entity:
+        field: 'name_field'
+
+
+      workshop:
+        country_id: 'País'
+        province_id: 'Provincia'
+        city_id: 'Ciudad'
+        workshop_category_id: 'Categoria'
+        
+        name: 'Nombre'
+        street: 'Calle'
+        number: 'Número'
+        floor: 'Piso'
+        apartment: 'Departamento'
+        province: 'Provincia'
+        postal_code: 'Código Postal'
+        observation: 'Observación'
+        latitude: 'Longitud'
+        longitude: 'Latitud'
+        place: 'Lugar'
+        description_place: 'Descripción del lugar'
+        category_id: 'Categoría'
+        activity_title: 'Título de la actividad'
+        activity_description: 'Síntesis del taller'
+        gender: 'Género'
+        level: 'Nivel'
+        description: 'Descripción ampliada'
+
+        
+        offer_material: 'Material ofrecido'
+        aspects_to_consider: 'Aspectos a tener en cuenta'
+
+
+        things_included: 'Cosas incluidas en el taller'
+        things_to_carry: 'Cosas que tiene que llevar el aprendiz'
+        price: 'Precio'
+        state: 'Estado'
+
+        charge_method_transfer: 'Transferencia bancaria'
+        charge_method_transfer_bank: 'Banco'
+        charge_method_transfer_subsidiary: 'Sucursal'
+        charge_method_transfer_owner: 'Titular de la cuenta'
+        charge_method_transfer_dni: 'DNI'
+        charge_method_transfer_account_number: 'N° de cuenta'
+        charge_method_transfer_cbu: 'CBU'
+
+      workshop_schedule:
+        schedule_info: 'Cita'
+        maximun_quota: 'Cupo máximo'
+        unlimited_quota: 'Cupo ilimitado'
+        start_publication: 'Comienzo'
+        always_open: 'Siempre abierto'
+        closing_of_registrations: 'Cierre'
+        never_close: 'Nunca cierra'
+        
+      address:
+        country_id: 'País'
+        province_id: 'Provincia'
+        city_id: 'Ciudad'
+        street: 'Calle'
+        number: 'Número'
+        floor: 'Piso'
+        apartment: 'Departamento'
+
+      profile:
+        name: 'Nombre'
+        surname: 'Apellido'
+        gender_id: 'Género'
+        birthdate: 'Fecha de nacimiento'
+        gender: 'Género'
+        postal_code: 'CP'
+        country_id: 'País'
+        province_id: 'Provincia'
+        city_id: 'Ciudad'
+        street: 'Calle'
+        number: 'Número'
+        floor: 'Piso'
+        apartment: 'Departamento'
+        phone_number: 'Teléfono'
+        workshop_category_to_learn_ids: ''
+        workshop_category_to_teach_ids: ''
+        observation: 'Una descripción de vos'
+        preference_place: 'Donde realizar las actividades'
+        preference_assistance: 'Con quien realizar las actividades?'
+        preference_time: 'Cuando realizar las actividades'

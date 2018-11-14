@@ -1,0 +1,55 @@
+<tr id="<%= singular_table_name %>_<%%= <%= singular_table_name %>.id %>" <%% unless visible %>style="display:none"<%% end %>>
+  <td data-title='<%%= t(:id, scope: :<%= singular_table_name %>_filter) %>:'>
+    <%%= <%= singular_table_name %>.id %>
+  </td>
+  <% attributes.reject(&:password_digest?).each do |attribute| -%>
+  <td data-title='<%%= t(:<%= attribute.name %>, scope: :<%= singular_table_name %>_filter) %>:'>
+    <%%= <%= singular_table_name %>.<%= attribute.name %> %>
+  </td>        
+  <% end -%>
+  <td class="operations text-right">
+    <%- if @selected_form_mode == '0' -%>
+      <%%= link_to [:backend, <%= singular_table_name %>], class: 'text-info', data: { toggle: 'tooltip'}, title: t(:show) do %>
+        <%%= icon :search, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:edit, :backend, <%= singular_table_name %>], class: 'text-warning', data: {toggle: 'tooltip'}, title: t(:action_edit) do %>
+        <%%= icon :pencil, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:backend, <%= singular_table_name %>], method: :delete, class: 'text-danger', data: {confirm: t(:confirm), toggle: 'tooltip'}, title: t(:delete) do %>
+        <%%= icon :trash, class: 'fa-2x' %>
+      <%% end if <%= singular_table_name %>.destroyable? %>
+    <%- end -%>
+    <%- if @selected_form_mode == '1' -%>
+      <%%= link_to [:backend, <%= singular_table_name %>], class: 'text-info', data: { behavior: 'ajax-modal', toggle: 'tooltip'}, title: t(:show) do %>
+        <%%= icon :search, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:edit, :backend, <%= singular_table_name %>, {source: '<%= singular_table_name %>_index'}], class: 'text-warning', data: {behavior: 'ajax-modal', toggle: 'tooltip'}, title: t(:action_edit) do %>
+        <%%= icon :pencil, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:backend, <%= singular_table_name %>, {source: '<%= singular_table_name %>_index'}], remote: true, method: :delete, class: 'text-danger', data: {confirm: t(:confirm), toggle: 'tooltip'}, title: t(:delete) do %>
+        <%%= icon :trash, class: 'fa-2x' %>
+      <%% end if <%= singular_table_name %>.destroyable? %>
+    <%- end -%>
+    <%- if @selected_form_mode == '2' -%>
+      <%%= link_to [:backend, <%= singular_table_name %>], class: 'text-info', data: { toggle: 'tooltip'}, title: t(:show) do %>
+        NORMAL <%%= icon :search, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:edit, :backend, <%= singular_table_name %>], class: 'text-warning', data: {toggle: 'tooltip'}, title: t(:action_edit) do %>
+        NORMAL <%%= icon :pencil, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:backend, <%= singular_table_name %>], method: :delete, class: 'text-danger', data: {confirm: t(:confirm), toggle: 'tooltip'}, title: t(:delete) do %>
+        NORMAL <%%= icon :trash, class: 'fa-2x' %>
+      <%% end if <%= singular_table_name %>.destroyable? %>
+      |<%%= link_to [:backend, <%= singular_table_name %>], class: 'text-info', data: { behavior: 'ajax-modal', toggle: 'tooltip'}, title: t(:show) do %>
+        AJAX <%%= icon :search, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:edit, :backend, <%= singular_table_name %>, {source: '<%= singular_table_name %>_index'}], class: 'text-warning', data: {behavior: 'ajax-modal', toggle: 'tooltip'}, title: t(:action_edit) do %>
+        AJAX <%%= icon :pencil, class: 'fa-2x' %>
+      <%% end %>
+      <%%= link_to [:backend, <%= singular_table_name %>, {source: '<%= singular_table_name %>_index'}], remote: true, method: :delete, class: 'text-danger', data: {confirm: t(:confirm), toggle: 'tooltip'}, title: t(:delete) do %>
+        AJAX <%%= icon :trash, class: 'fa-2x' %>
+      <%% end if <%= singular_table_name %>.destroyable? %>
+    <%- end -%>
+  </td>
+</tr>
+

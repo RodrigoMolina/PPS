@@ -1,0 +1,13 @@
+<div class="box box-success">
+  <div class="box-body">
+
+    <h1 class="page-header">
+      <%%= icon(:square)%> <%%= t :<%= singular_table_name %>, scope: :new %>
+      <%%= link_to icon(:reply), backend_<%= plural_table_name %>_path, class: 'pull-right text-grey button', data: {toggle: 'tooltip'}, title: t(:back) %>  
+    </h1>
+
+    <%%= render 'form', modal: false %>
+
+  </div>
+</div>
+

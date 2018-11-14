@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: rodrigo
+  password: root
+
+development:
+  <<: *default
+  database: jobbier_pps_development
+
+test:
+  <<: *default
+  database: jobbier_pps_test
+
+production:
+  <<: *default
+  database: jobbier_development

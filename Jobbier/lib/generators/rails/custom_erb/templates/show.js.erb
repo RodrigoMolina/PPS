@@ -1,0 +1,6 @@
+$('#modal_one .modal-dialog').attr('class', 'modal-dialog');
+$('#modal_one .modal-content').html('<%%= j render 'modal_show' %>');
+$('#modal_one').modal("show");
+$(document).trigger('flash:send', <%%= raw flash.to_hash.to_json %>);
+App.init();
+<%% flash.clear %>

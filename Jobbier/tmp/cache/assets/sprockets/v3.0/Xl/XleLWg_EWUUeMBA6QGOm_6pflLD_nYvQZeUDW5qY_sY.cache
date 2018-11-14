@@ -1,0 +1,56 @@
+I"G(function() {
+  window.Animations || (window.Animations = {});
+
+  $(function() {
+    Animations.initAll = function() {
+      $('#options-button').on('click', function(e) {
+        e.preventDefault();
+        $('.options-menu, #gradient-menu').toggleClass('open-map');
+      });
+      $('#map-button').on('click', function(e) {
+        e.preventDefault();
+        $('#map-filter-workshop').toggleClass('open-map');
+        window.maps['list_map'].refresh();
+      });
+      if (window.location.href === 'http://localhost:3000/users/sign_up') {
+        $('#footer').hide();
+      }
+      $('.left-arrow').on('click', function(e) {
+        return $(this).closest('.slide-card-section').stop().animate({
+          scrollLeft: '-=200px'
+        }, 800);
+      });
+      return $('.right-arrow').on('click', function(e) {
+        return $(this).closest('.slide-card-section').stop().animate({
+          scrollLeft: '+=200px'
+        }, 800);
+      });
+    };
+    Animations.onResize = function() {
+      var closeModalSection, fixPanel, setHeightTeacherInfo, teacherInfoSectionOnModal;
+      closeModalSection = $('#close-modal-section');
+      teacherInfoSectionOnModal = $('#teacher-info-section-on-custom-modal');
+      fixPanel = function() {
+        var chatContButton, panelEntity, panelWorkshopInfo;
+        panelEntity = $('#panel-entity');
+        panelWorkshopInfo = $('#panel-workshop-info');
+        chatContButton = $('#cont-chat-button');
+        return panelEntity.height(window.innerHeight - panelWorkshopInfo.innerHeight() - chatContButton.innerHeight());
+      };
+      setHeightTeacherInfo = function() {
+        var chatContButton, panelWorkshopInfo;
+        panelWorkshopInfo = $('#panel-workshop-info');
+        chatContButton = $('#cont-chat-button');
+        return teacherInfoSectionOnModal.height(window.innerHeight - panelWorkshopInfo.innerHeight() - chatContButton.innerHeight() - 40);
+      };
+      fixPanel();
+      return setHeightTeacherInfo();
+    };
+    Animations.onResize();
+    return $(window).on('resize', function() {
+      return Animations.onResize();
+    });
+  });
+
+}).call(this);
+:ET
