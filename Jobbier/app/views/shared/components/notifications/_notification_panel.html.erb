@@ -1,0 +1,30 @@
+
+
+<% if @profile_notifications.count.zero? %>
+
+<%= link_to '#', class: "main" do %>
+  <i class="fa fa-bell"></i>
+  <span id="counter-notification" style='display:none;'></span>
+<% end %>
+
+
+<% else %>
+
+<%= link_to authenticated_main_set_viewed_notifications_path, remote: true, class: "main" do %>
+  <i class="fa fa-bell"></i>
+  <span id="counter-notification"><%= @profile_notifications.count %></span>
+<% end %>
+
+
+<% end %>
+
+<div class="circle <% unless @profile_notifications.count.zero? %>motion-on<% end %>"></div>
+
+<article id="notification-panel">
+  <div class="title-notification">panel de notificaciones</div>
+  <div class="list-notification p-l-r list-overflow">
+    <% @profile_notifications.each do |pn| %>
+      <%= render 'shared/components/notifications/notification', notification: pn %>
+    <% end %>
+  </div>
+</article>

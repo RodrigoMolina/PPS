@@ -1,0 +1,12 @@
+<section class="container-fluid cont-cards" style="overflow: hidden; padding:0">
+  <article class="p-t-b-2 action-header flex j-c f-d-c">
+    <h2 class="center-block m-t-b m-r action-title col-xs-12">Talleres similares</h2>
+    <div class="col-xs-12 flex j-c a-s similar-cont">
+      <% @similar_workshops.each do |workshop| %>
+        <div class="col-xs-12 col-sm-4 col-md-3 flex j-c">
+          <%= render partial: 'shared/components/card_workshop_min', locals: {workshop: workshop} %>
+        </div>
+      <% end %>
+    </div>
+  </article>
+</section>

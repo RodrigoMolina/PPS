@@ -1,0 +1,7 @@
+
+$('#<%= dom_id @workshop %>').parent().remove();
+
+
+
+$(document).trigger('flash:send', <%= raw flash.to_hash.to_json %>);
+<% flash.clear %>

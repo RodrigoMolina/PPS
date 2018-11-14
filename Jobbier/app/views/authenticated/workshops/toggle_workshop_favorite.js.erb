@@ -1,0 +1,13 @@
+<% case @operation %>
+<% when 'added' %>
+  $('.workshop_favorite_<%= @workshop.id %>').html('<i class="fa fa-heart" aria-hidden="true"></i>');
+<% when 'removed' %>
+  $('.workshop_favorite_<%= @workshop.id %>').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+  if ($('#wishlist').length != 0){
+    $('#<%= dom_id @workshop %>').parent().remove();
+  } 
+<% end %>
+
+
+$(document).trigger('flash:send', <%= raw flash.to_hash.to_json %>);
+<% flash.clear %>

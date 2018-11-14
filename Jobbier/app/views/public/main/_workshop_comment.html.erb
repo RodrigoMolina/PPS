@@ -1,0 +1,29 @@
+<li class="comment p-t-b p-l-r b-t-g" id='workshop_comment_<%= workshop_comment.id %>'>
+
+
+  <div style='position: absolute;right: 20px;'>
+    <div>
+      <% score = workshop_comment.score || 1 %>
+      <% score.times do |i| %>
+          <%= image_tag 'star1.png', class: 'star' %>
+      <% end %>
+      <% (5 - score).times do |i| %>
+          <%= image_tag 'star0.png', class: 'star' %>
+      <% end %>
+    </div>
+    <% if workshop_comment.normal_profile == current_profile %>
+      <%= link_to authenticated_main_destroy_workshop_comment_path(workshop_comment), data: {confirm: 'Esta seguro que quiere borrar el taller?'}, remote: true, style: 'float: right;' do %>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <%= image_tag workshop_comment.normal_profile.get_image_thumb %>
+  <div class="p-l box-comment">
+    <div>
+      <%= workshop_comment.normal_profile.to_s %>
+
+    </div>
+    <span class="date"><%= workshop_comment.created_at %></span>
+    <p style="white-space: pre;"><%= workshop_comment.comment %></p>
+  </div>
+</li>

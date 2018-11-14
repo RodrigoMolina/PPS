@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+
+
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+  <div class="modal-body">
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">
+          <%= f.label :email, class: 'info-section-small' %>
+          <%= f.email_field :email, autofocus: true, class: 'j-input', placeholder: true %>
+      </div>
+
+      <div class="form-group">
+          <%= f.label :password, class: 'info-section-small' %>
+          <%= f.password_field :password, autocomplete: "off" , class: 'j-input', placeholder: 'Contraseña' %>  
+      </div>
+
+      <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <%= link_to t(:forgot_password), new_password_path(resource_name), style: 'display: block;margin-bottom: 10px;margin-top: -5px;' %>
+      <% end %>
+
+
+    <%= button_tag(t(:login), type: 'submit', class: 'btn btn-block action', style: 'margin: 0;', data: {'disable-with' => t(:logging)}) %>
+
+    <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-default btn-block btn-class-1" do %>
+    <i class="fa fa-2x fa-google media-middle" style="color: #db4437; margin-right: 5px;"></i> Iniciar con Google
+    <% end %>
+  
+    
+    <hr>
+
+    <%= link_to new_user_registration_path, class: "btn btn-default btn-block btn-class-1" do %>
+    <i class="fa fa-user-plus fa-fw"></i> <%= t :sign_up %>
+    <% end %>
+
+
+
+
+
+</div>
+<% end %> 
+
+
+
+
+
+  </div>
+</div>
+

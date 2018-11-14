@@ -1,0 +1,145 @@
+
+
+<%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step3'} do |f| %>
+
+<%= f.hidden_field :step, value: 'step3' %>
+
+<div class="container-fluid stage" id="step3">
+    <div class="col-sm-10 co-md-8 m-t-b-5 stage-card">
+        <div class="p-l-r-2 p-t-b title-workshop title-workshop-card ">
+            <h2>1: Taller</h2>
+
+
+            <div class='flex j-s-a'>
+                <%= link_to 'Paso 1', authenticated_workshops_step_path(@workshop, 'step1'), class: "step step-#{@workshop.step?('step1')} #{(@workshop.step == 'step1')? 'active' : ''}" %>
+                <%= link_to 'Paso 2', authenticated_workshops_step_path(@workshop, 'step2'), class: "step step-#{@workshop.step?('step2')} #{(@workshop.step == 'step2')? 'active' : ''}" %>
+                <%= link_to 'Paso 3', authenticated_workshops_step_path(@workshop, 'step3'), class: "step step-#{@workshop.step?('step3')} #{(@workshop.step == 'step3')? 'active' : ''}" %>
+            </div>
+
+            <!--
+            <div class="progress m-t m-b-2">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+                    1 de 3
+                </div>
+            </div>
+            -->
+        </div>
+        <h4 class="text p-t-b m-b b-b-g">¿Y qué tiene de único tu taller?</h4>
+
+
+        <div class="form-group">
+          <div class="col-xs-12 p-t-b">
+            <%= f.label :activity_title, class: 'info-section-small' %>
+          </div>
+            <%= f.text_field :activity_title, class: 'j-input', autofocus: true, placeholder: 'Ej: Taller de restauración de muebles' %>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-12 p-t-b">
+            <%= f.label :activity_description, class: 'info-section-small' %>
+          </div>
+            <%= f.text_field :activity_description, class: 'j-input', placeholder: 'Ej: Se enseñaran fundamentos teóricos y practicos para la restauración de muebles' %>
+        </div>
+
+        <h4 class="text p-t-b m-b b-b-g">¿Hacia quien está dirigido este taller?</h4>
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :gender, class: 'info-section-small' %>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <div class="form-group <% if @workshop.errors[:gender].any? %>has-error<% end %>">
+                    <%= f.radio_button :gender, :male, class: 'icheck', error: false %>
+                    <%= f.label t(:male, scope: :gender_kind_types), class: 'control-label' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if @workshop.errors[:gender].any? %>has-error<% end %>">
+                    <%= f.radio_button :gender, :female, class: 'icheck', error: false %>
+                    <%= f.label t(:female, scope: :gender_kind_types), class: 'control-label' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if @workshop.errors[:gender].any? %>has-error<% end %>">
+                    <%= f.radio_button :gender, :other, class: 'icheck', error: false %>
+                    <%= f.label t(:other, scope: :gender_kind_types), class: 'control-label' %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 form-group slider-range">
+            <div class="p-t-b">
+              <%= f.label :age_min, class: 'info-section-small' do %>
+              Edad: <span class="slider-range-label"></span>
+              <% end %>
+            </div>
+            <div class="slider-range-ui" data-min="<%= @workshop.age_min %>" data-max="<%= @workshop.age_max %>" style="margin-top: 40px;">
+                <%= f.hidden_field :age_min, class: 'slider-range-min' %>
+                <%= f.hidden_field :age_max, class: 'slider-range-max' %>
+            </div>
+        </div>
+
+
+
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :level, class: 'info-section-small' %>
+        </div>
+        <div class='col-xs-12'>
+            <div class='col-md-4'>
+                <div class="form-group <% if @workshop.errors[:level].any? %>has-error<% end %>">
+                    <%= f.radio_button :level, :beginners, class: 'icheck', error: false %>
+                    <%= f.label t(:beginners, scope: :level_kind_types), class: 'control-label' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if @workshop.errors[:level].any? %>has-error<% end %>">
+                    <%= f.radio_button :level, :medium, class: 'icheck', error: false %>
+                    <%= f.label t(:medium, scope: :level_kind_types), class: 'control-label' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if @workshop.errors[:level].any? %>has-error<% end %>">
+                    <%= f.radio_button :level, :advanced, class: 'icheck', error: false %>
+                    <%= f.label t(:advanced, scope: :level_kind_types), class: 'control-label' %>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h4 class="text p-t-b m-b b-b-g">Publicá algunas fotos del taller! Si es la primera vez que lo hacés mostrá alguna foto en acción, eso le permitirá a los interesados darse una idea de lo que encontrarán, y mejora tu anuncio!</h4>
+
+        <% if @workshop.errors[:workshop_images].any? %>
+            <p class="text-danger"><%= @workshop.errors[:workshop_images].join('') %></p>
+          <% end %>
+
+          <div class="workshop_images_normal_container">
+            <% @workshop.workshop_images.build(kind: :normal) %>
+            <%= f.fields_for :workshop_images, @workshop.workshop_images.select{|x| x.kind.to_sym == :normal} do |form| %>
+              <%= render "workshop_image_fields", f: form %>
+            <% end %>
+            <div class="add_workshop_image_normal_container hide">
+                <%= link_to_add_workshop_image f, :normal %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 p-t-b">
+            <%= f.label :description, class: 'info-section-small' %>
+          </div>
+          <div class="form-group">
+            <%= f.text_area :description, class: 'j-input', placeholder: 'Ej: Contamos con un gran espacio, las herramientas necesarias, y las ganas!' %>
+          </div>
+
+
+
+
+        <div class="sections-moves p-t-b m-t-2">
+                <div class="actions">
+                    <%= link_to 'ATRAS', authenticated_workshops_main_wizard_path(@workshop), class: 'action' %>
+                    <%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<% end %>

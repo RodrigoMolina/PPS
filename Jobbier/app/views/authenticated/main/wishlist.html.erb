@@ -1,0 +1,33 @@
+
+
+
+
+
+<section class="container cont-cards user-panel" id='wishlist'>
+  <div class="row p-t">
+    <div class="col-xs-12">
+      <h2 class="row info-section-medium no-p">
+        Lista de deseo
+      </h2>
+    </div>
+  </div>
+
+
+  <div class="row p-t-b"> <!-- Mapear Workshops -->
+    <h2 class="col-xs-12 info-section p-b b-b-g">
+      Talleres > <strong>Favoritos</strong>
+    </h2>
+    <% if @workshops.empty? %>
+      <div class="col-xs-12 info-state flex f-d-c j-c a-c">
+          <div class="message">No tienes ningun taller en "Favoritos"</div>
+      </div>
+    <% else %>
+      <% @workshops.each do |workshop| %>
+      <div class="col-xs-12 col-sm-6 col-md-3 m-t-b flex j-c">
+        <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</section>

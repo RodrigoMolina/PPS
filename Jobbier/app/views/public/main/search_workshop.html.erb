@@ -1,0 +1,73 @@
+<section class="container-fluid default-section-header" id="search-workshop">
+  <div class="wrapper-search">
+    <div class="col-sm-6 col-md-4">
+
+
+
+
+  <%= form_for @filter, as: :filter, url: public_main_search_workshop_path, html: {id: 'filter_form', class:'col-xs-12'}, remote: true, enforce_utf8: false, method: :get do |f| %>
+
+      <%= f.hidden_field :label_changed %>
+      <%= f.hidden_field :label_old %>
+      <%= f.hidden_field :center_latitude %>
+      <%= f.hidden_field :center_longitude %>
+      <%= f.hidden_field :latitude %>
+      <%= f.hidden_field :longitude %>
+      <%= f.hidden_field :zoom %>
+      <%= f.hidden_field :order %>
+      <%= f.hidden_field :direction %>
+      <%= f.hidden_field :este %>
+      <%= f.hidden_field :oeste %>
+      <%= f.hidden_field :norte %>
+      <%= f.hidden_field :sur %>
+      <%= f.hidden_field :geo_ok %>
+
+
+      <article class="filter-selector flex p-t-b a-c j-c row b-b-g p-l-r col-sm-6 col-md-4">
+
+
+        <div class="flex j-s a-s f-d-c">
+          <%= f.label :query, 'Buscar', class: 'col-sm-12 info-section' %>
+          <%= f.text_field :query, class: 'j-input', placeholder: 'Ej: Taller de cocina' %>
+        </div>
+
+        <div class="flex j-s a-s f-d-c">
+          <%= f.label :label, 'Lugar', class: 'col-sm-12 info-section' %>
+          <%= f.text_field :label, class: 'j-input', placeholder: 'Ej: La Plata' %>
+        </div>
+
+        <div class="flex j-s a-s f-d-c">
+          <%= f.label :workshop_category_id, 'Categoría', class: 'col-sm-12 info-section' %>
+          <%= f.collection_select(:workshop_category_id, WorkshopCategory.order_default, :id, :to_s, {include_blank: '-'}, {class: 'select-custom j-input no-select2'}) %>
+        </div>
+
+        <%= button_tag type: 'button', id: 'explorar_workshops', class: 'j-button m-l' do %>
+          <i class="fa fa-search" aria-hidden="true"></i>
+        <% end %>
+
+
+      </article>
+
+
+
+
+  <% end %>
+
+
+
+      <article class="col-xs-12 filtered-list-workshop" id="workshop_list">
+      </article>
+
+
+
+    </div>
+    <a href="#" class="button-on-map" id="map-button"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+<div class="col-xs-12 col-sm-6 col-md-8"style="height:100%; padding:0">
+  <div class="flex j-c list_map_container" data-gmaps='workshops-map' id="map-filter-workshop" style='width: 100%; height: 100%;'></div>
+</div>
+
+
+
+
+  </div>
+</section>

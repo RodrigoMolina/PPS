@@ -1,0 +1,218 @@
+#header {
+  #mobile-brand {
+    display: none;
+    img {
+      width: 40px;
+    }
+  }
+  #desktop-brand {
+    img {
+      width: 120px;
+    }
+  }
+  @media (max-width: 425px) {
+    #desktop-brand {
+      display: none;
+    }
+    #mobile-brand {
+      display: block;
+    }
+  }
+  @media (max-width: 767px) {
+    height: 46px;
+  }
+  background-color: white;
+  width: 100%;
+  position: fixed;
+  z-index: 1039;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.43);
+  display: flex;
+  height: 70px;
+  @media (max-width: 768px) {
+    bottom: 0;
+  }
+  nav {
+    .options-menu {
+      box-shadow: -1px 0px 3px 0 rgba(0, 0, 0, 0.51);
+      height: 100vh;
+      background: white;
+      box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      transition: all 0.8s;
+      right: -280px;
+      overflow: auto;
+      z-index: 3;
+      //border-top: 3px solid purple;
+      //box-shadow: -30px 0px 0 0px rgb(128, 0, 128);
+      .workshop-menu {
+        h6 {
+          font-size: 10px;
+          font-weight: 600;
+          color: grey;
+        }
+        .badge{
+          background-color: purple;
+          vertical-align: middle;
+          padding: 10px;
+          border-radius: 20px;
+          i{
+            margin-right: 3px;
+          }
+        }
+        ul {
+          list-style: none;
+          padding-left: 10px;
+          li > a {
+            font-size: 16px;
+            color: grey;
+            font-family: $roboto;
+            font-weight: 300;
+            padding-top: 4px;
+            padding-bottoms: 4px;
+            display: block;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 3px;
+            webkit-transition: background-color, color 0.2s ease-in;
+            -moz-transition: background-color, color 0.2s ease-in;
+            -o-transition: background-color, color 0.2s ease-in;
+            transition: background-color, color 0.2s ease-in;
+          }
+
+          li.active > a,
+          li > a:active,
+          li > a:hover {
+            text-decoration: none;
+            background-color: #ad2fad;
+            color: #fff;
+          }
+        }
+        i {
+          font-size: 12px;
+          margin-right: 10px;
+        }
+      }
+      @media (max-width: 767px) {
+          top: 0;
+          left: -300px;
+          position: fixed;
+          width: 280px;
+          height: 100vh;
+          z-index: 3;
+          box-shadow: 10px 0px 20px 0px rgba(0, 0, 0, 0.32);
+      }
+      @media (max-width: 375px) {
+        width: 200px;
+        padding-right: 10px;
+        padding-left: 16px;
+      }
+    }
+    width: 100%;
+    .cont-brand {
+      position: absolute;
+      left: 0;
+      padding-left: 20px;
+    }
+    ul {
+      .dropdown-toggle {
+        padding: 0;
+        width: 40px;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+      }
+      li > a {
+        font-size: 15px;
+        @media (max-width: 425px) {
+          padding: 0px 6px;
+        }
+      }
+    }
+    @media (max-width: 860px) {
+      #navbar-how-work {
+        display: none;
+      }
+      #navbar-instructor {
+        .action {
+          @include action-min;
+        }
+      }
+    }
+    @media (max-width: 767px) {
+      #navbar-instructor {
+        display: none;
+      }
+    }
+  }
+}
+#gradient-menu {
+  transition: all 0.4s;
+  height: 100vh;
+  width: 270px;
+  position: absolute;
+  top: 70px;
+  right: -280px;
+  background: linear-gradient(-45deg, #eeff25, #ffed14, #c708c7, #23D5AB);
+  background-size: 400% 400%;
+  z-index: 1;
+  -webkit-animation: Gradient 2s ease infinite;
+  -moz-animation: Gradient 1s ease infinite;
+  animation: Gradient 1s ease infinite;
+  @media (max-width: 767px) {
+      top: 0;
+      left: -300px;
+      position: fixed;
+      width: 300px;
+      height: 100vh;
+  }
+  @media (max-width: 375px) {
+    width: 220px;
+  }
+}
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+.open {
+  right: 0 !important;
+}
+@media (max-width: 767px) {
+  .open {
+    right: inherit !important;
+    left: 0 !important;
+  }
+}

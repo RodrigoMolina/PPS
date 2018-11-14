@@ -1,0 +1,66 @@
+<article class="workshop-card m-l-r card_workshop">
+
+
+
+  <%= link_to public_main_workshop_path(workshop), onClick: "ga('send', 'event', 'taller', 'click', '#{workshop.activity_title.to_s.parameterize}');", onmouseover: "ga('send', 'event', 'taller', 'pasarRaton', '#{workshop.activity_title.to_s.parameterize}');" do %>
+    <div class='img <%= workshop.main_high_or_wide %>' style='background-image:url(<%= image_url workshop.main_get_image  %>);'></div>
+  <% end %>
+  <div class="cont-info m-t">
+    <div class="workshop-info p-l-r">
+      <a href="/taller/<%= workshop.id %>">
+        <h4 class="title"><%= workshop.activity_title %></h4>
+        <p class="p-r description"><%= workshop.activity_description %></p>
+      </a>
+      <div class="small-info" style='justify-content: space-between;'>
+
+          <div class="price">
+            <div class=""><i class="fa fa-money" aria-hidden="true"></i><%= number_to_currency workshop.price %></div>
+          </div>
+
+          <span>
+            <% score = workshop.avg_score %>
+            <% unless score.zero? %>
+              <% score.times do |i| %>
+                  <%= image_tag 'star1.png', class: 'star', style: 'height: 15px;' %>
+              <% end %>
+              <% (5 - score).times do |i| %>
+                  <%= image_tag 'star0.png', class: 'star', style: 'height: 15px;' %>
+              <% end %>
+            <% else %>
+              -
+            <% end %>
+          </span>
+      </div>
+      <div class="p-b">
+        <% if workshop.workshop_category.present? %>
+          <%= link_to public_main_workshop_category_path(workshop.workshop_category) do %>
+            <span class="tag-input-outline m-t"><img src='<%= image_url("icons/category-invert/#{workshop.workshop_category.to_s.parameterize}.svg") %>' class="category-icon"/><%= workshop.workshop_category %></span>
+          <% end %>
+        <% end %>
+        <div class="teacher">
+            Por:
+              <%= image_tag workshop.normal_profile.get_image_thumb %>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="a-c b-t-g col-xs-12 flex j-c p-b p-t-b">
+
+
+    <% if(user_signed_in?) %>
+      <%= link_to authenticated_workshops_toggle_workshop_favorite_path(workshop), remote: true, class: "workshop_favorite_#{workshop.id} cont-wish m-r flex a-c j-c" do %>
+        <% if workshop.favorite?(current_profile)%>
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        <% else %>
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <a href="/taller/<%= workshop.id %>" class="action center-block m-t-b m-r" role="button" aria-pressed="true">VER</a>
+  </div>
+
+</article>
+
+
+

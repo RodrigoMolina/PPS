@@ -1,0 +1,32 @@
+
+<% case @operation %>
+<% when 'removed' %>
+
+  $('#info-workshop').html('<h1 class="title text-center animated fadeInUp" style="margin-top: 40px;"><i class="fa fa-warning fa-2x" style="vertical-align: middle;margin-right: 10px;color: #900;"></i>Ha salido del taller</h1>');
+ 
+  setTimeout(function () {
+     window.location.href = '/catalogo?id=<%= @id %>';
+  }, 500);
+
+
+  if ($('#to_learn_workshops').length != 0){
+    $('#<%= dom_id @workshop %>').parent().remove();
+  }
+
+
+<% when 'added' %>
+
+  $('#info-workshop').html('<h1 class="title text-center animated fadeInUp" style="margin-top: 40px;"><i class="fa fa-check-circle fa-2x" style="vertical-align: middle;margin-right: 10px;color: #070;"></i>Inscripcion realizada con éxito</h1>');
+ 
+  setTimeout(function () {
+     window.location.href = '/mis-talleres-como-aprendiz?id=<%= @workshop_schedule.workshop.id %>';
+  }, 1000);
+
+<% end %>
+
+
+
+
+
+$(document).trigger('flash:send', <%= raw flash.to_hash.to_json %>);
+<% flash.clear %>

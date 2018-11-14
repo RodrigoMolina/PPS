@@ -1,0 +1,16 @@
+<article href="#" class="workshop-card m-l-r card_workshop m-t-b">
+  <div class='img min <%= workshop.main_high_or_wide %>' style='background-image:url(<%= image_url workshop.main_get_image  %>);'></div>
+  <div class="cont-info m-t">
+    <div class="workshop-info p-l-r">
+      <h4 class="title"><%= workshop.activity_title %></h4>
+      <p class="p-r description"><%= workshop.activity_description %></p>
+      <div class="p-b">
+        <% if workshop.workshop_category.present? %>
+          <%= link_to public_main_workshop_category_path(workshop.workshop_category) do %>
+          <span class="tag-input-outline m-t"><img src='<%= image_url("icons/category-invert/#{workshop.workshop_category.to_s.parameterize}.svg") %>' class="category-icon"/><%= workshop.workshop_category %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</article>

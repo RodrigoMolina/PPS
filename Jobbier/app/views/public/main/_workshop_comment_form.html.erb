@@ -1,0 +1,37 @@
+<li class="comment">
+  <%= form_for workshop_comment, url: authenticated_main_workshop_comment_path, remote: true, method: :post do |f| %>
+
+  <%= f.hidden_field :normal_profile_id %>
+  <%= f.hidden_field :workshop_id %>
+
+
+
+
+
+  <div class="box-comment">
+    <h2 class="col-sm-12 info-section-medium p-b">Escribe un comentario acerca de este taller</h2>
+
+    <span class="rating" style="margin-bottom: 15px;">
+
+      <%= f.radio_button :score, '5', error: false, class: 'rating-input' %>
+      <label for="workshop_comment_score_5" class="rating-star"></label>
+      <%= f.radio_button :score, '4', error: false, class: 'rating-input' %>
+      <label for="workshop_comment_score_4" class="rating-star"></label>
+      <%= f.radio_button :score, '3', error: false, class: 'rating-input' %>
+      <label for="workshop_comment_score_3" class="rating-star"></label>
+      <%= f.radio_button :score, '2', error: false, class: 'rating-input' %>
+      <label for="workshop_comment_score_2" class="rating-star"></label>
+      <%= f.radio_button :score, '1', error: false, class: 'rating-input' %>
+      <label for="workshop_comment_score_1" class="rating-star"></label>
+
+    </span>
+
+
+    <%= f.text_area :comment, rows: "8", cols: "80", class: 'row j-input' %>
+    <article class="p-t-b-2 text-center">
+      <%= button_tag('ENVIAR COMENTARIO', type: 'submit', class: "action", data: {'disable-with' => 'ENVIANDO'}) %>
+    </article>
+  </div>
+
+  <% end %>
+</li>

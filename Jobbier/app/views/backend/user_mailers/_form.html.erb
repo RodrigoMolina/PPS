@@ -1,0 +1,30 @@
+<% form_params = (modal) ? {remote: true} : {} %>
+<% locale_set = 'activerecord.attributes.user_mailer' %>
+
+<%= form_for([:backend, @user_mailer], form_params) do |f| %>
+  <%= hidden_field_tag :source, params[:source] %>
+
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+    </div>
+
+    <div class="panel-footer">
+      <div class="actions text-right">
+        <%= button_tag(t(:submit), type: 'submit', class: 'btn btn-success btn-ok btn-lg', data: {'disable-with' => t(:submiting)}) %>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
+
+
+
+
+
+
+
+
+

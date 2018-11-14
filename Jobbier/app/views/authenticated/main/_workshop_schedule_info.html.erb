@@ -1,0 +1,11 @@
+<div class="flex a-c j-s p-l-r extend-info p-t-b">
+  <span class="p-r b-r-b">Inscriptos:<br>
+    <strong><%= @workshop_schedule_active.actual_quota %></strong>
+  </span>
+  <span class="p-l-r b-r-b">Cupos:<br>
+    <strong><%= @workshop_schedule_active.available_quota %></strong>
+  </span>
+  <span class="p-l-r">Estado:<br>
+   <strong><%= state_name(@workshop_schedule_active.get_state) %></strong>
+ </span>
+</div>

@@ -1,0 +1,7 @@
+<% if @workshop_schedule_message.present? %>
+$('#cont-msgs').append('<%= j render 'workshop_schedule_message', workshop_schedule_message: @workshop_schedule_message_created %>');
+<% end %>
+$('#workshop_schedule_message_form').html('<%= j render 'workshop_schedule_message_form' %>');
+
+$(document).trigger('flash:send', <%= raw flash.to_hash.to_json %>);
+<% flash.clear %>

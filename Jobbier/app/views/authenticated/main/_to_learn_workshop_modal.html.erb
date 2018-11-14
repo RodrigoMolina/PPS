@@ -1,0 +1,143 @@
+<div class="modal-content">
+  <div class="col-sm-12 col-md-4 p-t info-workshop-wrapper">
+    <div class="fixed-info" id="panel-workshop-info">
+      <div class="p-t-b" id="close-modal-section">
+        <button type="button" class="j-button" data-dismiss="modal" id="close-modal-panel">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <article class="workshop-card card_workshop">
+        <div class="cont-info m-t">
+          <div class="workshop-info p-l-r">
+            <h4 class="title"><%= @workshop.activity_title %></h4>
+            <p class="p-r description"><%= @workshop.activity_description %></p>
+          </div>
+        </div>
+      </article>
+
+
+
+
+
+
+      <ul class="nav nav-tabs">
+        <% @workshop.workshop_schedules.each_with_index do |ws, index| %>
+
+
+          <% if current_profile.workshop_schedules.include?(ws) %>
+
+            <% if @workshop_schedule_active ==  ws %>
+            <li class='nav-tab-workshop-schedule workshop-schedule-<%= ws.id %> active'>
+              <%= link_to authenticated_main_to_teach_workshop_schedule_path(ws), remote: true, class: "change_workshop_schedule" do %>
+                <%= "Turno #{index+1}" %>
+                <span>
+                  <% new_msj_learner = current_profile.workshop_schedule_message_observers.joins(:workshop_schedule).where(workshop_schedules: {id: @workshop_schedule_active}).state_new.kind_learner.count %>
+                  <% unless new_msj_learner.zero? %><span class='badge' style="background-color: #a800a8;padding: 3px 10px;border-radius: 20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_learner %></span><% end %>
+                </span>
+
+              <% end %>
+            </li>
+            <% else %>
+            <li class='nav-tab-workshop-schedule workshop-schedule-<%= ws.id %>'>
+              <%= link_to authenticated_main_to_teach_workshop_schedule_path(ws), remote: true, class: "change_workshop_schedule" do %>
+                <%= "Turno #{index+1}" %>
+                <span>
+                  <% new_msj_learner = current_profile.workshop_schedule_message_observers.joins(:workshop_schedule).where(workshop_schedules: {id: ws.id}).state_new.kind_learner.count %>
+                  <% unless new_msj_learner.zero? %><span class='badge' style="background-color: #a800a8;padding: 3px 10px;border-radius: 20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_learner %></span><% end %>
+                </span>
+
+              <% end %>
+            </li>
+            <% end %>
+
+          <% end %>
+
+
+        <% end %>
+      </ul>
+
+
+
+      <article class="title-entity-section p-t-b p-l-r b-b-g" style='margin-top: 0;'>
+        <%= image_tag @workshop.normal_profile.get_image_thumb, style: 'width: 45px;float: left;margin-right: 10px;' %>
+        <h4 style='margin-top: 0;'>Instructor/a</h4>
+        <p><%= @workshop.normal_profile %></p>
+      </article>
+
+
+
+        <article class="action-panel">
+          <div class="extend-info p-t-b">
+            <div id='workshop_schedule_info_2'>
+              <%= render 'workshop_schedule_info_2' %>
+            </div>
+            <div class="p-l-r p-t-b b-b-g">Dirección:<br>
+              <strong><%= @workshop.address_to_s %></strong>
+              <div style="margin-top: 10px;" id="map-container" data-lat='<%= @workshop.latitude %>' data-lng='<%= @workshop.longitude %>'></div>
+
+            </div>
+         </div>
+        </article>
+
+
+
+
+
+
+      <article class="action-panel">
+        <div class="extend-info p-t-b">
+          <div class="p-l-r p-t-b b-b-g">Cosas incluidas en el taller:<br>
+            <strong><%= @workshop.things_included %></strong>
+          </div>
+          <div class="p-l-r p-t-b b-b-g">Cosas que tiene que llevar el aprendiz:<br>
+            <strong><%= @workshop.things_to_carry %></strong>
+          </div>
+          <div class="p-l-r p-t-b b-b-g">Aspectos a tener en cuenta:<br>
+            <strong><%= @workshop.aspects_to_consider %></strong>
+          </div>
+       </div>
+      </article>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+    <article class="p-t-b visible-xs visible-sm text-center b-t-g" id="cont-chat-button">
+      <button type="button" class="action" id="open-panel-chat">ABRIR CHAT GRUPAL</button>
+    </article>
+
+
+
+  </div>
+
+  <div class="col-sm-12 col-md-8 p-t right-viewer">
+    <div class="wrapper-right">
+      <section class="p-t-b title-right p-l-r-2 flex a-c">
+        <button type="button" class="j-button visible-xs visible-sm" id="close-chat-room">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </button>
+        <h2 class="info-section-small m-l-2 no-p">Mensajes grupales </h2>
+      </section>
+      <section class="cont-msgs" id='cont-msgs'>
+        <%= render partial: 'workshop_schedule_message', collection: @workshop_schedule_active.workshop_schedule_messages, as: :workshop_schedule_message   %>
+      </section>
+
+
+
+      <section id="workshop_schedule_message_form">
+        <%= render 'workshop_schedule_message_form' %>
+      </section>
+
+
+    </div>
+  </div>
+
+</div>

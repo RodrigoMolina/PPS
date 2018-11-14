@@ -1,0 +1,58 @@
+<section class="p-t-b-2 p-l-2 p-r-4 options-menu">
+  <div class="workshop-menu" class="p-l p-t-b-2">
+    <h6 class="">Como instructor</h6>
+    <ul>
+      <li>
+        <% new_msj_teacher = current_profile.workshop_schedule_message_observers.state_new.kind_teacher.count %>
+        <%= link_to authenticated_main_to_teach_workshops_path, class: 'partial-selector' do %>
+          Mis talleres <% unless new_msj_teacher.zero? %><span class='badge'><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_teacher %></span><% end %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to authenticated_workshops_create_path, class: 'partial-selector' do %>
+          Crear taller
+        <% end %>
+      </li>
+
+    </ul>
+    <h6 class="">Como aprendiz</h6>
+    <ul>
+      <li>
+
+        <% new_msj_learner = current_profile.workshop_schedule_message_observers.state_new.kind_learner.count %>
+        <%= link_to authenticated_main_to_learn_workshops_path, class: 'partial-selector' do %>
+          Mis talleres <% unless new_msj_learner.zero? %><span class='badge'><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_learner %></span><% end %>
+        <% end %>
+      </li>
+    </ul>
+    <ul class="b-t-g p-t">
+      <li>
+        <%= link_to authenticated_main_wishlist_path, class: 'partial-selector' do %>
+          <i class="fa fa-bookmark-o" aria-hidden="true"></i> Lista de deseos
+        <% end %>
+      </li>
+      <!--<li><a href="" class="partial-selector"><i class="fa fa-usd" aria-hidden="true"></i>  Cuenta</a></li>-->
+      <!--<li><a href="" class="partial-selector"><i class="fa fa-star-o" aria-hidden="true"></i>  Calificaciones</a></li>
+      <li>
+        <%= link_to authenticated_chat_index_path do %>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          Mensajes
+        <% end %>
+      </li>-->
+    </ul>
+    <ul class="b-t-g p-t">
+      <li>
+        <%= link_to edit_user_registration_path do %>
+        <i class="fa fa-user-circle-o fa-fw"></i> <%= t :edit_profile %>
+        <% end %>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fa fa-sign-out fa-fw"></i> <%= t :logout %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</section>
+<section id="gradient-menu"></section>

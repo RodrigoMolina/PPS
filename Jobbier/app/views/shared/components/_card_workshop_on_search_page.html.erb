@@ -1,0 +1,62 @@
+<div class="flex j-c m-t-b">
+  <article class="workshop-card workshop-card-on-search p-t-b">
+
+    <%= link_to public_main_workshop_path(workshop), id: "show_workshop_#{workshop.id}", data: {behavior: 'ajax-modal'}, style: 'text-decoration: none;', onClick: "ga('send', 'event', 'taller', 'click', '#{workshop.activity_title.to_s.parameterize}');", onmouseover: "ga('send', 'event', 'taller', 'pasarRaton', '#{workshop.activity_title.to_s.parameterize}');" do %>
+
+
+    <div class="flex a-c">
+      <div class="avatar-card-search flex j-c a-s p-t-b p-l-r">
+        <%= image_tag workshop.main_get_image_thumb %>
+      </div>
+      <div class="cont-info">
+        <div class="workshop-info p-l-r">
+          <h4 class="title"><%= workshop.activity_title %> <% if workshop.try(:distanciaKm).present? %>(<%= workshop.try(:distanciaKm).round(2) %> km)<% end %></h4>
+          <p class="p-r description"><%= workshop.activity_description %></p>
+        </div>
+        <% if workshop.workshop_category.present? %>
+        <span class="tag-input-outline p-l"> <img src='<%= image_url("icons/category-invert/#{workshop.workshop_category.to_s.parameterize}.svg") %>' class="category-icon"/><%= workshop.workshop_category %></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex a-c j-c p-l-r extend-info p-t">
+      <span class="p-r">Precio: <strong><%= number_to_currency workshop.price %></strong></span>
+
+      <% workshop_schedule = workshop.workshop_schedules.first %>
+
+      <span class="b-l-w p-l-r">Cupos:
+      <% if workshop_schedule.unlimited_quota %>
+        <strong>-</strong>
+       <% else %>
+        <strong><%= workshop_schedule.available_quota %></strong>
+       <% end %>
+     </span>
+     
+     <% if workshop_schedule.days_to_start=='Comenzado' %>
+        <span class="b-l-w p-l-r"><strong><%= workshop_schedule.days_to_start %></strong></span>   
+     <% else %>
+        <span class="b-l-w p-l-r">Inicia en: <strong><%= workshop_schedule.days_to_start %></strong></span>
+     <% end %> 
+
+    </div>
+
+    <% end %>
+
+    <div class="a-c col-xs-12 flex j-e p-t like-section">
+
+
+
+        <% if(user_signed_in?) %>
+          <%= link_to authenticated_workshops_toggle_workshop_favorite_path(workshop), remote: true, class: "workshop_favorite_#{workshop.id} cont-wish m-r flex a-c j-c" do %>
+            <% if workshop.favorite?(current_profile)%>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+            <% else %>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+        <% end %>
+
+
+        <%= link_to 'VER', public_main_workshop_path(workshop), id: "show_workshop_#{workshop.id}", class: 'action center-block m-t-b m-r', data: {behavior: 'ajax-modal'}, onClick: "ga('send', 'event', 'taller', 'click', '#{workshop.activity_title.to_s.parameterize}');", onmouseover: "ga('send', 'event', 'taller', 'pasarRaton', '#{workshop.activity_title.to_s.parameterize}');" %>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,125 @@
+#show-workshop {
+  .info-section-small {
+    padding-left: 15px;
+    margin: 4px 0 0 0;
+  }
+  #description-workshop {
+    .show-workshop-portrait {
+      height: 250px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      width: 100%;
+      border-radius: 0 0 4px 4px;
+      box-shadow: inset 0px 11px 14px -8px rgba(0, 0, 0, 0.61);
+      position: relative;
+      .tag-input-outline {
+        position: absolute;
+        bottom: 12px;
+        background: white;
+        border: none;
+      }
+    }
+    .title {
+        font-size: 36px;
+        font-weight: 600;
+        color: $j-black;
+        font-family: $roboto;
+        margin-bottom: 0;
+    }
+    .description {
+      color: #545454;
+      font-weight: 300;
+      font-family: $roboto;
+      font-size: 16px;
+      margin: 0;
+    }
+    .instructor-section {
+      .instructor-name {
+        font-family: $roboto;
+        font-weight: 600;
+        color: grey;
+      }
+      img {
+        width: 40px;
+        border-radius: 50%;
+        margin: 6px;
+      }
+      .text {
+        margin: 0;
+      }
+    }
+    .place-section {
+      .map {
+        height: 300px;
+        width: 100%;
+        background-color: grey;
+      }
+    }
+  }
+  #info-workshop {
+    .action-panel {
+      .extend-info:first-child {
+        .info-section-small {
+          color: white;
+        }
+        background-color: $j-black;
+        color: white;
+      }
+      .action {
+        @include action-min;
+      }
+      z-index: 2;
+      border-radius: 0px 0px 6px 6px ;
+      font-family: $roboto;
+      .extend-info {
+        span {
+          text-align: center;
+        }
+        .info-section-small {
+          padding: 0px 0 6px 0;
+          margin: 0;
+        }
+      }
+    }
+    @media (max-width: 767px) {
+      position: initial;
+      top: 0;
+      .action-panel {
+        width: 100%;
+        margin: 0;
+        left: 0;
+        .extend-info {
+          padding: 4px 1em 4px 1em;
+          border: none;
+          &:nth-child(2) {
+            box-shadow: 0px 7px 4px -8px black;
+          }
+        }
+      }
+    }
+    .social-share-button {
+      .ssb-icon {
+        background-size: 25px;
+        height: 25px;
+        width: 25px;
+      }
+    }
+  }
+}
+.modal-body {
+  #show-workshop {
+    @media (max-width: 767px) {
+      .action-panel {
+        position: static !important;
+      }
+      #action-workshop {
+        position: inherit !important;
+        box-shadow: none !important;
+        margin-bottom: 25px !important;
+        padding-bottom: 6px !important;
+        padding-top: 3em;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+#register {
+  height: 100vh;
+  background: #c0392b;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #8e44ad, #c0392b);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #8e44ad, #c0392b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  .video-full-height-container {
+    opacity: 0.5;
+  }
+
+  .info-section-small {
+    color: white;
+  }
+  .j-input {
+  }
+  .action-header {
+    @include purple-action-header;
+    position: fixed;
+    z-index: 2;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+  }
+  footer {
+    position: absolute;
+    width: 100%;
+    background: rgba(31, 0, 31, 0.52);
+  }
+}

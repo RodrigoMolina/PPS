@@ -1,0 +1,78 @@
+<% workshop_schedule = f.object %>
+<% locale_set = 'activerecord.attributes.workshop_schedule' %>
+<div class='workshop_schedule <% if(workshop_schedule._destroy) %>hide<% end %>'>
+
+<div class='panel panel-default'>
+<div class='panel-body'>
+
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group ">
+                <%= f.text_area :schedule_info, class: 'j-input', placeholder: 'Ej: martes y jueves de 19 a 21 / Ej2: A convenir' %>
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-top: 10px;">
+            <%= f.hidden_field :_destroy %>
+            <%= link_to icon(:trash, class: 'fa-2x'), 'javascript:;', class: 'text-danger remove-workshop_schedule' %>
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 p-t-b">
+          <%= f.label :maximun_quota, class: 'info-section-small' %>
+        </div>
+        <div class='row'>
+            <div class='col-md-8 maximun_quota_container' <% if workshop_schedule.unlimited_quota? %>style="display: none;"<% end %>>
+                <div class="form-group ">
+                    <%= f.number_field :maximun_quota, class: 'j-input workshop_schedule_maximun_quota' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if workshop_schedule.errors[:unlimited_quota].any? %>has-error<% end %>" style="margin-top: 15px;">
+                    <%= f.check_box :unlimited_quota, class: 'icheck workshop_schedule_unlimited_quota', error: false %>
+                    <%= f.label t(:unlimited_quota, scope: locale_set), class: 'control-label' %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :start_publication, class: 'info-section-small' %>
+        </div>
+        <div class='row'>
+            <div class='col-md-8 start_publication_container' <% if workshop_schedule.always_open? %>style="display: none;"<% end %>>
+                <div class="form-group ">
+                    <%= f.text_field :start_publication, class: 'datepicker j-input workshop_schedule_start_publication', placeholder: 'Ej: dd/mm/aaaa' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if workshop_schedule.errors[:always_open].any? %>has-error<% end %>" style="margin-top: 15px;">
+                    <%= f.check_box :always_open, class: 'icheck workshop_schedule_always_open', error: false %>
+                    <%= f.label t(:always_open, scope: locale_set), class: 'control-label' %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :closing_of_registrations, class: 'info-section-small' %>
+        </div>
+        <div class='row'>
+            <div class='col-md-8 closing_of_registrations_container' <% if workshop_schedule.never_close? %>style="display: none;"<% end %>>
+                <div class="form-group ">
+                    <%= f.text_field :closing_of_registrations, class: 'datepicker j-input workshop_schedule_closing_of_registrations', placeholder: 'Ej: dd/mm/aaaa' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group <% if workshop_schedule.errors[:never_close].any? %>has-error<% end %>" style="margin-top: 15px;">
+                    <%= f.check_box :never_close, class: 'icheck workshop_schedule_never_close', error: false %>
+                    <%= f.label t(:never_close, scope: locale_set), class: 'control-label' %>
+                </div>
+            </div>
+        </div>
+
+
+</div>
+</div>
+
+
+
+
+</div>

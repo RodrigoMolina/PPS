@@ -1,0 +1,47 @@
+
+<div class="box box-success">
+  <div class="box-body">
+
+    <h1 class="page-header">
+      <%= icon(:square)%> <%= t :user_mailers %>
+    </h1>
+    
+    <div class="box box-success box-solid">
+      <div class="box-header">
+        <h3 class="box-title"></h3>
+        <div class="box-tools pull-right">
+          <%= link_to icon(:filter), 'javascript:;', class: 'btn btn-box-tool btn-default', data: {target: '#panel-filter', toggle: 'toggle-filter'} %>
+            <%= link_to t(:user_mailer, scope: :new), new_backend_user_mailer_path, class: 'btn btn-box-tool btn-primary btn-add' %>
+        </div>
+      </div>
+      <div id="panel-filter" class="text-right <% if from_filter? %>visible<% end %>">
+        <%= render 'filter' %>
+      </div>
+
+        <div class="responsive-table">
+          <table id="user_mailers" class="table table-bordered" style="margin-bottom: 0;">
+            <thead>
+              <tr>
+                <% [:id, ].each do |field_name| %>
+                <th><%= link_to t(field_name, scope: :user_mailer_filter), backend_user_mailers_path(order_url(field_name, params[:filter])) %></th>
+                <% end %>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody id="user_mailer_container">
+              <%= render @user_mailers, visible: true %>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="paginate_container">
+          <%= will_paginate @user_mailers %>
+        </div>
+        
+
+    </div>
+
+
+  </div>
+</div>
+

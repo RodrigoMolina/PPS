@@ -1,0 +1,61 @@
+
+<!-- Modal -->
+
+<div id="details" class="modal fade custom-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal chat -->
+
+  </div>
+</div>
+
+<div id="tutorial" class="modal fade custom-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal Tutorial -->
+
+  </div>
+</div>
+
+<section class="container cont-cards user-panel" id='to_learn_workshops'>
+  <div class="row p-t">
+    <div class="col-xs-12">
+      <h2 class="row info-section-medium p-b">
+        Mis talleres <small>(Como aprendiz)</small>
+      </h2>
+    </div>
+  </div>
+
+    <div id="panel-paginator" class="row">
+      <ul class="col-xs-12">
+        <li>
+          <%= link_to 'Abiertos', authenticated_main_to_learn_workshops_path(:open), class: "partial-selector #{(@state == :open)? 'active' : ''}" %>
+        </li>
+        <li>
+          <%= link_to 'En curso', authenticated_main_to_learn_workshops_path(:in_progress), class: "partial-selector #{(@state == :in_progress)? 'active' : ''}" %>
+        </li>
+        <li>
+          <%= link_to 'Terminados', authenticated_main_to_learn_workshops_path(:finish), class: "partial-selector #{(@state == :finish)? 'active' : ''}" %>
+        </li>
+        <li>
+          <%= link_to 'Todos', authenticated_main_to_learn_workshops_path, class: "partial-selector #{(@state == :all)? 'active' : ''}" %>
+        </li>
+      </ul>
+    </div>
+
+  <div class="row p-t-b"> <!-- Mapear Workshops -->
+    <h2 class="col-xs-12 info-section p-b b-b-g">
+      Talleres > <strong><%= state_name @state %></strong>
+    </h2>
+    <% if @workshops.empty? %>
+      <div class="col-xs-12 info-state flex f-d-c j-c a-c">
+          <div class="message">No tienes ningun taller en "<%= state_name @state %>"</div>
+      </div>
+    <% else %>
+      <% @workshops.each do |ws| %>
+      <div class="col-xs-12 col-sm-6 col-md-3 m-t-b flex j-c">
+        <%= render partial: 'shared/components/to_learn_card_workshop', locals: {workshop: ws} %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</section>

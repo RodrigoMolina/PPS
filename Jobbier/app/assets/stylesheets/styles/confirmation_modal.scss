@@ -1,0 +1,18 @@
+.modal-footer{
+  .action{
+    padding-rigth: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+  }
+  text-align: center;
+}
+
+.modal-dialog-centered{
+  .modal-footer{
+    text-align: center;
+  }
+  margin-top: 15%;
+  text-align: center;
+}

@@ -1,0 +1,30 @@
+#tutorial{
+  background: none;
+}
+
+#tutorial-content-css{
+  .action{
+    font-size: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .fa-money{
+    color: grey;
+    margin-left: 5px;
+  }
+  
+  background: white;
+  text-align: center;
+  width: 550px;
+  max-width: 550px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}

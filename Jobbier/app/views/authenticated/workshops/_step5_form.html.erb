@@ -1,0 +1,56 @@
+
+
+<% locale_set = 'activerecord.attributes.workshop' %>
+<%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step5'} do |f| %>
+
+<%= f.hidden_field :step, value: 'step5' %>
+
+<div class="container-fluid stage" id="step5">
+    <div class="col-sm-6 m-t-b-5 stage-card">
+        <div class="p-l-r-2 p-t-b title-workshop title-workshop-card ">
+            <h2>2 : Creando tu agenda</h2>
+
+
+            <div class='flex j-s-a'>
+                <%= link_to 'Paso 4', authenticated_workshops_step_path(@workshop, 'step4'), class: "step step-#{@workshop.step?('step4')} #{(@workshop.step == 'step4')? 'active' : ''}" %>
+                <%= link_to 'Paso 5', authenticated_workshops_step_path(@workshop, 'step5'), class: "step step-#{@workshop.step?('step5')} #{(@workshop.step == 'step5')? 'active' : ''}" %>
+            </div>
+
+
+        </div>
+
+        <h4 class="text p-t-b m-b b-b-g">Ya dijimos qué, dónde, cuándo y por qué, ahora vamos por el cómo!<br>Contale a los interesados cosas para que se sientan cómodos...<br>¿Ofrecés material/equipos para el aprendiz?</h4>
+
+
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :things_included, class: 'info-section-small' %>
+        </div>
+        <div class="form-group ">
+            <%= f.text_field :things_included, class: 'j-input', placeholder: 'Ej: Todas las herramientas necesarias para el desarrollo del mismo' %>
+        </div>
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :things_to_carry, class: 'info-section-small' %>
+        </div>
+        <div class="form-group ">
+            <%= f.text_field :things_to_carry, class: 'j-input', placeholder: 'Ej: Ropa cómoda y muchas ganas de aprender' %>
+        </div>
+        <div class="col-xs-12 p-t-b">
+          <%= f.label :aspects_to_consider, class: 'info-section-small' %>
+        </div>
+        <div class="form-group ">
+            <%= f.text_field :aspects_to_consider, class: 'j-input', placeholder: 'Ej: Días de lluvia no se realiza' %>
+        </div>
+
+
+
+        <div class="sections-moves p-t-b m-t-2">
+                <div class="actions">
+                    <%= link_to 'ATRAS', authenticated_workshops_main_wizard_path(@workshop), class: 'action' %>
+                    <%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<% end %>

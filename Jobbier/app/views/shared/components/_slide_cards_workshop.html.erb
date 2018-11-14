@@ -1,0 +1,17 @@
+<section class="container cont-cards" style="overflow: hidden">
+  <div class="row p-t-b">
+    <h2 class="col-sm-12 info-section-bold b-b-g p-b">Novedades</h2>
+  </div>
+  <div class="row p-t-b hidden-xs"> <!-- Mapear Workshops -->
+    <% @workshops.each do |workshop| %>
+    <div class="col-xs-6 col-sm-6 col-md-3 m-t-b flex j-c">
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    </div>
+    <% end %>
+  </div>
+  <div class="row p-t-b visible-xs slide-card-section "> <!-- Mapear Workshops -->
+    <% @workshops.each do |workshop| %>
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    <% end %>
+  </div>
+</section>

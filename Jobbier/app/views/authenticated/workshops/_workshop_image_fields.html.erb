@@ -1,0 +1,22 @@
+<% workshop_image = f.object %>
+<% kind_str = (workshop_image.kind.to_sym == :place)? '_place' : '_normal' %>
+
+<div class='workshop_image<%= kind_str %> <% if(workshop_image._destroy) %>hide<% end %>'>
+    <% image_obj = (workshop_image.image.present?) ? workshop_image.image : Image.new %>
+    <%= f.fields_for :image, image_obj do |image| %>
+    <div class='imageloader-container'>
+        <%= image.file_field :file, class: 'imageloader-file-div' %>
+        <%= image.hidden_field :file_cache if image_obj.file_cache.present? %>
+
+        <div class="imageloader-img <%= workshop_image.high_or_wide %>" style='background-image:url(<%= image_url workshop_image.get_image %>);'></div>
+        <div class='workshop_image_actions'>
+            <%= f.hidden_field :kind %>
+            <%= f.hidden_field :_destroy %>
+            <%= link_to icon(:trash, class: 'fa-2x'), 'javascript:;', class: "text-danger remove-workshop_image#{kind_str}" %>
+        </div>
+    </div>
+    <% if workshop_image.errors[:image].any? %>
+    <p class="text-danger"><%= workshop_image.errors[:image].join('') %></p>
+    <% end %>
+    <% end %>
+</div>

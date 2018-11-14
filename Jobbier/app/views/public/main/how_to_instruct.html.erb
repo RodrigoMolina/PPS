@@ -1,0 +1,49 @@
+<section class="default-section-header" id="como-ser-instructor">
+  <article class="header">
+    <article class="p-t-3 p-l-4 cont-title">
+      <h1 class="title-full-height p-r">
+          ¡Compartí conocimiento!
+      </h1>
+      <p>
+        Con Jobbier podés ofrecer eso que sabés creando talleres de manera simple,
+        rápida y sencilla. Conocé gente interesada en tu disciplina y disfrutá
+        de compartir el saber de la manera más horizontol del planeta.
+      </p>
+    </article>
+  </article>
+  <article class="p-t-b-2 action-header a-c">
+    <%= link_to authenticated_workshops_create_path,  class: "action center-block m-t-b m-r" do %>
+      CARGÁ TU TALLER
+    <% end %>
+  </article>
+  <article class="container p-t-b-3" id="steps">
+    <h2 class="b-b-b">¿Cómo ser instructor?</h2>
+    <ul class="col-sm-8 flex f-d-c a-c">
+      <li class="row p-t-3 flex f-d-c">
+        <div class="j-step"><span>1</span><p class="b-b-b" >Alta de usuario</p></div>
+      </li>
+      <li class="row p-t-3 flex f-d-c">
+        <div class="j-step"><span>2</span><p class="b-b-b" >Creá tu taller paso a paso</p></div>
+      </li>
+      <li class="row p-t-3 flex f-d-c">
+        <div class="j-step"><span>3</span><p class="b-b-b" >Vos y Jobbier, juntos, le damos difusión al taller</p></div>
+      </li>
+      <li class="row p-t-3 flex f-d-c">
+        <div class="j-step"><span>4</span><p class="b-b-b" >Empezá a recibir inscriptos e intresados</p></div>
+      </li>
+      <li class="row p-t-3 flex f-d-c">
+        <div class="j-step"><span>5</span><p>¡Te encontrarás para compartir aprendizaje, y listo! Tu dinero queda
+          en tu cuenta de Jobbier para gestionarlo como quieras</p></div>
+      </li>
+    </ul>
+    <h2 class="col-xs-12 m-t-2">¡Eso es todo! ¿Qué estás esperando?</h2>
+  </article>
+  <article class="p-t-b-2 action-cont">
+    <%= link_to authenticated_workshops_create_path,  class: "action center-block m-t-b m-r" do %>
+      CARGÁ TU TALLER
+    <% end %>
+  </article>
+</section>
+<%= render 'shared/como_funciona' %>
+<%= render 'shared/comunidad' %>
+<%= render 'shared/why_workshop' %>

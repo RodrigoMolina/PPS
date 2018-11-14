@@ -1,0 +1,118 @@
+#chat {
+  height: 100%;
+  display: flex;
+  background: white;
+  width: 100%;
+}
+.entity-viewer {
+  width: 320px;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 0 0 46px 0;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+.title-entity-section {
+  h4 {
+    font-size: 16px;
+    color: #444444;
+    font-family: $open;
+    margin-bottom: 0;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: Ellipsis;
+  }
+  p {
+    padding-top: 6px;
+    color: grey;
+    font-family: $open;
+    margin-bottom: 0;
+  }
+}
+.right-viewer {
+  display: flex;
+  align-items: flex-end;
+  background-color: #d2d2d2;
+  flex: 2;
+  height: 100%;
+  padding: 0;
+}
+
+.wrapper-right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .cont-msgs {
+    overflow-y: auto;
+    height: 100%;
+  }
+  .box-message {
+    display: flex;
+    align-items: flex-start;
+    img {
+      width: 30px;
+      border-radius: 50%;
+      margin: 0 6px;
+    }
+    p {
+      margin: 0;
+      display: inline-table;
+      background: white;
+      border-radius: 0 0 10px 10px;
+      padding: 4px 10px;
+      color: grey;
+      max-width: 450px;
+    }
+  }
+  .box-message.own {
+    flex-direction: row-reverse;
+  }
+}
+.send {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  input {
+    width: 100%;
+  }
+  .has-error{
+    width: 100%;
+  }
+}
+
+.entity-list {
+  list-style: none;
+  padding: 0;
+  .entity {
+    a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      @include link-no-decoration;
+      img {
+        width: 40px;
+        border-radius: 50%;
+        height: 40px;
+      }
+      .info-entity {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        span:first-child {
+          color: black;
+        }
+        span:last-child {
+          color: grey;
+          font-size: 12px;
+        }
+      }
+      i {
+        font-size: 14px;
+        color: #ababab;
+      }
+    }
+  }
+}

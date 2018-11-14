@@ -1,0 +1,9 @@
+<%= link_to public_main_workshop_category_path(workshop_category), class: 'j-card-category', onClick: "ga('send', 'event', 'Home', 'click', '#{workshop_category.to_s.parameterize}');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', '#{workshop_category.to_s.parameterize}');" do %>
+  <img src="<%= image_url(workshop_category.image_card_category.file.to_s) %>" class="back-image "/>
+  <div class="cont-category-name p-t-b">
+    <img src='<%= image_url("icons/category/#{workshop_category.to_s.parameterize}.svg") %>' class="category-icon"/>
+    <h3><%= workshop_category %></h3>
+  </div>
+<% end %>
+
+

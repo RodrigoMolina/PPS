@@ -1,0 +1,5 @@
+
+<article class="box-message <% if current_profile == workshop_schedule_message.profile %>own<% end %> p-t-b">
+  <%= image_tag workshop_schedule_message.profile.get_image_thumb %>
+  <p><%= workshop_schedule_message.body %></p>
+</article>

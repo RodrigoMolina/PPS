@@ -1,0 +1,217 @@
+.stage {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  textarea {
+    height: 100px;
+  }
+}
+.stage-card {
+  background: $soft-grey;
+  border-radius: 14px;
+  max-width: 650px;
+  box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  .title-workshop {
+    margin: 0px -15px;
+  }
+  .flex-box-section {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    .flex-box-item {
+      margin: 0;
+    }
+  }
+}
+.title-workshop {
+  background: white;
+  h2 {
+    font-family: $monserrat;
+    font-size: 24px;
+    color: purple;
+  }
+}
+.title-workshop-card {
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.37);
+    .step {
+      font-size: 12px;
+      text-decoration: none !important;
+      -webkit-transition: color 0.2s ease-in;
+      -moz-transition: color 0.2s ease-in;
+      -o-transition: color 0.2s ease-in;
+      transition: color 0.2s ease-in;
+    }
+    .step-false{
+      color: #cacaca;
+    }
+    .step-true{
+      color: #3c763d;
+    }
+    .step-false:before{
+      content: "\f10c";
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 2.5em;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    .step-true:before{
+      content: "\f05d";
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 2.5em;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    .step:not(.step-true):hover, .step:not(.step-true):active, .step.active{
+      color: purple;
+    }
+
+}
+.progress {
+  margin: 0;
+  max-width: 400px;
+}
+.desc {
+  color: purple;
+  font-family: $open;
+  font-size: 14px;
+  margin: 0;
+}
+
+.wizard-section{
+  color: #cacaca;
+}
+
+.wizard-section:hover, .wizard-section:active{
+  color: purple;
+  text-decoration: none;
+}
+
+.wizard-section.active{
+  color: green !important;
+}
+
+.wizard-section .fa-check-circle-o{
+  color: #3c763d;
+}
+.wizard-section .fa-circle-o{
+  color: #cacaca;
+}
+
+.light-title {
+  font-family: $monserrat;
+  font-size: 14px;
+}
+.light-desc {
+  font-family: $open;
+  font-size: 12px;
+}
+.sections-moves {
+  display: flex;
+  justify-content: center;
+  margin-right: -15px;
+  margin-left: -15px;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.37);
+  background: white;
+}
+.action {
+  border: none;
+  font-size: 18px;
+  margin: 0 10px;
+}
+label {
+  margin: 0;
+}
+/* Slide similar */
+.similar-cont {
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.cont-wish {
+  @include link-no-decoration;
+  float: right;
+  height: 40px;
+  width: 40px;
+  transition: all 0.5s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  i {
+    color: $dark-purple;
+    font-size: 18px;
+    transition: all 0.5s;
+  }
+  &:hover {
+    border-radius: 50%;
+    border: 1px solid $dark-purple;
+    .action {
+      display: none;
+    }
+    height: 40px;
+    width: 40px;
+    i {
+      color: $dark-purple;
+      font-size: 20px;
+      -webkit-animation: MotionHover 0.6s ease;
+      -moz-animation: MotionHover 0.6s ease;
+      animation: MotionHover 0.6s ease;
+    }
+  }
+  @keyframes MotionHover {
+      0% {
+          transform: scale(0.3);
+      }
+      100% {
+          transform: scale(1);
+      }
+  }
+}
+
+
+
+.show-workshop-portrait > .cont-wish {
+  @include link-no-decoration;
+  float: right;
+  height: 40px;
+  width: 40px;
+  transition: all 0.5s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  i {
+    color: purple;
+    font-size: 38px;
+    transition: all 0.5s;
+    background-color: #FFF;
+    border-radius: 50%;
+    padding: 5px;
+  }
+  &:hover {
+    border-radius: 50%;
+    .action {
+      display: none;
+    }
+    height: 40px;
+    width: 40px;
+    i {
+      color: $dark-purple;
+      -webkit-animation: MotionHover 0.6s ease;
+      -moz-animation: MotionHover 0.6s ease;
+      animation: MotionHover 0.6s ease;
+    }
+  }
+  @keyframes MotionHover {
+      0% {
+          transform: scale(0.3);
+      }
+      100% {
+          transform: scale(1);
+      }
+  }
+}

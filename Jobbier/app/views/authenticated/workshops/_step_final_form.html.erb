@@ -1,0 +1,464 @@
+<% locale_set = 'activerecord.attributes.workshop' %>
+
+
+<%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step_final'} do |f| %>
+
+<%= f.hidden_field :step, value: 'step_final' %>
+
+<div class="container-fluid stage" id="step_final">
+
+
+<% if @workshop.state_draft? %>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 m-t-b-5">
+      <div class="col-xs-12">
+        <h2 class="co-xs-12 m-b-2 final-message">¡Genial, así se ve el ve el taller!</h2>
+        <div class="col-sm-6 flex f-d-c a-c text-center">
+          <p id="welcome" class="p-t-b">
+            ¡Muy bien! Presiona en publicar para finalizar o navegá hasta abajo para seguir editando o corregir algo :)
+          </p>
+          <div class="actions m-t-b-2">
+              <%= button_tag('PUBLICAR', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-5 col-lg-4 flex j-c p-t-2">
+          <%= render partial: 'shared/components/card_workshop', locals: {workshop: @workshop} %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 m-t-b-5 p-t-2 stage-card">
+
+        <h2 class="m-t-b-2">1: Taller</h2>
+
+        <h4 class="col-xs-12 text p-t-b m-b b-b-b">Información básica del taller</h4>
+
+        <div>
+            <div class="col-sm-9">
+                <div class="form-group m-t-b-3">
+                    <%= f.label :activity_title, class: 'info-section-small' %>
+                    <%= f.text_field :activity_title, class: 'j-input', autofocus: true %>
+                </div>
+                <div class="form-group m-t-b-3">
+                    <%= f.label :activity_description, class: 'info-section-small' %>
+                    <%= f.text_field :activity_description, class: 'j-input' %>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <% if @workshop.errors[:workshop_images].any? %>
+                <p class="text-danger"><%= @workshop.errors[:workshop_images].join('') %></p>
+                <% end %>
+
+                <div class="workshop_images_place_container">
+                    <% @workshop.workshop_images.build(kind: :place) if @workshop.workshop_images.empty? %>
+                    <%= f.fields_for :workshop_images, @workshop.workshop_images.select{|x| x.kind.to_sym == :place} do |form| %><%= render "workshop_image_fields", f: form %><% end %>
+                </div>
+                <div class="add_workshop_image_place_container hide"><%= link_to_add_workshop_image f, :place %></div>
+            </div>
+        </div>
+
+        <h4 class="text p-t-b m-b b-b-b">Acerca del lugar</h4>
+        <div class="select_ajax_geo_container">
+            <div>
+                <div class="col-sm-3">
+                    <div class="p-t-b">
+                      <%= f.label :country_id, class: 'info-section-small' %>
+                    </div>
+                    <div class="form-group <% if(@workshop.errors[:country_id].any?) %>has-error<% end %>">
+                        <% country_id, country_name = (@workshop.country.nil?) ? [nil, nil] : [@workshop.country.id, @workshop.country.to_s] %>
+                        <%= f.hidden_field :country_id, data: {kind: 'country', url: '/api/countries', 'record-id' => country_id, 'record-text' => country_name, placeholder: ''}, autofocus: true, class: 'select_ajax_geo select-custom j-input' %>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="p-t-b">
+                      <%= f.label :province_id, class: 'info-section-small' %>
+                    </div>
+                    <div class="form-group <% if(@workshop.errors[:province_id].any?) %>has-error<% end %>">
+                        <% province_id, province_name = (@workshop.province.nil?) ? [nil, nil] : [@workshop.province.id, @workshop.province.to_s] %>
+                        <%= f.hidden_field :province_id, data: {kind: 'province', url: '/api/provinces', 'record-id' => province_id, 'record-text' => province_name, placeholder: ''}, class: 'select_ajax_geo select-custom j-input' %>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="p-t-b">
+                      <%= f.label :city_id, class: 'info-section-small' %>
+                    </div>
+                    <div class="form-group <% if(@workshop.errors[:city_id].any?) %>has-error<% end %>">
+                        <% city_id, city_name = (@workshop.city.nil?) ? [nil, nil] : [@workshop.city.id, @workshop.city.to_s] %>
+                        <%= f.hidden_field :city_id, data: {kind: 'city', url: '/api/cities', 'record-id' => city_id, 'record-text' => city_name, placeholder: ''}, class: 'select_ajax_geo select-custom j-input' %>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="p-t-b">
+                      <%= f.label :workshop_category_id, class: 'info-section-small' %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.collection_select(:workshop_category_id, WorkshopCategory.order_default, :id, :to_s, {include_blank: '-'}, {class: 'select-custom j-input'}) %>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="p-t-b">
+                    <%= f.label :description_place, class: 'info-section-small' %>
+                  </div>
+                    <div class="form-group">
+                        <%= f.text_area :description_place, class: 'j-input' %>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                  <div class="p-t-b">
+                    <%= f.label :place, class: 'info-section-small' %>
+                  </div>
+                    <div class='slimed'>
+                        <div class='col-md-12'>
+                          <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                              <%= f.radio_button :place, :omitir, class: 'icheck', error: false %>
+                              <%= f.label t(:omitir, scope: :workshop_place), autofocus: true, class: 'control-label' %>
+                          </div>
+                            <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                                <%= f.radio_button :place, :institucion, class: 'icheck', error: false %>
+                                <%= f.label t(:institucion, scope: :workshop_place), class: 'control-label' %>
+                            </div>
+                            <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                                <%= f.radio_button :place, :pub, class: 'icheck', error: false %>
+                                <%= f.label t(:pub, scope: :workshop_place), class: 'control-label' %>
+                            </div>
+                            <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                                <%= f.radio_button :place, :casa, class: 'icheck', error: false %>
+                                <%= f.label t(:casa, scope: :workshop_place), class: 'control-label' %>
+                            </div>
+                            <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                                <%= f.radio_button :place, :aire_libre, class: 'icheck', error: false %>
+                                <%= f.label t(:aire_libre, scope: :workshop_place), class: 'control-label' %>
+                            </div>
+                            <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                                <%= f.radio_button :place, :a_domicilio, class: 'icheck', error: false %>
+                                <%= f.label t(:a_domicilio, scope: :workshop_place), class: 'control-label' %>
+                            </div>
+                            <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                                <%= f.radio_button :place, :other, class: 'icheck', error: false %>
+                                <%= f.label t(:other, scope: :workshop_place), class: 'control-label' %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="address_information" <% if @workshop.place.nil? || [:omitir, :a_domicilio].include?(@workshop.place.to_sym) %>style="display: none;"<% end %>>
+
+
+            <div class="m-t-b-2">
+                <div class="col-sm-6">
+                    <div class='row slimed'>
+                        <div class='col-md-9'>
+                            <div class="form-group">
+                                <%= f.label :street, class: 'info-section-small' %>
+                                <%= f.text_field :street, class: 'j-input' %>
+                            </div>
+                        </div>
+
+                        <div class='col-md-3'>
+                            <div class="form-group">
+                                <%= f.label :number, class: 'info-section-small' %>
+                                <%= f.text_field :number, class: 'j-input' %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row slimed'>
+                        <div class='col-md-6'>
+                            <div class="form-group">
+                                <%= f.label :floor, class: 'info-section-small' %>
+                                <%= f.text_field :floor, class: 'j-input' %>
+                            </div>
+                        </div>
+                        <div class='col-md-6'>
+                            <div class="form-group">
+                                <%= f.label :apartment, class: 'info-section-small' %>
+                                <%= f.text_field :apartment, class: 'j-input' %>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-sm-6 m-t-2">
+                    <div class="form-group">
+                        <div data-gmaps='showroom-address' style='width: 100%; height: 200px;'>
+                            <%= f.hidden_field :latitude, class: 'map_lat' %>
+                            <%= f.hidden_field :longitude, class: 'map_lng' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <h4 class="text p-t-b m-b b-b-b">Acerca de tus aprendices</h4>
+        <div class='col-xs-12'>
+            <div class='col-xs-12'>
+                <div class="p-t-b">
+                  <%= f.label :gender, class: 'info-section-small' %>
+                </div>
+                <div class='slimed'>
+                    <div class='col-md-4'>
+                        <div class="form-group <% if @workshop.errors[:gender].any? %>has-error<% end %>">
+                            <%= f.radio_button :gender, :male, class: 'icheck', error: false %>
+                            <%= f.label t(:male, scope: :gender_kind_types), class: 'control-label' %>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class="form-group <% if @workshop.errors[:gender].any? %>has-error<% end %>">
+                            <%= f.radio_button :gender, :female, class: 'icheck', error: false %>
+                            <%= f.label t(:female, scope: :gender_kind_types), class: 'control-label' %>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class="form-group <% if @workshop.errors[:gender].any? %>has-error<% end %>">
+                            <%= f.radio_button :gender, :other, class: 'icheck', error: false %>
+                            <%= f.label t(:other, scope: :gender_kind_types), class: 'control-label' %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group slider-range">
+                    <div class="p-t-b">
+                      <%= f.label :age_min, class: 'info-section-small' do %>
+                      Edad: <span class="slider-range-label"></span>
+                      <% end %>
+                    </div>
+                    <div class="slider-range-ui" data-min="<%= @workshop.age_min %>" data-max="<%= @workshop.age_max %>">
+                        <%= f.hidden_field :age_min, class: 'slider-range-min' %>
+                        <%= f.hidden_field :age_max, class: 'slider-range-max' %>
+                    </div>
+                </div>
+
+
+
+                <div class='slimed m-t-b-2'>
+                  <div class="p-t-b">
+                    <%= f.label :level, class: 'info-section-small' %>
+                  </div>
+                    <div class='col-md-4'>
+                        <div class="form-group <% if @workshop.errors[:level].any? %>has-error<% end %>">
+                            <%= f.radio_button :level, :beginners, class: 'icheck', error: false %>
+                            <%= f.label t(:beginners, scope: :level_kind_types), class: 'control-label' %>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class="form-group <% if @workshop.errors[:level].any? %>has-error<% end %>">
+                            <%= f.radio_button :level, :medium, class: 'icheck', error: false %>
+                            <%= f.label t(:medium, scope: :level_kind_types), class: 'control-label' %>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class="form-group <% if @workshop.errors[:level].any? %>has-error<% end %>">
+                            <%= f.radio_button :level, :advanced, class: 'icheck', error: false %>
+                            <%= f.label t(:advanced, scope: :level_kind_types), class: 'control-label' %>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <h4 class="col-xs-12 text p-t-b m-b b-b-b">Estas son las fotos del lugar</h4>
+            <div class='col-md-6'>
+                <% if @workshop.errors[:workshop_images].any? %>
+                <p class="text-danger"><%= @workshop.errors[:workshop_images].join('') %></p>
+                <% end %>
+                <div class="workshop_images_normal_container">
+                    <% @workshop.workshop_images.build(kind: :normal) %>
+                    <%= f.fields_for :workshop_images, @workshop.workshop_images.select{|x| x.kind.to_sym == :normal} do |form| %>
+                    <%= render "workshop_image_fields", f: form %>
+                    <% end %>
+                    <div class="add_workshop_image_normal_container hide">
+                        <%= link_to_add_workshop_image f, :normal %>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <%= f.label :description, class: 'info-section-small' %>
+                    <%= f.text_area :description, class: 'j-input' %>
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+
+        <h2 class="m-t-b-2">2 : Creando tu agenda</h2>
+
+
+
+        <div class='col-xs-12'>
+            <div class="col-xs-12">
+              <%= f.label :workshop_schedules, 'Calendario', class: 'info-section-small' %>
+            </div>
+            <div class='workshop_schedules_aux_container' >
+
+                <div class="workshop_schedules_container">
+                    <% workshop_workshop_schedules = (@workshop.workshop_schedules.any?)? @workshop.workshop_schedules : (@workshop.step?('step4')? [] : [WorkshopSchedule.new]) %>
+                    <%= f.fields_for :workshop_schedules, workshop_workshop_schedules do |form| %><%= render "workshop_schedule_fields", f: form %><% end %>
+                </div>
+                <% if @workshop.errors[:workshop_schedules].any? %>
+                <p class="text-danger"><%= @workshop.errors[:workshop_schedules].join('') %></p>
+                <% end %>
+                <%= link_to_add_workshop_schedule f %>
+
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div>
+            <div class='col-md-4'>
+                <div class="form-group ">
+                    <%= f.label :things_included, class: 'info-section-small' %>
+                    <%= f.text_field :things_included, class: 'j-input' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group ">
+                    <%= f.label :things_to_carry, class: 'info-section-small' %>
+                    <%= f.text_field :things_to_carry, class: 'j-input' %>
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <div class="form-group ">
+                    <%= f.label :aspects_to_consider, class: 'info-section-small' %>
+                    <%= f.text_field :aspects_to_consider, class: 'j-input' %>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <h2 class="m-t-b-2">3 : Precios</h2>
+
+
+
+        <div class="form-group">
+            <%= f.label :price, class: 'info-section-small' %>
+
+            <div>
+                <div class='col-md-4'>
+                    <%= f.text_field :price, class: 'j-input', autofocus: true %>
+                </div>
+                <div class='col-md-4'>
+                    <div class="form-group">
+                        <%= f.select :price_unit, price_unit_types, {}, {class: 'j-input select-custom'} %>
+                    </div>
+                </div>
+                <div class='col-md-4'>
+                    <%= f.text_field :payment_method, class: 'j-input', placeholder: 'A convenir en el primer encuentro' %>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+       <!--
+       <div class='p-t-b-2'>
+            <div class="form-group <% if @workshop.errors[:charge_method_transfer].any? %>has-error<% end %>">
+                <%= f.check_box :charge_method_transfer, class: 'icheck', error: false %>
+                <%= f.label t(:charge_method_transfer, scope: locale_set), class: 'control-label' %>
+            </div>
+
+            <div class='panel'  id='charge_method_transfer_container' <% unless @workshop.charge_method_transfer? %>style="display: none;"<% end %>>
+                <div class='panel-body'>
+                    <div class="form-group ">
+                        <%= f.label :charge_method_transfer_bank, class: 'info-section-small' %>
+                        <%= f.text_field :charge_method_transfer_bank, class: 'j-input' %>
+                    </div>
+                    <div class="form-group ">
+                        <%= f.label :charge_method_transfer_subsidiary, class: 'info-section-small' %>
+                        <%= f.text_field :charge_method_transfer_subsidiary, class: 'j-input' %>
+                    </div>
+                    <div class="form-group ">
+                        <%= f.label :charge_method_transfer_owner, class: 'info-section-small' %>
+                        <%= f.text_field :charge_method_transfer_owner, class: 'j-input' %>
+                    </div>
+                    <div class="form-group ">
+                        <%= f.label :charge_method_transfer_dni, class: 'info-section-small' %>
+                        <%= f.text_field :charge_method_transfer_dni, class: 'j-input' %>
+                    </div>
+                    <div class="form-group ">
+                        <%= f.label :charge_method_transfer_account_number, class: 'info-section-small' %>
+                        <%= f.text_field :charge_method_transfer_account_number, class: 'j-input' %>
+                    </div>
+                    <div class="form-group ">
+                        <%= f.label :charge_method_transfer_cbu, class: 'info-section-small' %>
+                        <%= f.text_field :charge_method_transfer_cbu, class: 'j-input' %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="sections-moves p-t-b m-t-2">
+            <div class="actions">
+                <%= link_to 'ATRAS', authenticated_main_to_teach_workshops_path, class: 'action m-t-b' %>
+                <% if @workshop.state_draft? %>
+                    <%= button_tag('GUARDAR Y PUBLICAR', type: 'submit', class: "action m-t-b", data: {'disable-with' => 'GUARDANDO'}) %>
+                <% else %>
+                    <%= button_tag('GUARDAR', type: 'submit', class: "action m-t-b", data: {'disable-with' => 'GUARDANDO'}) %>
+                <% end %>
+                <button type="button" id="lala" class="action m-t-b" style="background-color: red !important" data-toggle="modal" data-target="#confirmationModal"> ELIMINAR </button>
+            </div>
+        </div>
+    </div> </div>
+
+
+</div>
+
+
+<% end %>
+
+
+<%= render partial: 'shared/comunidad' %>
+
+
+<!-- Modal -->
+<div class="modal custom-modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content flex f-d-c j-c a-c">
+      <div class="modal-body">
+        <div class="col-xs-12 content flex f-d-c a-c">
+            <img src='<%= image_url("icons/como-funciona/04.svg") %>' class="category-icon"/>
+            <h3><strong>¿Esta seguro que desea eliminar el curso?</h3>
+          <div class="modal-footer">
+            <button type="button" class="btn action" style="background-color: grey" data-dismiss="modal">Cancelar</button>
+            <%= link_to "OK", authenticated_workshops_destroy_path(@workshop), class: "btn action" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $( document ).on('turbolinks:load', function() {
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+  });
+</script>

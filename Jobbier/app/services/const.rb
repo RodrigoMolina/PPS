@@ -1,0 +1,14 @@
+class Const
+
+  PER_PAGE = 10
+
+  GMAPS_KEY = 'AIzaSyAmhth_L9Zd8VAfPgHn5stA_UGbA6f_loI'
+
+  OAUTH_FACEBOOK_CLIENT = '168640357044992'
+  OAUTH_FACEBOOK_SECRET = '4231dd71b320c04dc37f739a04421d7c'
+  #OAUTH_GMAIL_CLIENT = '133018711392-5nh92vem4h6uat8tquheq0m71cc7qk58.apps.googleusercontent.com'
+  #OAUTH_GMAIL_SECRET = 'odAHLvDrVQnokfJrw8CFTX5G'
+
+  OAUTH_GMAIL_CLIENT = '1076446373641-q60t285mbgk2oakraqm2nnh8ev0715br.apps.googleusercontent.com'
+  OAUTH_GMAIL_SECRET = 'vgPfToLtCts7TbY_5wb3ZRmv'
+end

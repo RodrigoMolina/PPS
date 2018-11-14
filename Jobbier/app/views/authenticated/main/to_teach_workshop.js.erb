@@ -1,0 +1,5 @@
+$('#details .modal-dialog').html('<%= j render 'to_teach_workshop_modal' %>');
+$('#details').modal("show");
+App.init();
+Actions.initToTeachWorkshopModal();
+<% flash.clear %>

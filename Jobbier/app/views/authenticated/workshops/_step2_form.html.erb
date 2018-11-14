@@ -1,0 +1,157 @@
+
+
+    <%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step2'} do |f| %>
+
+    <%= f.hidden_field :step, value: 'step2' %>
+
+    <div class="container-fluid stage" id="step2">
+        <div class="col-sm-6 m-t-b-5 stage-card">
+            <div class="p-l-r-2 p-t-b title-workshop title-workshop-card ">
+                <h2>1: Taller</h2>
+
+
+                <div class='flex j-s-a'>
+                    <%= link_to 'Paso 1', authenticated_workshops_step_path(@workshop, 'step1'), class: "step step-#{@workshop.step?('step1')} #{(@workshop.step == 'step1')? 'active' : ''}" %>
+                    <%= link_to 'Paso 2', authenticated_workshops_step_path(@workshop, 'step2'), class: "step step-#{@workshop.step?('step2')} #{(@workshop.step == 'step2')? 'active' : ''}" %>
+                    <%= link_to 'Paso 3', authenticated_workshops_step_path(@workshop, 'step3'), class: "step step-#{@workshop.step?('step3')} #{(@workshop.step == 'step3')? 'active' : ''}" %>
+                </div>
+
+
+
+            </div>
+
+            <h4 class="text p-t-b m-b b-b-g">¿Y que tal el espacio físico donde se llevará a cabo?</h4>
+
+
+            <div class='col-xs-12 slimed m-t'>
+              <div class="col-xs-12 p-t-b">
+                <%= f.label :place, class: 'info-section-small m-b col-xs-12' %>
+              </div>
+              <div class='col-xs-12'>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :omitir, class: 'icheck', error: false %>
+                      <%= f.label t(:omitir, scope: :workshop_place), autofocus: true, class: 'control-label' %>
+                  </div>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :institucion, class: 'icheck', error: false %>
+                      <%= f.label t(:institucion, scope: :workshop_place), class: 'control-label' %>
+                  </div>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :pub, class: 'icheck', error: false %>
+                      <%= f.label t(:pub, scope: :workshop_place), class: 'control-label' %>
+                  </div>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :casa, class: 'icheck', error: false %>
+                      <%= f.label t(:casa, scope: :workshop_place), class: 'control-label' %>
+                  </div>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :aire_libre, class: 'icheck', error: false %>
+                      <%= f.label t(:aire_libre, scope: :workshop_place), class: 'control-label' %>
+                  </div>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :a_domicilio, class: 'icheck', error: false %>
+                      <%= f.label t(:a_domicilio, scope: :workshop_place), class: 'control-label' %>
+                  </div>
+                  <div class="form-group <% if @workshop.errors[:place].any? %>has-error<% end %>">
+                      <%= f.radio_button :place, :other, class: 'icheck', error: false %>
+                      <%= f.label t(:other, scope: :workshop_place), class: 'control-label' %>
+                  </div>
+              </div>
+            </div>
+
+
+
+            <div id="address_information" <% if @workshop.place.nil? || [:omitir, :a_domicilio].include?(@workshop.place.to_sym) %>style="display: none;"<% end %>>
+
+                <% if @workshop.step?('step1') %>
+
+                <%= hidden_field_tag :workshop_country, @workshop.country %>
+                <%= hidden_field_tag :workshop_province, @workshop.province %>
+                <%= hidden_field_tag :workshop_city, @workshop.city %>
+
+
+                <div class='row slimed'>
+                    <div class='col-md-9'>
+                        <div class="form-group">
+                            <%= f.label :street, class: 'info-section-small' %>
+                            <%= f.text_field :street, class: 'j-input' %>
+                        </div>
+                    </div>
+
+                    <div class='col-md-3'>
+                        <div class="form-group">
+                            <%= f.label :number, class: 'info-section-small' %>
+                            <%= f.text_field :number, class: 'j-input' %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='row slimed'>
+                    <div class='col-md-6'>
+                        <div class="form-group">
+                            <%= f.label :floor, class: 'info-section-small' %>
+                            <%= f.text_field :floor, class: 'j-input' %>
+                        </div>
+                    </div>
+                    <div class='col-md-6'>
+                        <div class="form-group">
+                            <%= f.label :apartment, class: 'info-section-small' %>
+                            <%= f.text_field :apartment, class: 'j-input' %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div data-gmaps='showroom-address' style='width: 100%; height: 300px;'>
+                        <%= f.hidden_field :latitude, class: 'map_lat' %>
+                        <%= f.hidden_field :longitude, class: 'map_lng' %>
+                    </div>
+                </div>
+
+                <% else %>
+
+                <p class="text-danger"><i class="fa fa-warning"></i> Es necesario completar el Paso 1</p>
+
+                <% end %>
+
+            </div>
+
+
+
+
+            <div class="form-group m-t-2 col-xs-12">
+                <%= f.label :description_place, class: 'info-section-small m-b' %>
+                <%= f.text_area :description_place, class: 'j-input', placeholder: 'Ej: La actividad se realiza en un taller cerca del centro, con facil acceso y posibilidad de ingresar con bicicletas' %>
+            </div>
+
+
+
+            <h4 class="text p-t-b m-b b-b-g">Cargá la foto del taller</h4>
+            <p>Esta será la foto principal del taller</p>
+
+
+            <div class="workshop_images_place_container">
+              <% @workshop.workshop_images.build(kind: :place) if @workshop.workshop_images.empty? %>
+              <%= f.fields_for :workshop_images, @workshop.workshop_images.select{|x| x.kind.to_sym == :place} do |form| %>
+                <%= render "workshop_image_fields", f: form %>
+              <% end %>
+              <div class="add_workshop_image_place_container hide">
+                  <%= link_to_add_workshop_image f, :place %>
+              </div>
+            </div>
+
+
+
+
+
+
+            <div class="sections-moves p-t-b m-t-2">
+                <div class="actions">
+                    <%= link_to 'ATRAS', authenticated_workshops_main_wizard_path(@workshop), class: 'action' %>
+                    <%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% end %>

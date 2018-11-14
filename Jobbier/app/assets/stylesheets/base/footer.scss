@@ -1,0 +1,147 @@
+
+.footer {
+  background-color: purple;
+  flex-direction: column;
+  ul {
+    list-style: none;
+    padding: 0;
+    li > a {
+      color: white;
+    }
+  }
+  .title-section-footer {
+    font-size: 16px;
+    color: white;
+    font-family: $roboto;
+    font-weight: 600;
+  }
+
+////////////////////////////// Brand & social
+  #brand-and-social {
+    .brand {
+      font-size: 20px;
+      color: white;
+      h1 {
+        margin: 0;
+      }
+    }
+    .social {
+      padding: 0;
+      .item {
+        @include j-hover;
+        display: inline-block;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.51);
+        text-align: center;
+        font-size: 16px;
+        margin: 0 2px;
+        a {
+          font-family: $open;
+          color: white;
+          width: 34px;
+          height: 34px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+        }
+      }
+    }
+    @media (max-width: 767px) {
+      justify-content: flex-start;
+    }
+  }
+  #comunity-and-legal {
+    li {
+      padding: 2px 0;
+    }
+    @media (max-width: 767px) {
+      justify-content: flex-start;
+    }
+  }
+
+  .cont-list-categories {
+    .catogories-list {
+      padding: 0;
+      font-weight: 800;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      @media (max-width: 767px) {
+        display: block;
+      }
+      .category-item {
+        @media (max-width: 767px) {
+          display: inline-block;
+        }
+        a {
+          @include j-hover;
+          display: inline-block;
+          border: 1px solid rgba(255, 255, 255, 0.37);
+          padding: 2px 14px;
+          border-radius: 30px;
+          font-weight: 300;
+          margin: 4px;
+          font-size: 12px;
+          font-family: $roboto;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    justify-content: center;
+    color: white;
+    background: $dark-purple;
+    width: 100%;
+    text-align: center;
+  }
+
+/////////////////////// Activity
+
+  .cont-activity-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    .cont-card-workshop-min {
+      .activity-title {
+        color: white;
+        i {
+          font-size: 16px;
+          border: 1px solid white;
+          padding: 5px;
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          text-align: center;
+          margin-right: 10px;
+          padding-top: 8px;
+        }
+        p {
+          font-size: 18px;
+          font-weight: 300;
+          margin: 0;
+        }
+      }
+      .workshop-card {
+        width: 230px;
+        .cont-info > .workshop-info > .title {
+          font-size: 14px;
+          white-space: inherit;
+        }
+        .tag-input-outline {
+          font-size: 10px;
+        }
+      }
+    }
+    @media (max-width: 550px) {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 768px) {
+    .copyright {
+      padding-bottom: 80px;
+    }
+  }
+
+}

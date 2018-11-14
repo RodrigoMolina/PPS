@@ -1,0 +1,181 @@
+.workshop-card {
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.19);
+  display: inline-block;
+  background: white;
+  width: 100%;
+  max-width: 300px;
+
+  .img {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px 6px 0 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    backface-visibility: hidden;
+  }
+  .img.min {
+    height: 130px;
+  }
+  .img.high {
+    background-size: cover;
+  }
+  .img.wide {
+    background-size: cover;
+    //background-size: contain;
+  }
+  .cont-info {
+    .teacher {
+      display: inline-block;
+      font-size: 10px;
+      padding-left: 10px;
+      img {
+        width: 30px;
+        border-radius: 50%;
+        margin-left: 6px;
+      }
+      .title {
+        color: #3c3c3c;
+        padding-top: 10px;
+        font-size: 10px;
+        text-align: left;
+        margin: 0;
+      }
+      .name {
+        color: #4e4e4e;
+        text-align: left;
+        font-size: 11px;
+      }
+    }
+  }
+  .card-tools {
+    .tool {
+      text-decoration: none;
+      background: #dbdbdb;
+      border-radius: 30px;
+      padding: 4px 16px;
+      color: black;
+      font-size: 12px;
+      margin: 0 4px;
+      span {
+        margin-left: 6px;
+      }
+    }
+  }
+  .workshop-info {
+    width: 100%;
+    a {
+      @include link-no-decoration;
+    }
+    .title {
+      font-size: 16px;
+      color: #444444;
+      font-family: $open;
+      margin-bottom: 0;
+      overflow: hidden;
+      font-weight: 600;
+      white-space: nowrap;
+      text-overflow: Ellipsis;
+    }
+    .description {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      padding-top: 6px;
+      color: grey;
+      font-family: $open;
+    }
+    .date {
+      color: grey;
+      margin: 0;
+    }
+    .small-info {
+      display: flex;
+      color: grey;
+      .distance, .price {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        i {
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+  .action {
+    float: right;
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  .bookmark {
+      font-size: 20px;
+  }
+}
+
+
+#share-workshop {
+  position: absolute;
+  z-index: 2;
+  background: white;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  padding: 18px 0 0px 0px;
+  font-size: 18px;
+  right: 20px;
+  bottom: 230px;
+  text-decoration: none;
+  box-shadow: 0px 0px 10px 2px #0000008a;
+
+  #close-share {
+    box-shadow: 0px 0px 10px 2px #0000008a;
+    position: absolute;
+    z-index: 1;
+    background: white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    padding-top: 7px;
+    top: -20px;
+    right: 20px;
+  }
+  #share-options {
+    display: none;
+    width: 100%;
+    height: 100%;
+    .share-title-section {
+      background-color: purple;
+      h3 {
+        padding: 8px 0;
+        margin: 0;
+        font-size: 18px;
+        color: white;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+      }
+    }
+    .social-share-button .ssb-icon {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 30px 30px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+}
+.expand-share-options {
+  height: 310px !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  padding: 0px !important;
+  transition: all 0.6s !important;
+  bottom: 0 !important;
+}

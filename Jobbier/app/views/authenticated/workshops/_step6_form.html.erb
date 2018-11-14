@@ -1,0 +1,109 @@
+
+
+    <% locale_set = 'activerecord.attributes.workshop' %>
+    <%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step6'} do |f| %>
+
+    <%= f.hidden_field :step, value: 'step6' %>
+
+    <div class="container-fluid stage" id="step6">
+        <div class="col-sm-6 m-t-b-5 stage-card">
+            <div class="p-l-r-2 p-t-b title-workshop title-workshop-card ">
+                <h2>3 : Precios</h2>
+
+
+                <div class='flex j-s-a'>
+                    <%= link_to 'Paso 6', authenticated_workshops_step_path(@workshop, 'step6'), class: "step step-#{@workshop.step?('step6')} #{(@workshop.step == 'step6')? 'active' : ''}" %>
+                    <%#= link_to 'Paso 7', authenticated_workshops_step_path(@workshop, 'step7'), class: "step step-#{@workshop.step?('step7')} #{(@workshop.step == 'step7')? 'active' : ''}" %>
+                </div>
+
+
+            </div>
+
+
+            <h4 class="text p-t-b m-b b-b-g">Última, pero no por eso menos importante: cuánto...<br>Es muy importante que definas un precio claro y acorde al mercado para que puedas tener inscriptos!<br>Define el precio de tus talleres.</h4>
+
+            <% if @workshop.step?('step1') %>
+
+            <div class="col-xs-12 p-t-b">
+              <%= f.label :activity_title, class: 'info-section-small' %>
+            </div>
+            <div class="form-group col-xs-12">
+                <h4 class="desc p-t-b b-b-g"><%= @workshop.activity_title %></h4>
+            </div>
+            <div class="col-xs-12 p-t-b">
+              <%= f.label :price, class: 'info-section-small' %>
+            </div>
+            <div class="form-group">
+                <%= f.text_field :price, class: 'j-input', autofocus: true, placeholder: 'Ej: 400' %>
+            </div>
+            <div class="form-group">
+            <%= f.select :price_unit, price_unit_types, {}, {class: 'j-input select-custom'} %>
+            </div>
+
+            <div class="form-group">
+                <%= f.text_field :payment_method, class: 'j-input', placeholder: 'A convenir en el primer encuentro' %>
+            </div>
+
+            <% else %>
+                <p class="text-danger"><i class="fa fa-warning"></i> Es necesario completar el Paso 1</p>
+            <% end %>
+
+
+            <div class="sections-moves p-t-b m-t-2">
+                <div class="actions">
+                    <%= link_to 'ATRAS', authenticated_workshops_main_wizard_path(@workshop), class: 'action' %>
+                    <%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+                    <!--
+                    <% if @workshop.step?('step1') %>
+                        <button type="button" class="action areYouShureBotton">
+                            GUARDAR
+                        </button>
+                    <% end %>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid modal fade" id="areYouShure" tabindex="-1" role="dialog" aria-labelledby="d">
+        <div class="row flex a-c j-c" style="height: 100%">
+            <div class="">
+                <div class="col-xs-12 modal-content" style="max-width: 500px">
+
+                    <div class="modal-body">
+
+
+
+
+                        <h4 class="desc p-t-b-2 b-b-g">
+                            <strong>A tener encuenta!</strong>
+                            <br>
+                            El precio es un factor clave de tu Taller.
+                            Poner un precio muy bajo podría generar una mala percepción de calidad, y un precio muy alto una fuga de interés.
+                            <br>
+                            El precio promedio para tu categoría es de: <strong><%= number_to_currency @workshop.workshop_category.avg_price if @workshop.workshop_category.present? %></strong>
+                            <br>
+                            ¿Estás de acuerdo con el precio que pusiste?
+                        </h4>
+
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <div class="actions" style="display: flex;justify-content: center;">
+                            <button type="button" class="action" data-dismiss="modal">CORREGIR</button>
+                            <%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <% end %>

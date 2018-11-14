@@ -1,0 +1,99 @@
+
+
+<% locale_set = 'activerecord.attributes.workshop' %>
+<%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step7'} do |f| %>
+
+<%= f.hidden_field :step, value: 'step7' %>
+
+<div class="container-fluid stage" id="step7">
+    <div class="col-sm-6 m-t-b-5 p-l-r-2 stage-card">
+        <div class="p-l-r-2 p-t-b title-workshop title-workshop-card ">
+            <h2>3 : Precios</h2>
+
+
+            <div class='flex j-s-a'>
+                <%= link_to 'Paso 6', authenticated_workshops_step_path(@workshop, 'step6'), class: "step step-#{@workshop.step?('step6')} #{(@workshop.step == 'step6')? 'active' : ''}" %>
+                <%= link_to 'Paso 7', authenticated_workshops_step_path(@workshop, 'step7'), class: "step step-#{@workshop.step?('step7')} #{(@workshop.step == 'step7')? 'active' : ''}" %>
+            </div>
+
+
+        </div>
+
+        <h4 class="text p-t-b m-b b-b-g">
+            <strong>Último, pero no por eso menos importante: cuánto...</strong><br/>
+            Sabemos lo incómodo que es tener que cobrarle a los interesados en tu taller, por eso mejor dejarlo todo claro desde el principio, y listo!<br/>
+            Jobbier pone a disposición de los aprendices varios métodos de pago. Ellos seleccionarán el que quieran y se asignará el dinero a tu cuenta que podrás revisarla, cobrarla o usarla como vos quieras en todo momento!<br/>
+            Al momento de cobrar tu dinero, deberás configurar tus preferencias de cuenta. Puedes hacerlo ahora o dejarlo para más tarde. Es tu dinero, y será tuyo siempre...
+        </h4>
+
+
+        <div class='p-t-b-2'>
+            <div class="form-group <% if @workshop.errors[:charge_method_transfer].any? %>has-error<% end %>">
+                <%= f.check_box :charge_method_transfer, class: 'icheck', error: false %>
+                <%= f.label t(:charge_method_transfer, scope: locale_set), class: 'control-label' %>
+            </div>
+
+            <div class='row'  id='charge_method_transfer_container' <% unless @workshop.charge_method_transfer? %>style="display: none;"<% end %>>
+            <div class='panel-body'>
+              <div class="col-xs-12 p-t-b">
+                <%= f.label :charge_method_transfer_bank, class: 'info-section-small' %>
+              </div>
+                <div class="form-group ">
+                    <%= f.text_field :charge_method_transfer_bank, class: 'j-input' %>
+                </div>
+                <div class="col-xs-12 p-t-b">
+                  <%= f.label :charge_method_transfer_subsidiary, class: 'info-section-small' %>
+                </div>
+                <div class="form-group ">
+                    <%= f.text_field :charge_method_transfer_subsidiary, class: 'j-input' %>
+                </div>
+                <div class="col-xs-12 p-t-b">
+                  <%= f.label :charge_method_transfer_owner, class: 'info-section-small' %>
+                </div>
+                <div class="form-group ">
+                    <%= f.text_field :charge_method_transfer_owner, class: 'j-input' %>
+                </div>
+                <div class="col-xs-12 p-t-b">
+                  <%= f.label :charge_method_transfer_dni, class: 'info-section-small' %>
+                </div>
+                <div class="form-group ">
+                    <%= f.text_field :charge_method_transfer_dni, class: 'j-input' %>
+                </div>
+                <div class="col-xs-12 p-t-b">
+                  <%= f.label :charge_method_transfer_account_number, class: 'info-section-small' %>
+                </div>
+                <div class="form-group ">
+                    <%= f.text_field :charge_method_transfer_account_number, class: 'j-input' %>
+                </div>
+                <div class="col-xs-12 p-t-b">
+                  <%= f.label :charge_method_transfer_cbu, class: 'info-section-small' %>
+                </div>
+                <div class="form-group ">
+                    <%= f.text_field :charge_method_transfer_cbu, class: 'j-input' %>
+                </div>
+
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="sections-moves p-t-b m-t-2">
+                <div class="actions">
+                    <%= link_to 'ATRAS', authenticated_workshops_main_wizard_path(@workshop), class: 'action' %>
+                    <%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<% end %>

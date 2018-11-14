@@ -1,0 +1,48 @@
+/* Base */
+@import "base/normalize";
+@import "base/globals";
+@import "base/var";
+@import "base/header";
+@import "base/footer";
+@import "base/general";
+@import "base/flexbox";
+/* Components styles */
+@import "components/card_category";
+@import "components/card_workshop";
+@import "components/card_workshop_on_search";
+@import "components/notification_panel";
+/* Styles */
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import "styles/home";
+@import "styles/como_funciona";
+@import "styles/comunidad";
+@import "styles/panel";
+@import "styles/category_page";
+@import "styles/como_ser_instructor";
+@import "styles/chat";
+@import "styles/comments";
+@import "styles/account";
+@import "styles/why_workshop";
+@import "styles/search_workshop";
+@import "styles/show_workshop";
+@import "styles/custom_modal";
+@import "styles/modals";
+@import "styles/account/recovery_password";
+/* Account */
+@import "styles/account/register";
+@import "styles/tutorial";
+@import "styles/confirmation_modal";
+@import "styles/catalogue";
+
+  /* Workshop*/
+  @import "styles/workshops/workshop";
+  @import "styles/workshops/workshop-wisard";
+  @import "styles/workshops/step1";
+  @import "styles/workshops/step2";
+  @import "styles/workshops/step3";
+  @import "styles/workshops/step4";
+  @import "styles/workshops/step5";
+  @import "styles/workshops/step6";
+  @import "styles/workshops/step7";
+  @import "styles/workshops/step8";
+  @import "styles/workshops/step_final";

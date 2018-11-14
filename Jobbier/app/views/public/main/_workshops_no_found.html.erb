@@ -1,0 +1,56 @@
+<div class="col-xs-12 flex j-c m-t-b">
+  <article class="workshop-card workshop-card-on-search p-t-b">
+        <div class="workshop-info p-l-r">
+          
+
+
+          <h4><i>No se encontraron resultados para su busqueda</i></h4>
+
+          <h4>
+          <% unless @filter.query.blank? %><b style="color: purple;">"<%= @filter.query %>"</b><% end %>
+          <% unless @filter.label.blank? %>en <b style="color: purple;">"<%= @filter.label %>"</b><% end %>
+          <% unless @filter.workshop_category.blank? %>para <b style="color: purple;">"<%= @filter.workshop_category %>"</b><% end %>
+          </h4>
+          <% if @filter.query.present? && @filter.label.present? && @filter.workshop_category.present? %>
+            <a class="action" id='blank_label_and_workshop_category_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar <b>"<%= @filter.query %>"</b> en otros lados</a>
+            <a class="action" id='blank_label_and_query_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar la categoría <b>"<%= @filter.workshop_category %>"</b> en otros lados</a>
+            <a class="action" id='blank_query_and_workshop_category_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar que otras actividades hay en <b>"<%= @filter.label %>"</b></a>
+
+          <% elsif @filter.query.present? && @filter.workshop_category.present? %>
+            <a class="action" id='blank_workshop_category_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar solo <b>"<%= @filter.query %>"</b></a>
+            <a class="action" id='blank_query_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar solo la categoría <b>"<%= @filter.workshop_category %>"</b></a>
+          
+          <% elsif @filter.query.present? && @filter.label.present? %>
+            <a class="action" id='blank_query_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar que otras actividades hay en <b>"<%= @filter.label %>"</b></a>
+            <a class="action" id='blank_label_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar <b>"<%= @filter.query %>"</b> en otros lados</a>
+          
+          <% elsif @filter.workshop_category.present? && @filter.label.present? %>
+            <a class="action" id='blank_workshop_category_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar que otras actividades hay en <b>"<%= @filter.label %>"</b></a>
+            <a class="action" id='blank_label_search' href="javascript:;" style='font-size: 1em; float: none; margin-bottom: 10px;'>Proba buscar la categoría <b>"<%= @filter.workshop_category %>"</b> en otros lados</a>
+
+
+                    
+          <% end %>
+
+        </div>
+  </article>
+</div>
+<% if @filter.label.blank? %>
+  <article>
+
+    <h4><i>Estos son otros cursos:</i></h4>
+
+    <%= render partial: "shared/components/card_workshop_on_search_page", collection: @workshop_all, as: :workshop %>
+  </article>
+<% elsif !(@workshops_near.empty?) %>
+  <article>
+    <h4><i>Estos son otros cursos cerca de <%= @filter.label %>:</i></h4>
+
+    <%= render partial: "shared/components/card_workshop_on_search_page", collection: @workshops_near, as: :workshop %>
+
+  </article>
+<% end %>
+
+    <a class="action" href="consultas" style='font-size: 1em; float: none; margin-bottom: 10px; margin-left: 35px; margin-top: 20px;'>¿Tenes alguna sugerencia? Hace click aca!</a>
+
+

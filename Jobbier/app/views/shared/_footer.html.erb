@@ -1,0 +1,90 @@
+<footer class="footer p-t-5 flex j-c" id="footer">
+  <div class="col-xs-12 p-l-r-2">
+    <div class="col-sm-6 col-md-2 p-t-b-2 flex j-e" id="brand-and-social">
+      <div>
+        <%= link_to root_path, class: 'cont-brand', id:"mobile-brand" do %>
+          <img src='<%= image_url("brand/original_white.svg") %>' class="category-icon"/>
+        <% end %>
+        <h2 class="title-section-footer">Acerca de Jobbier</h2>
+        <ul class="info">
+          <li class="item">
+            <%= link_to 'Sobre nosotros', public_main_about_us_path %>
+          </li>
+          <!--<li class="item">
+            <a href="#">Prensa y noticias</a>
+          </li>-->
+          <li class="item">
+            <%= link_to 'Trabajá con nosotros', public_work_with_us_path %>
+          </li>
+          <li class="item">
+            <%= link_to 'Contacto', public_main_contact_path %>
+          </li>
+        </ul>
+        <h2 class="title-section-footer">Links</h2>
+        <ul class="social m-t-2">
+          <li class="item">
+            <a href="https://www.facebook.com/jobbier">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>  
+          </li>
+          <li class="item">
+            <a href="https://instagram.com/jobbier">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 p-l-2" id="comunity-and-legal">
+      <h2 class="title-section-footer">La comunidad de Jobbier</h2>
+      <ul class="info">
+
+
+
+
+        <li class="item">
+          <%= link_to '¿Por qué hablamos de Talleres?', public_main_why_workshop_path %>
+        </li>
+        <li class="item">
+          <%= link_to '¿Quién puede ser Instructor?', public_main_who_can_be_a_instructor_path %>
+        </li>
+        <li class="item">
+          <%= link_to '¿Quién garantiza la calidad de las clases o actividades?', public_main_who_guarantee_workshops_path %>
+        </li>
+        <li class="item">
+          <%= link_to 'Consultas', public_main_contact_path %>
+        </li>
+      </ul>
+      <h2 class="title-section-footer">Información legal</h2>
+      <ul class="info">
+        <li class="item">
+          <a href="#">Condiciones generales de uso</a>
+        </li>
+        <li class="item">
+          <a href="#">Políticas de privacidad</a>
+        </li>
+        <li class="item">
+          <a href="#">Asistencia virtual</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-12 col-md-7 cont-activity-info p-t-b-2 flex j-s" id="comunity-and-legal">
+      <div class="cont-card-workshop-min">
+        <div class="p-l p-b activity-title flex j-s a-c">
+          <i class="fa fa-fire" aria-hidden="true">
+          </i> <p>Actividad reciente...</p>
+        </div>
+        <% workshop_footer = Workshop.filter_state_to_show.last %>
+        <%= render partial: 'shared/components/card_workshop_min', locals: {workshop: workshop_footer} if workshop_footer.present? %>
+      </div>
+      <!-- ********* Listado de categorias ************* -->
+      <div class="cont-list-categories">
+        <%= render partial: 'shared/categories_list' %>
+      </div>
+      <!-- ********* FIN Listado de categorias ************* -->
+    </div>
+  </div>
+  <div class="copyright p-t-b-2 m-t-3">
+    2017  | Jobbier &copy; todos los derechos reservados
+  </div>
+</footer>

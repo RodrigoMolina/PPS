@@ -1,0 +1,142 @@
+//Custom modal
+.custom-modal {
+  margin: 0 !important;
+  padding: 0 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .j-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .custom-modal-header {
+    .info-section-medium {
+      padding: 0;
+      margin-top: 10px;
+      width: 100%;
+    }    
+  }
+
+  .modal-dialog {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    .modal-content {
+      overflow-y: hidden;
+      .custom-modal-header {
+        .info-section-medium {
+          padding: 0 !important;
+        }
+      }
+      & > :first-child {
+        padding: 0;
+      }
+
+      .info-workshop-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        #panel-workshop-info {
+          background: #585858;
+          .workshop-card {
+            background: none;
+            .title, .description {
+              color: white;
+            }
+          }
+          .nav-tabs > li > a {
+            color: white;
+            &:hover {
+              background-color: #dc40dc !important;
+              border: none;
+            }
+          }
+          .nav-tabs > .active > a {
+            color: black;
+            &:hover {
+              color: white;
+            }
+          }
+          .action-panel {
+            background-color: white;
+          }
+          .title-entity-section {
+            background-color: white;
+            margin-top: -10px;
+            .text {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+      .teacher-avatar {
+        background: white;
+        img {
+          border-radius: 50%;
+          width: 130px;
+        }
+      }
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      #close-modal-section {
+        padding: 10px;
+        float: right;
+        width: 100%;
+        #close-modal-panel {
+          @include j-hover;
+          float: right;
+        }
+      }
+      .workshop-card {
+        box-shadow: none;
+      }
+      .entity-viewer {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        overflow-y: hidden;
+      }
+      .entity-list {
+        overflow-y: scroll;
+        height: 100%;
+        margin: 0;
+      }
+      .right-viewer {
+        .wrapper-right > .title-right{
+          background-color: white;
+        }
+        .wrapper-right > #teacher-location {
+          height: 100%;
+        }
+      }
+      #teacher-info-section-on-custom-modal {
+        overflow-y: auto;
+      }
+    }
+    @media (max-width: 991px) {
+      .modal-content {
+        .right-viewer {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          transition: all 0.5s;
+          left: -1000px;
+        }
+      }
+    }
+  }
+}
+.modal-content {
+  box-shadow: none !important;
+  border: none !important;
+  .modal-header {
+    border: none;
+  }
+}
+.openChatRoom {
+  left: 0 !important;
+}

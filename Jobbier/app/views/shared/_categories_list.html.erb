@@ -1,0 +1,9 @@
+<ul class="catogories-list">
+  <% WorkshopCategory.order_default.each do |workshop_category| %>
+    <li class="category-item">
+      <%= link_to public_main_workshop_category_path(workshop_category) do %>
+          <%= workshop_category %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,59 @@
+.workshop-card-on-search {
+  background: rgba(255, 255, 255, 0.12);
+  max-width: 100%;
+  .avatar-card-search {
+    height: 100%;
+    img {
+      width: 60px;
+      height: 60px;
+      @media (max-width: 425px){
+        width: 50px;
+        height: 50px;
+      }
+      @media (min-width: 425px) and (max-width: 768px){
+        width: 70px;
+        height: 70px;
+      }
+      @media (max-width: 1200px){
+
+      }
+      border-radius: 50%;
+    }
+  }
+  .cont-info {
+    width: 75%;
+    .workshop-info {
+      h4,p {
+        color: grey;
+      }
+    }
+    .tag-input-outline {
+      cursor: auto;
+      border: none;
+    }
+  }
+  .extend-info {
+    color: grey;
+    font-size: 12px;
+    font-family: $roboto;
+    font-weight: 300;
+    span {
+      // padding: 2px;
+    }
+  }
+  .like-section {
+    width: 100%;
+    .cont-wish {
+      color: white;
+      i {
+        color: white;
+      }
+      &:hover {
+        color: white;
+        border-radius: 50%;
+        border: 1px solid white;
+        background: none;
+      }
+    }
+  }
+}

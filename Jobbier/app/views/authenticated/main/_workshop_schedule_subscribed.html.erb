@@ -1,0 +1,10 @@
+<li class="entity">
+  <%= link_to public_main_profile_path(s), class: "p-l-r p-t-b", target: '_blank' do %>
+  <%= image_tag s.get_image_thumb %>
+  <div class="info-entity p-l">
+    <span>Aprendiz</span>
+    <span><%= s.to_s %></span>
+  </div>
+  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+  <% end %>
+</li>

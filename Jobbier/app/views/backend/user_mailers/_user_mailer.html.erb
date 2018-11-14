@@ -1,0 +1,17 @@
+<tr id="user_mailer_<%= user_mailer.id %>" <% unless visible %>style="display:none"<% end %>>
+  <td data-title='<%= t(:id, scope: :user_mailer_filter) %>:'>
+    <%= user_mailer.id %>
+  </td>
+    <td class="operations text-right">
+      <%= link_to [:backend, user_mailer], class: 'text-info', data: { toggle: 'tooltip'}, title: t(:show) do %>
+        <%= icon :search, class: 'fa-2x' %>
+      <% end %>
+      <%= link_to [:edit, :backend, user_mailer], class: 'text-warning', data: {toggle: 'tooltip'}, title: t(:action_edit) do %>
+        <%= icon :pencil, class: 'fa-2x' %>
+      <% end %>
+      <%= link_to [:backend, user_mailer], method: :delete, class: 'text-danger', data: {confirm: t(:confirm), toggle: 'tooltip'}, title: t(:delete) do %>
+        <%= icon :trash, class: 'fa-2x' %>
+      <% end if user_mailer.destroyable? %>
+  </td>
+</tr>
+

@@ -1,0 +1,72 @@
+<section class="default-section-header p-b-5" id="catalogue">
+  <article class="header">
+    <article class="p-t-3 p-l-4 cont-title">
+      <h1 class="title-full-height p-r">
+        Lamentamos que no te haya gustado el <%= @workshop.activity_title %>
+      </h1>
+      <p>
+      <br>Segui buscando, estamos seguros que tenemos algo para vos
+      </p>
+    </article>
+  </article>
+
+
+<% if @workshop.city.present? %>
+<section class="container cont-cards" style="overflow: hidden">
+  <div class="row p-t p-t-3">
+    <h2 class="col-sm-12 info-section-bold b-b-g p-b">Cerca de <%= @workshop.city.name.capitalize %></h2>
+  </div>
+  <div class="row p-t-b hidden-xs">
+    <% @workshops_near.each do |workshop| %>
+    <div class="col-xs-6 col-sm-6 col-md-3 m-t-b flex j-c">
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    </div>
+    <% end %>
+  </div>
+  <div class="row p-t-b visible-xs slide-card-section ">
+    <% @workshops_near.each do |workshop| %>
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    <% end %>
+  </div>
+</section>
+<% end %>
+
+
+<% if @workshop.workshop_category.present? %>
+<section class="container cont-cards" style="overflow: hidden">
+  <div class="row p-t-b">
+    <h2 class="col-sm-12 info-section-bold b-b-g p-b">Talleres de <%= @workshop.workshop_category.name %></h2>
+  </div>
+  <div class="row p-t-b hidden-xs">
+    <% @workshops_same_category.each do |workshop| %>
+    <div class="col-xs-6 col-sm-6 col-md-3 m-t-b flex j-c">
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    </div>
+    <% end %>
+  </div>
+  <div class="row p-t-b visible-xs slide-card-section ">
+    <% @workshops_same_category.each do |workshop| %>
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    <% end %>
+  </div>
+</section>
+<% end %>
+
+
+<section class="container cont-cards" style="overflow: hidden">
+  <div class="row p-t-b">
+    <h2 class="col-sm-12 info-section-bold b-b-g p-b">Ultimos agregados</h2>
+  </div>
+  <div class="row p-t-b hidden-xs">
+    <% @last_workshops.each do |workshop| %>
+    <div class="col-xs-6 col-sm-6 col-md-3 m-t-b flex j-c">
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    </div>
+    <% end %>
+  </div>
+  <div class="row p-t-b visible-xs slide-card-section ">
+    <% @last_workshops.each do |workshop| %>
+      <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+    <% end %>
+  </div>
+</section>

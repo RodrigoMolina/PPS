@@ -1,0 +1,63 @@
+<% if @workshops.empty? %>
+  $('#workshop_list').html('<%= j render partial: "workshops_no_found" %>');
+<% else %>
+  $('#workshop_list').html('<%= j render partial: "shared/components/card_workshop_on_search_page", collection: @workshops, as: :workshop %>');
+<% end %>
+
+
+
+
+var new_markers = []
+
+
+<% @workshops.each_with_index do |workshop, index|  %>
+
+    new_markers.push('marker<%= workshop.id %>')
+    if(window.markers['list_map']['marker<%= workshop.id %>'] === undefined){
+
+      marker = window.maps['list_map'].addMarker({
+        lat: <%= workshop.latitude %>,
+        lng: <%= workshop.longitude %>,
+        title: '<%= workshop.to_s %>',
+        icon: '/perm_assets/images/<%= workshop.workshop_category.to_s.parameterize %>.png'        
+      });
+
+      window.markers['list_map']['marker<%= workshop.id %>'] = marker;
+      window.markers['list_map']['marker<%= workshop.id %>'].addListener('click', function() {
+        $('#show_workshop_<%= workshop.id %>').trigger('click');
+      });
+    
+    }
+
+
+
+<% end %>
+
+
+marker_to_erase = Object.keys(window.markers['list_map']).diff(new_markers);
+
+
+$.each(marker_to_erase, function(index, value){
+window.maps['list_map'].removeMarker(window.markers['list_map'][value]);
+delete window.markers['list_map'][value];
+});
+
+<% if @filter.label_changed %>
+window.maps['list_map'].setCenter({lat: <%= @filter.latitude %>, lng: <%= @filter.longitude %>})
+window.maps['list_map'].setZoom(<%= @filter.zoom %>);
+$('#filter_label_old').val('<%= @filter.label_old %>');
+$('#filter_geo_ok').val('<%= @filter.geo_ok %>');
+$('#workshop_list').html('');
+<% end %>
+
+/*
+if(window.pointer !== undefined){
+  window.maps['list_map'].removeMarker(window.pointer);  
+}
+window.pointer = window.maps['list_map'].addMarker({
+  lat: <%= @filter.latitude %>,
+  lng: <%= @filter.longitude %>,
+});
+*/
+
+App.init();

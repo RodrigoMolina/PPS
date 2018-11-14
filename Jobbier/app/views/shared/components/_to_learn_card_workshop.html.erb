@@ -1,0 +1,102 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="workshop-card m-l-r card_workshop" id="<%= dom_id workshop %>">
+
+
+  <input type="text" value="http://jobbier.com/taller/<%= workshop.id %>" id="workshopPathToCopy" style="padding: 0;margin: -999px;width: 0;height: 0;position: absolute;">
+
+    <div id="share-workshop" class="flex a-c f-d-c">
+      <i class="fa fa-share-alt" aria-hidden="true"></i>
+      <div class="flex a-c f-d-c" id="share-options">
+        <div id="close-share"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="col-xs-12 share-title-section">
+          <h3 class="text m-t-b">
+            Compartí <strong><%= workshop.activity_title %></strong>
+          </h3>
+        </div>
+        <div class="col-xs-12 flex f-d-c a-c m-t">
+          <span class="info-section-small"><strong>Opción 1</strong></span>
+          <p class="text m-b b-b-b ">
+            Seleccioná un red social
+          </p>
+          <div class="social-to-share flex j-c a-c">
+
+            <%= social_share_button_tag("#{workshop.activity_title} por #{current_profile}", url: "http://jobbier.com/taller/#{workshop.id}", desc: workshop.activity_title, allow_sites: %w(facebook twitter linkedin) ) %>
+
+
+
+
+          </div>
+        </div>
+        <div class="col-xs-12 flex f-d-c a-c m-t">
+          <span class="info-section-small"><strong>Opción 2</strong></span>
+          <p class="text m-b b-b-b ">
+            Copiá el link del taller
+          </p>
+          <div class="flex j-c a-c">
+            <button class="action" id="copy-button"> COPIAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class='img <%= workshop.main_high_or_wide %>' style='background-image:url(<%= image_url workshop.main_get_image  %>);'></div>
+  <div class="cont-info m-t">
+    <div class="workshop-info p-l-r">
+      <a href="/taller/<%= workshop.id %>">
+        <h4 class="title"><%= workshop.activity_title %></h4>
+        <p class="p-r description"><%= workshop.activity_description %></p>
+      </a>
+      <div class="small-info">
+        <div class="price">
+          <div class=""><i class="fa fa-money" aria-hidden="true"></i><%= workshop.price %></div>
+        </div>
+      </div>
+      <div class="p-b">
+        <% if workshop.workshop_category.present? %>
+        <span class="tag-input-outline m-t"> <img src='<%= image_url("icons/category-invert/#{workshop.workshop_category.to_s.parameterize}.svg") %>' class="category-icon"/><%= workshop.workshop_category %></span>
+        <% end %>
+        <div class="teacher">
+          Por:
+            <%= image_tag workshop.normal_profile.get_image_thumb %>
+        </div>
+        <span>
+          <% new_msj_learner = current_profile.workshop_schedule_message_observers.joins(:workshop).where(workshops: {id: workshop}).state_new.kind_learner.count %>
+          <% unless new_msj_learner.zero? %><span class='badge' style="background-color: purple;padding: 10px;border-radius: 20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_learner %></span><% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="a-c b-t-g col-xs-12 flex j-c p-b p-t-b card-tools">
+
+
+
+    <%= link_to authenticated_main_to_learn_workshop_path(workshop), class: "tool flex a-c j-c", data: {behavior: 'ajax-modal'} do %>
+        <i class="fa fa-comments" aria-hidden="true"></i><span>chat</span>
+    <% end %>
+
+    <a href="/taller/<%= workshop.id %>" class="tool flex a-c j-c" role="button" aria-pressed="true">
+      <i class="fa fa-search" aria-hidden="true"></i><span>ver</span>
+    </a>
+
+
+
+
+
+  </div>
+
+
+</article>

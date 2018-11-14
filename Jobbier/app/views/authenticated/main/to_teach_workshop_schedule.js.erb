@@ -1,0 +1,22 @@
+$('.nav-tab-workshop-schedule').removeClass('active');
+$('.workshop-schedule-<%= @workshop_schedule_active.id %>').addClass('active');
+
+
+
+
+if ($('#workshop_schedule_info').length != 0) {
+  $('#workshop_schedule_info').html('<%= j render 'workshop_schedule_info' %>');
+}
+
+if ($('#workshop_schedule_info_2').length != 0) {
+  $('#workshop_schedule_info_2').html('<%= j render 'workshop_schedule_info_2' %>');
+}
+
+if ($('#workshop_schedule_subscribed').length != 0) {
+  $('#workshop_schedule_subscribed').html('<%= j render partial: 'workshop_schedule_subscribed', collection: @workshop_schedule_active.subscribed_normal_profiles, as: :s %>')
+}
+
+
+
+$('#cont-msgs').html('<%= j render partial: 'workshop_schedule_message', collection: @workshop_schedule_active.workshop_schedule_messages, as: :workshop_schedule_message %>');
+$('#workshop_schedule_message_form').html('<%= j render 'workshop_schedule_message_form' %>');

@@ -1,0 +1,160 @@
+
+
+<% content_for :social_links do %>
+
+  <!-- Place this data between the <head> tags of your website -->
+  <title><%= @workshop.activity_title %></title>
+  <meta name="description" content="<%= @workshop.activity_description %>" />
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jobbier">
+  <meta name="twitter:title" content="<%= @workshop.activity_title %>">
+  <meta name="twitter:description" content="<%= @workshop.activity_description %>">
+  <meta name="twitter:creator" content="<%= @workshop.normal_profile.to_s %>">
+  <meta name="twitter:image" content="<%= image_url(@workshop.main_get_image) %>">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="<%= @workshop.activity_title %>" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="http://jobbier.com/taller/<%= @workshop.id %>" />
+  <meta property="og:image" content="<%= image_url(@workshop.main_get_image) %>" />
+  <meta property="og:description" content="<%= @workshop.activity_description %>" />
+  <meta property="og:site_name" content="Jobbier" />
+  <meta property="og:app_id" content="168640357044992" />
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+<section id="show-workshop">
+  <div class="container p-b-5">
+    <h4 class="col-xs-12 title m-t" style="font-size: 32px; color: #585858; font-family: 'Roboto';font-weight: 600;"></i><%= @workshop.activity_title %></h4>
+    
+
+    <div class="col-sm-7" id="description-workshop">
+      
+
+
+      <div class="col-xs-12 show-workshop-portrait" style="background-image: url(<%= image_url( @workshop.main_get_image ) %>)">
+        
+
+        <% if(user_signed_in?) %>
+          <%= link_to authenticated_workshops_toggle_workshop_favorite_path(@workshop), remote: true, class: "workshop_favorite_#{@workshop.id} cont-wish m-r flex a-c j-c", style: 'margin-top: 15px;margin-right: 0;' do %>
+            <% if @workshop.favorite?(current_profile)%>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+            <% else %>
+              <i class="fa fa-heart-o" aria-hidden="true" ></i>
+            <% end %>
+          <% end %>
+        <% end %>
+
+
+        <span class="tag-input-outline m-t"><img src='<%= image_url("icons/category-invert/#{@workshop.workshop_category.to_s.parameterize}.svg") %>' class="category-icon"/><%= @workshop.workshop_category %></span>
+
+
+        <div style="position: absolute;right: 8px;bottom: 2px;">
+          <%= social_share_button_tag(@workshop.activity_title, url: "http://jobbier.com/taller/#{@workshop.id}", image: image_url(@workshop.main_get_image), desc: @workshop.activity_title, allow_sites: %w(facebook twitter linkedin) ) %>
+        </div>
+
+
+
+      </div>
+      
+
+
+      <p class="col-xs-12 description p-t p-b m-b"><%= @workshop.activity_description %></p>
+        <h2 class="col-xs-12 info-section-medium p-t m-t b-t-g">Instructor/ra</h2>
+
+        <div class="col-xs-12 instructor-section m-t">
+          <%= image_tag @workshop.normal_profile.get_image_thumb %>
+          <span class="instructor-name"><%= @workshop.normal_profile.to_s %></span>
+          <p class="text p-t-b"><%= @workshop.normal_profile.observation %></p>
+        </div>
+
+        <h2 class="col-xs-12 info-section-medium b-t-g p-t m-t">Acerca del lugar</h2>
+        <div class="col-xs-12 m-t">
+          <p class="text p-t-b"><%= t(@workshop.place, scope: :workshop_place) %></p>
+        </div>
+
+        <h2 class="col-xs-12 info-section-medium b-t-g p-t m-t">Caracterísitcas</h2>
+        <div class="col-xs-12 m-t">
+          <div class='row'>
+            <div class='col-sm-4'>
+              <p class="text p-t-b"><b>Género:</b><br> <%= t(@workshop.gender, scope: :gender_kind_types) %></p>
+            </div>
+            <div class='col-sm-4'>
+              <p class="text p-t-b"><b>Edad:</b><br> <%= @workshop.age_min %> - <%= @workshop.age_max %></p>
+            </div>
+            <div class='col-sm-4'>
+              <p class="text p-t-b"><b>Nivel:</b><br> <%= t(@workshop.level, scope: :level_kind_types) %></p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-sm-12'>
+              <p class="text p-t-b"><b>Cosas incluidas en el taller:</b><br> <%= @workshop.things_included %></p>
+            </div>
+            <div class='col-sm-12'>
+              <p class="text p-t-b"><b>Cosas que tiene que llevar el aprendiz:</b><br> <%= @workshop.things_to_carry %></p>
+            </div>
+            <div class='col-sm-12'>
+              <p class="text p-t-b"><b>Aspectos a tener en cuenta:</b><br> <%= @workshop.aspects_to_consider %></p>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class='col-xs-12 p-t'>
+          <% @workshop.workshop_images.kind_normal.each do |image| %>
+          <div class="col-md-4 m-t-b">
+            <%= image_tag image.get_image, style: 'width: 100%;'  %>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="col-xs-12 place-section">
+          <p class="text p-t-b"><%= @workshop.description_place %></p>
+          <div id="map-container" data-lat='<%= @workshop.latitude %>' data-lng='<%= @workshop.longitude %>'></div>
+        </div>
+
+
+        <hr>
+
+        <section class="col-xs-12 p-t-b-2 b-t-g" id="comments">
+
+
+          <% own_workshop_comment = @workshop.workshop_comments.find_by(normal_profile: current_profile) %>
+
+          <% if (user_signed_in? && current_profile.subscribed_workshops.include?(@workshop)) && own_workshop_comment.nil? %>
+          <ul class="comments-list" id="comments-list-form" >
+            <%= render 'public/main/workshop_comment_form', workshop_comment: @workshop_comment %>
+          </ul>
+          <% end %>
+          <ul class="comments-list" id="comments-list-container" >
+            <%= render partial: 'public/main/workshop_comment', collection: @workshop.workshop_comments %>
+          </ul>
+        </section>
+
+    </div>
+    <div class="col-sm-5" id="info-workshop">
+
+      <% @workshop.workshop_schedules.each do |workshop_schedule| %>
+
+          <%= render 'public/main/workshop_schedule', workshop_schedule: workshop_schedule %>
+
+      <% end %>
+
+
+    </div>
+  </div>
+</section>

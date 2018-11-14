@@ -1,0 +1,46 @@
+
+<section class="container-fluid" id="portrait-public-profile">
+  <div class="row cont-background">
+
+  </div>
+</section>
+<section class="container-fluid" id="info-public-profile">
+  <div class="row p-b-5 p-l-r-3 flex j-c">
+    <div class="big-card p-t-b p-l-r col-sm-8 col-lg-6">
+      <article class="profile-card p-b-2">
+        <div class="">
+          <img src="<%= image_url('avatar_default.png') %>" />
+        </div>
+        <div class="details-account m-t-b">
+          <h2 class=""><%= @profile %></h2>
+          <h2 class="p-b info-section-small m-b">Acerca de mi</h2>
+          <p class="text p-t-b b-t-g b-b-g">Hay docenas de razas, algunas sin pelo o incluso sin cola,
+            como resultado de mutaciones genéticas y años de selección artificial,
+            y existen en una amplia variedad de colores. Son depredadores por naturaleza,
+            siendo sus presas potenciales más de cien especies diferentes de animales.
+          </p>
+        </div>
+        <div class="flex m-t-b">
+          <div class="p-r">
+            <h2 class="info-section-small">Nombre</h2>
+            <p class="text"><%= @profile.name %></p>
+            <h2 class="info-section-small">Apellido</h2>
+            <p class="text"><%= @profile.surname %></p>
+            <h2 class="info-section-small">Edad</h2>
+            <p class="text">31</p>
+          </div>
+          <div class="p-r">
+            <h2 class="info-section-small">E-mail</h2>
+            <p class="text">enzocaminosdcv@gmail.com</p>
+            <h2 class="info-section-small">Teléfono</h2>
+            <p class="text">02213044480</p>
+          </div>
+        </div>
+      </article>
+      <article class="">
+        <div class="">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<section class="container-fluid p-t-5 flex j-c a-c f-d-c p-l-r"  id="why-workshop">
+
+  <article class="m-t-4 p-t-b p-l-r col-xs-12">
+    <p class="col-lg-8 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 text">
+
+      <b>Hola!... Hello! Hallo! Ciao! Olá! Salut! </b><br><br>
+      ¿En qué podemos ayudarte?<br>
+    </p>
+
+      <div class='col-lg-8 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 '>
+        <%= form_for @message_normal_form, url: public_main_contact_send_path, method: :put do |f| %>
+
+        <div class="row">
+        <div class="form-group col-md-6">
+          <%= f.label :name, 'Nombre', class: 'info-section-small' %>
+          <%= f.text_field :name, class: 'j-input', autofocus: true %>
+        </div>
+
+        <div class="form-group col-md-6">
+          <%= f.label :email, 'E-mail', class: 'info-section-small' %>
+          <%= f.text_field :email, class: 'j-input' %>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :content, 'Mensaje', class: 'info-section-small' %>
+          <%= f.text_area :content, class: 'j-input' %>
+        </div>  
+
+
+
+
+          <div class="actions text-right">
+            <%= button_tag('ENVIAR', type: 'submit', class: "action", data: {'disable-with' => 'ENVIANDO'}) %>
+          </div>
+
+
+        <% end %>
+      </div>
+
+  </article>
+</section>

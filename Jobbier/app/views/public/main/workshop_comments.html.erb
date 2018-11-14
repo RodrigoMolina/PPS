@@ -1,0 +1,22 @@
+<section class="container-fluid p-t-b-3" id="comments">
+
+<ul id="comments-list" class="col-sm-offset-2 col-sm-8">
+	<li class="comment p-t p-b-3">
+		<div class="p-l box-comment">
+			<div class="row">
+			  <h2 class="col-sm-12 info-section-medium b-b-g p-b m-b-2">Escribe un comentario acerca de este taller</h2>
+			</div>
+			<textarea name="name" rows="8" cols="80" class="col-xs-12"></textarea>
+			<article class="p-t-b-2 action-cont col-xs-12">
+			  <a href="#" class="action center-block m-t-b m-r">ENVIAR COMENTARIO</a>
+			</article>
+		</div>
+	</li>
+
+	<% 5.times.each do |x| %>
+		<%= render partial: 'workshop_comment' %>
+	<% end %>
+</ul>
+
+
+</section>

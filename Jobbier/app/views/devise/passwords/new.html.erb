@@ -1,0 +1,22 @@
+
+<div id="recovery-password-page" class="flex j-c a-c">
+ <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      
+      <div class="m-b-3 flex j-c f-d-c">
+        <h1 class="page-header text-center info-section-bold"><%= t :recover_password %></h1>
+          <div class="form-group m-b-2">
+            <div class="">
+              <%= f.label :email, class: 'info-section-small' %>
+              <%= f.text_field :email, autofocus: true, class: 'j-input form-control', placeholder: 'Usuario/Email', width: '100%' %>  
+            
+            </div>
+          </div>
+          <%= f.submit t(:send_me_instructions), class: 'action', data: { 'disable-with' => t(:sending)} %>
+      </div>
+
+    <% end %>
+</div>
+
+
+
+

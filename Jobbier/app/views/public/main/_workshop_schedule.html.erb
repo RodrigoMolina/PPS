@@ -1,0 +1,82 @@
+<article class="action-panel" id='<%= dom_id workshop_schedule %>'>
+  <div class="flex a-s j-s f-d-c p-l-r extend-info p-t-2 p-b b-b-g">
+    <h2 class="info-section-small">Inscripciones</h2>
+    <div class="">
+      <span class="p-r">
+        Comienzo: <strong><% if workshop_schedule.always_open %>Siempre abierto<% else %><%= workshop_schedule.start_publication %><% end %></strong>
+      </span>
+      <span>
+        Cierre: <strong><% if workshop_schedule.never_close %>Nunca cierra<% else %><%= workshop_schedule.closing_of_registrations %><% end %></strong>
+      </span> <br>
+      <span>
+        <%= workshop_schedule.schedule_info%>
+      </span>
+    </div>
+  </div>
+  <div class="flex a-c j-s p-l-r extend-info p-t-b b-b-g">
+    <span class="p-r b-r-g">Precio:<br>
+      <strong><%= number_to_currency @workshop.price %> <%= (@workshop.price_unit).tr!("_", " ") %></strong>
+    </span>
+    <span class="p-l-r b-r-g">Cupos:<br>
+     <% if workshop_schedule.unlimited_quota %>
+     <strong>-</strong>
+     <% else %>
+     <strong><%= workshop_schedule.available_quota %></strong>
+     <% end %>
+   </span>
+   <span class="p-l-r">Estado:<br>
+     <strong><%= state_name(workshop_schedule.get_state) %></strong>
+   </span>
+ </div>
+ <div class="flex a-c j-c p-t-b-2" id="action-workshop">
+
+  <% if @workshop.state_finsh? %>
+    <%= link_to 'TALLER CERRADO', 'javascript:void();', class: "action m-l", style: "background-color: #999;", disabled: 'disabled' %>
+  <% else %>
+    <% if(user_signed_in?) %>
+      <% if workshop_schedule.subscribed?(current_profile)%>
+        <button type="button" class="btn action" data-toggle="modal" data-target="#confirmationModal">
+        CANCELAR INSCRIPCION
+        </button>
+      <% else %>
+      <button type="button" id="inscriptButton" class="btn action" data-toggle="modal" data-target="#confirmationModal">
+        INSCRIBIRSE
+      </button>
+      <% end %>
+    <% else %>
+      <%= link_to(new_user_session_path(schedule_id: workshop_schedule)) do %>
+        <button type="button" class="btn action">INICIAR SESION PARA INSCRIBIRSE</button>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+
+</div>
+</article>
+
+<!-- Modal -->
+<div class="modal custom-modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content flex f-d-c j-c a-c">
+      <div class="modal-body">
+        <div class="col-xs-12 content flex f-d-c a-c">
+          <% if workshop_schedule.subscribed?(current_profile)%>
+            <img src='<%= image_url("icons/como-funciona/04.svg") %>' class="category-icon"/>
+            <h3><strong>Esta por cancelar la inscripcion a <%= @workshop.activity_title %><br></strong> ¿Desea continuar?</h3>
+          <% else %>
+            <img src='<%= image_url("icons/como-funciona/04.svg") %>' class="category-icon"/>
+            <h3 class="title m-t"><strong>Esta por inscribirse a <%= @workshop.activity_title %></strong><br> ¿Desea continuar?</h3>
+          <% end %>
+          <div class="modal-footer">
+            <button type="button" class="btn action" style="background-color: grey" data-dismiss="modal">Cancelar</button>
+            <%= link_to(authenticated_workshops_toggle_workshop_schedule_subscribed_path(workshop_schedule), remote: true) do %>
+              <button type="button" class="btn action" data-dismiss="modal">OK</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

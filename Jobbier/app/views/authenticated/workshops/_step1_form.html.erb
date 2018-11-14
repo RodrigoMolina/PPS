@@ -1,0 +1,65 @@
+
+
+<%= form_for @workshop, url: authenticated_workshops_update_path(@workshop), method: :put, html: {class: 'step1'} do |f| %>
+
+<%= f.hidden_field :step, value: 'step1' %>
+
+<div class="container-fluid stage" id="step1">
+	<div class="col-sm-6 m-t-b-5 p-l-r-2 stage-card">
+		<div class="p-l-r-2 p-t-b title-workshop title-workshop-card ">
+			<h2>1: Taller</h2>
+
+
+			<div class='flex j-s-a'>
+				<%= link_to 'Paso 1', authenticated_workshops_step_path(@workshop, 'step1'), class: "step step-#{@workshop.step?('step1')} #{(@workshop.step == 'step1')? 'active' : ''}" %>
+				<%= link_to 'Paso 2', authenticated_workshops_step_path(@workshop, 'step2'), class: "step step-#{@workshop.step?('step2')} #{(@workshop.step == 'step2')? 'active' : ''}" %>
+				<%= link_to 'Paso 3', authenticated_workshops_step_path(@workshop, 'step3'), class: "step step-#{@workshop.step?('step3')} #{(@workshop.step == 'step3')? 'active' : ''}" %>
+			</div>
+
+			<!--
+			<div class="progress m-t m-b-2">
+				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+					1 de 3
+				</div>
+			</div>
+			-->
+		</div>
+		<h4 class="text p-t-b m-b-2 b-b-g">Groso! La comunidad Jobbier está a punto de tener un nuevo taller! Eso nos pone muy felices a todos. Estamos para ayudarte!</h4>
+
+		<div class="select_ajax_geo_container">
+	    	<div class="form-group m-t-2 m-b-3 <% if(@workshop.errors[:country_id].any?) %>has-error<% end %>">
+				<%= f.label :country_id, class: 'info-section-small' %>
+				<% country_id, country_name = (@workshop.country.nil?) ? [nil, nil] : [@workshop.country.id, @workshop.country.to_s] %>
+		    	<%= f.hidden_field :country_id, data: {kind: 'country', url: '/api/countries', 'record-id' => country_id, 'record-text' => country_name, placeholder: 'Seleccionar País'}, autofocus: true, class: 'select_ajax_geo select-custom j-input' %>
+	    	</div>
+
+	    	<div class="form-group m-t-b-3 <% if(@workshop.errors[:province_id].any?) %>has-error<% end %>">
+				<%= f.label :province_id, class: 'info-section-small' %>
+				<% province_id, province_name = (@workshop.province.nil?) ? [nil, nil] : [@workshop.province.id, @workshop.province.to_s] %>
+		    	<%= f.hidden_field :province_id, data: {kind: 'province', url: '/api/provinces', 'record-id' => province_id, 'record-text' => province_name, placeholder: 'Seleccionar Provincia'}, class: 'select_ajax_geo select-custom j-input' %>
+	    	</div>
+
+	    	<div class="form-group m-t-b-3 <% if(@workshop.errors[:city_id].any?) %>has-error<% end %>">
+				<%= f.label :city_id, class: 'info-section-small' %>
+				<% city_id, city_name = (@workshop.city.nil?) ? [nil, nil] : [@workshop.city.id, @workshop.city.to_s] %>
+		    	<%= f.hidden_field :city_id, data: {kind: 'city', url: '/api/cities', 'record-id' => city_id, 'record-text' => city_name, placeholder: 'Seleccionar Ciudad'}, class: 'select_ajax_geo select-custom j-input' %>
+	    	</div>
+    	</div>
+
+
+    	<div class="form-group">
+			<%= f.label :workshop_category_id, class: 'info-section-small' %>
+			<%= f.collection_select(:workshop_category_id, WorkshopCategory.order_default, :id, :to_s, {prompt: 'Seleccionar Categoría'}, {class: 'select-custom j-input'}) %>
+		</div>
+
+		<div class="sections-moves p-t-b m-t-2">
+				<div class="actions">
+					<%= link_to 'ATRAS', authenticated_workshops_main_wizard_path(@workshop), class: 'action' %>
+					<%= button_tag('SIGUIENTE', type: 'submit', class: "action", data: {'disable-with' => 'GUARDANDO'}) %>
+				</div>
+		</div>
+	</div>
+</div>
+
+
+<% end %>

@@ -1,0 +1,31 @@
+/* Flexbox */
+.flex {
+  display: flex;
+}
+.j-c {
+  justify-content: center;
+}
+.j-e {
+  justify-content: flex-end;
+}
+.j-s {
+  justify-content: flex-start;
+}
+.j-s-a {
+	justify-content: space-around;
+}
+.a-c {
+  align-items: center;
+}
+.a-e {
+  align-items: flex-end;
+}
+.a-s {
+  align-items: flex-start;
+}
+.f-d-r {
+  flex-direction: row;
+}
+.f-d-c {
+  flex-direction: column;
+}

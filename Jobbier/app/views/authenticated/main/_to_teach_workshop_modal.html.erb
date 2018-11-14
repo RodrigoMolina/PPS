@@ -1,0 +1,95 @@
+<div class="modal-content">
+  <div class="col-sm-12 col-md-4 p-t info-workshop-wrapper">
+    <div class="fixed-info" id="panel-workshop-info">
+      <div class="p-t-b" id="close-modal-section">
+        <button type="button" class="j-button" data-dismiss="modal" id="close-modal-panel">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <article class="workshop-card card_workshop">
+        <div class="cont-info m-t">
+          <div class="workshop-info p-l-r">
+            <h4 class="title"><%= @workshop.activity_title %></h4>
+            <p class="p-r description"><%= @workshop.activity_description %></p>
+          </div>
+        </div>
+      </article>
+
+
+
+
+
+      <ul class="nav nav-tabs">
+        <% @workshop.workshop_schedules.each_with_index do |ws, index| %>
+        <% if @workshop_schedule_active ==  ws %>
+        <li class='nav-tab-workshop-schedule workshop-schedule-<%= ws.id %> active'>
+          <%= link_to authenticated_main_to_teach_workshop_schedule_path(ws), remote: true, class: "change_workshop_schedule" do %>
+            <%= "Turno #{index+1}" %>
+            <span>
+              <% new_msj_teacher = current_profile.workshop_schedule_message_observers.joins(:workshop_schedule).where(workshop_schedules: {id: @workshop_schedule_active}).state_new.kind_teacher.count %>
+              <% unless new_msj_teacher.zero? %><span class='badge' style="background-color: #a800a8;padding: 3px 10px;border-radius: 20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_teacher %></span><% end %>
+            </span>
+
+          <% end %>
+        </li>
+        <% else %>
+
+        <li class='nav-tab-workshop-schedule workshop-schedule-<%= ws.id %>'>
+          <%= link_to authenticated_main_to_teach_workshop_schedule_path(ws), remote: true, class: "change_workshop_schedule" do %>
+            <%= "Turno #{index+1}" %>
+            <span>
+
+              <% new_msj_teacher = current_profile.workshop_schedule_message_observers.joins(:workshop_schedule).where(workshop_schedules: {id: ws.id}).state_new.kind_teacher.count %>
+              <% unless new_msj_teacher.zero? %><span class='badge' style="background-color: #a800a8;padding: 3px 10px;border-radius: 20px;"><i class="fa fa-envelope-o" aria-hidden="true"></i> <%= new_msj_teacher %></span><% end %>
+            </span>
+
+          <% end %>
+        </li>
+        <% end %>
+        <% end %>
+      </ul>
+
+      <article class="action-panel" id='workshop_schedule_info'>
+        <%= render 'workshop_schedule_info' %>
+      </article>
+
+
+     <article class="title-entity-section p-t-b p-l-r b-b-g">
+      <h4>Aprendices inscriptos</h4>
+      <p>Estas son todas las personas que participan en este día y horario</p>
+    </article>
+  </div>
+
+
+  <article class="entity-viewer" id="panel-entity">
+    <ul class="entity-list" id='workshop_schedule_subscribed'>
+      <%= render partial: 'workshop_schedule_subscribed', collection: @workshop_schedule_active.subscribed_normal_profiles, as: :s  %>
+    </ul>
+
+  </article>
+  <article class="p-t-b visible-xs visible-sm text-center b-t-g" id="cont-chat-button">
+    <button type="button" class="action" id="open-panel-chat">ABRIR CHAT GRUPAL</button>
+  </article>
+</div>
+<div class="col-sm-12 col-md-8 p-t right-viewer">
+  <div class="wrapper-right">
+    <section class="p-t-b title-right p-l-r-2 flex a-c">
+      <button type="button" class="j-button visible-xs visible-sm" id="close-chat-room">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </button>
+      <h2 class="info-section-small m-l-2 no-p">Mensajes grupales </h2>
+    </section>
+    <section class="cont-msgs" id='cont-msgs'>
+      <%= render partial: 'workshop_schedule_message', collection: @workshop_schedule_active.workshop_schedule_messages, as: :workshop_schedule_message   %>
+    </section>
+
+
+
+    <section id="workshop_schedule_message_form">
+      <%= render 'workshop_schedule_message_form' %>
+    </section>
+
+
+  </div>
+</div>
+</div>

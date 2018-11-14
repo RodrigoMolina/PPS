@@ -1,0 +1,64 @@
+<section class="container-fluid aside-section p-t-b m-t-2" id="how-work-section">
+  <article class="container how-section p-b-2">
+    <div class="row p-t-b">
+      <h2 class="col-sm-12 info-section-bold b-b-g p-b m-b-2">¿Cómo funciona Jobbier?</h2>
+    </div>
+    <h3 class="subtitle p-t-b">Todos tenemos mucho por <strong>aprender</strong></h2>
+    <div class="col-sm-4 item p-t-b flex j-c a-c f-d-c">
+        <div class="num">1</div>
+        <img src="<%= image_url('icons/como-funciona/01.svg') %>" class="center-block"/>
+        <p class="text p-t-b p-l-r">
+          Explorá sobre eso que estabas queriendo aprender!
+        </p>
+    </div>
+    <div class="col-sm-4 item p-t-b flex j-c a-c f-d-c">
+        <div class="num">2</div>
+        <img src="<%= image_url('icons/como-funciona/02.svg') %>" class="center-block"/>
+        <p class="text p-t-b p-l-r">
+          Inscribite al taller que más te guste.
+        </p>
+    </div>
+    <div class="col-sm-4 item p-t-b flex j-c a-c f-d-c">
+        <div class="num">3</div>
+        <img src="<%= image_url('icons/como-funciona/03.svg') %>" class="center-block"/>
+        <p class="text p-t-b p-l-r">
+          Aprendé de manera presencial junto a quienes ya lo estan haciendo.
+        </p>
+    </div>
+    <div class="col-xs-12">
+      <%= link_to public_main_search_workshop_path,  class: "action center-block m-t-b m-r" do %>
+        GUAU, QUIERO VER QUE HAY!
+      <% end %>
+    </div>
+  </article>
+  <article class="container how-section p-b-2">
+    <h3 class="subtitle p-t-b">Todos tenemos algo para <strong>enseñar</strong></h2>
+    <div class="col-sm-4 item p-t-b flex j-c a-c f-d-c">
+        <div class="num">4</div>
+        <img src="<%= image_url('icons/como-funciona/04.svg') %>" class="center-block"/>
+        <p class="text p-t-b p-l-r">
+          Cargá un perfil de instructor, y armá el taller que quieras, como quieras, cuando quieras!
+        </p>
+    </div>
+    <div class="col-sm-4 item p-t-b flex j-c a-c f-d-c">
+        <div class="num">5</div>
+        <img src="<%= image_url('icons/como-funciona/05.svg') %>" class="center-block"/>
+        <p class="text p-t-b p-l-r">
+          Establecé formas de contacto, días, agenda y condiciones del curso.
+        </p>
+    </div>
+    <div class="col-sm-4 item p-t-b flex j-c a-c f-d-c">
+        <div class="num">6</div>
+        <img src="<%= image_url('icons/como-funciona/06.svg') %>" class="center-block"/>
+        <p class="text p-t-b p-l-r">
+          Empezá a recibir ofertas, y a conocer gente interesada en aprender junto a vos!
+        </p>
+    </div>
+    <div class="col-xs-12 center-block">
+      <%= link_to public_main_how_to_instruct_path,  class: "action center-block m-t-b m-r", onClick: "ga('send', 'event', 'Home', 'click', 'si-quiero-compartirlo');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', 'si-quiero-compartirlo');" do %>
+        SI, QUIERO COMPARTIR LO QUE SÉ
+      <% end %>
+    </div>
+  </article>
+</section>
+

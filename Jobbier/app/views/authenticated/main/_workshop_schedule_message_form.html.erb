@@ -1,0 +1,10 @@
+<%= form_for @workshop_schedule_message, url: authenticated_main_workshop_schedule_message_path, remote: true, method: :post do |f| %>
+
+<section class="send m-t">
+<%= f.hidden_field :workshop_schedule_id %>
+
+<%= f.text_field :body, class: 'j-input row', placeholder: 'Escribí un mensaje aquí' %>
+<%= button_tag('enviar', type: 'submit', class: "action center-block m-t-b m-r") %>
+
+</section>
+<% end %>

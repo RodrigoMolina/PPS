@@ -1,0 +1,18 @@
+<section class="container-fluid category-page">
+  <article class="category-header row" style="background-image: url(<%= image_url(@workshop_category.image_cover.file.to_s) %>)">
+    <h1 class="name-category">
+      <%= @workshop_category %>
+    </h1>
+  </article>
+  <article class="col-xs-12 category-workshops p-t-b-3">
+    <div class="row p-t-b"> <!-- Mapear Workshops -->
+      <% @workshops.each do |workshop| %>
+        <div class="col-sm-3">
+          <%= render partial: 'shared/components/card_workshop', locals: {workshop: workshop} %>
+        </div>
+      <% end %>
+    </div>
+  </article>
+</section>
+<%= render partial: 'shared/como_funciona' %>
+<%= render partial: 'shared/comunidad' %>

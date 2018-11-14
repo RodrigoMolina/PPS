@@ -1,0 +1,94 @@
+#search-workshop {
+  body {
+    overflow: hidden;
+  }
+  padding: 0;
+  height: 100%;
+  .j-input{
+    @include small-select;
+  }
+
+#explorar_workshops{
+  border-radius: 4px;
+}
+
+//First column: Filter and list
+  .wrapper-search {
+    @include small-select;
+
+    height: 100%;
+    & > :first-child {
+      height: 100%;
+      overflow-y: scroll;
+      padding: 0;
+    }
+    .filter-selector {
+      .j-input {
+        @include j-input-small;
+      }
+      position: fixed;
+      z-index: 2;
+      background: white;
+      box-shadow: -20px -5px 21px 6px rgba(0, 0, 0, 0.42);
+      div {
+        width: 100%;
+        padding: 0 4px;
+      }
+      .info-section {
+        @include small-info;
+      }
+      @media (max-width: 767px) {
+        position: fixed;
+        z-index: 2;
+        bottom: 45px;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+    .filtered-list-workshop {
+      padding-top: 88px;
+      background: #efefef;
+      height: 99%;
+      .workshop-card-on-search {
+        background: white;
+      }
+      @media (max-width: 767px) {
+        height: 100vh;
+        position: fixed;
+        bottom: 0;
+        z-index: 1;
+        overflow-y: scroll;
+        padding-top: 10px;
+        padding-bottom: 300px;
+      }
+    }
+  }
+
+//Second column: Map
+  #map-filter-workshop {
+    background-color: grey;
+    height: 100%;
+    @media (max-width: 767px) {
+      margin-top: -1px;
+      position: fixed;
+      height: 100vh;
+      z-index: 2;
+      left: -100%;
+      transition: all 0.5s;
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+.open-map {
+  right: 0 !important;
+}
+@media (max-width: 767px) {
+  .open-map {
+    left: 0 !important;
+    top: 0 !important;
+  }
+}

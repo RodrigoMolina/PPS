@@ -1,0 +1,19 @@
+  <div class="modal-body" id="tutorial-content-css">
+    <div class="modal-header">
+      <h1 class="modal-title">¡Felicitaciones!</h1>
+      <h5 class="modal-title">Te inscribiste a <%= @workshop.activity_title %></h5>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <%= render partial: 'shared/components/to_learn_card_workshop_tutorial', locals: {workshop: @workshop} %>
+        </div>
+        <div class="col-sm-6">
+          <%= render partial: 'authenticated/main/card_workshop_tutorial_text' %>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>

@@ -1,0 +1,7 @@
+<% if @workshop_comment.destroyed? %>
+$('#workshop_comment_<%= @workshop_comment.id %>').fadeOut(function(){ $(this).remove(); })
+<% end %>
+
+$(document).trigger('flash:send', <%= raw flash.to_hash.to_json %>);
+<% flash.clear %>
+

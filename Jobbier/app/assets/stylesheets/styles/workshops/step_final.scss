@@ -1,0 +1,251 @@
+@import './base/var';
+
+#step_final h2 {
+  font-family: $monserrat;
+  font-size: 24px;
+  background: #763a80;
+  padding: 14px 10px 14px 30px;
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0px 16px 0 -9px #6ff0ba;
+}
+
+.final-message {
+  color: purple !important;
+  background-color: white !important;
+  box-shadow: none !important;
+  text-align: center;
+}
+
+#welcome {
+  font-family: $nobile;
+  color: white;
+  font-size: 18px;
+  max-width: 320px;
+}
+
+#step_final {
+  background: #6441A5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #2a0845, #6441A5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  flex-direction: column;
+  .workshop-card {
+    max-width: 280px;
+    margin: 0;
+    box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.09)
+  }
+
+}
+
+#step_final .stage-card{
+    max-width: initial;
+    box-shadow: none;
+}
+
+
+#step_final .workshop_images_place_container{
+    font-size: 0;
+}
+
+#step_final .workshop_images_place_container .workshop_image_place{
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    width: 100%;
+    height: 150px;
+    background-color: purple;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    webkit-transition: background-color 0.2s ease-in;
+    -moz-transition: background-color 0.2s ease-in;
+    -o-transition: background-color 0.2s ease-in;
+    transition: background-color 0.2s ease-in;
+}
+
+#step_final .workshop_images_place_container .add-workshop_image_place{
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    display: table;
+    line-height: 128px;
+    outline: 5px solid;
+    outline-offset: -5px;
+    opacity: 0.6;
+    webkit-transition: opacity 0.2s ease-in;
+    -moz-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+}
+
+#step_final .workshop_images_place_container .add-workshop_image_place:hover{
+    opacity: 1;
+}
+
+
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container{
+width: 100%;
+height: 100%;
+}
+
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .imageloader-img{
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .imageloader-img.high{
+    background-size: cover; //MAS ALTA
+}
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .imageloader-img.wide{
+    background-size: contain; //MAS ANCHA
+}
+
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .imageloader-file-div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .workshop_image_actions{
+    position: absolute;
+    top: 10px;
+    font-size: 12px;
+    right: 10px;
+    opacity: 0;
+    z-index: 9;
+    width: 100%;
+    webkit-transition: opacity 0.2s ease-in;
+    -moz-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+}
+#step_final .workshop_images_place_container .workshop_image_place:hover .imageloader-container .workshop_image_actions{
+    opacity: 1;
+}
+
+
+
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .workshop_image_actions .icheckbox_square-blue{
+    float: left;
+    left: 10px;
+    top: 3px;
+}
+#step_final .workshop_images_place_container .workshop_image_place .imageloader-container .workshop_image_actions .remove-workshop_image_place{
+    float: right;
+    background-color: rgba(254,254,254,0.6);
+    border: 1px solid #888;
+    border-radius: 15px;
+    padding: 3px;
+}
+
+
+
+#step_final .workshop_images_normal_container{
+    font-size: 0;
+}
+
+#step_final .workshop_images_normal_container .workshop_image_normal{
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    width: 32%;
+    height: 150px;
+    background-color: purple;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    webkit-transition: background-color 0.2s ease-in;
+    -moz-transition: background-color 0.2s ease-in;
+    -o-transition: background-color 0.2s ease-in;
+    transition: background-color 0.2s ease-in;
+}
+
+#step_final .workshop_images_normal_container .add-workshop_image_normal{
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    display: table;
+    line-height: 128px;
+    outline: 5px solid;
+    outline-offset: -5px;
+    opacity: 0.6;
+    webkit-transition: opacity 0.2s ease-in;
+    -moz-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+}
+
+#step_final .workshop_images_normal_container .add-workshop_image_normal:hover{
+    opacity: 1;
+}
+
+
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container{
+width: 100%;
+height: 100%;
+}
+
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .imageloader-img{
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .imageloader-img.high{
+    background-size: cover; //MAS ALTA
+}
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .imageloader-img.wide{
+    background-size: contain; //MAS ANCHA
+}
+
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .imageloader-file-div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .workshop_image_actions{
+    position: absolute;
+    top: 10px;
+    font-size: 12px;
+    right: 10px;
+    opacity: 0;
+    z-index: 9;
+    width: 100%;
+    webkit-transition: opacity 0.2s ease-in;
+    -moz-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+}
+#step_final .workshop_images_normal_container .workshop_image_normal:hover .imageloader-container .workshop_image_actions{
+    opacity: 1;
+}
+
+
+
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .workshop_image_actions .icheckbox_square-blue{
+    float: left;
+    left: 10px;
+    top: 3px;
+}
+#step_final .workshop_images_normal_container .workshop_image_normal .imageloader-container .workshop_image_actions .remove-workshop_image_normal{
+    float: right;
+    background-color: rgba(254,254,254,0.6);
+    border: 1px solid #888;
+    border-radius: 15px;
+    padding: 3px;
+}

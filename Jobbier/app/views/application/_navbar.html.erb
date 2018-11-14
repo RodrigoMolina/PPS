@@ -1,0 +1,78 @@
+<header class="container-fluid" id="header">
+
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="nav flex a-c j-e" role="navigation">
+
+    <%= link_to root_path, class: 'cont-brand', id:"desktop-brand", onClick: "ga('send', 'event', 'Home', 'click', 'logo-jobbier');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', 'logo-jobbier');" do %>
+      <img src='<%= image_url("brand/1.svg") %>' class="category-icon"/>
+    <% end %>
+
+    <%= link_to root_path, class: 'cont-brand', id:"mobile-brand", onClick: "ga('send', 'event', 'Home', 'click', 'logo-jobbier');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', 'logo-jobbier');" do %>
+      <img src='<%= image_url("brand/5.svg") %>' class="category-icon"/>
+    <% end %>
+
+
+          <% if(user_signed_in?) %><%= render 'shared/left_menu_panel' %><% end %>
+
+          <ul class="nav navbar-nav flex a-c j-c">
+
+
+            <% if(controller_name == 'main' && action_name == 'index' ) %>
+              <li class="m-l-r" id="navbar-how-work">
+                <a href="#how-work-section" onClick="ga('send', 'event', 'Home', 'click', 'como-funciona-up');" onmouseover="ga('send', 'event', 'Home', 'pasarRaton', 'como-funciona-up');">¿Cómo funciona Jobbier?</a>
+              </li>
+            <% end %>
+
+
+            <% if !user_signed_in? || (user_signed_in? && current_profile.workshops.empty?) %>
+              <li class="m-l-r" id="navbar-instructor">
+                <%= link_to public_main_how_to_instruct_path, class: "action", onClick: "ga('send', 'event', 'Home', 'click', 'convertite-en-instrutor');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', 'como-funciona-up');" do %>
+                  CONVERTITE EN INSTRUCTOR
+                <% end %>
+              </li>
+            <% end %>
+
+
+
+
+
+
+
+
+
+
+            <li class="m-r">
+              <%= link_to public_main_search_workshop_path, onClick: "ga('send', 'event', 'Home', 'click', 'buscar-up');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', 'buscar-up');" do %>
+                Buscar
+              <% end %>
+            </li>
+
+
+            <% if(user_signed_in?) %>
+
+              <li class="m-l-r-2" id="notification-button">
+                <%= render 'shared/components/notifications/notification_panel' %>
+              </li>
+
+              <li class="dropdown avatar-cont m-r" id="options-button">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <%= image_tag current_profile.get_image_thumb %>
+                </a>
+              </li>
+
+            <% else %>
+
+
+              <% #unless controller_name == 'sessions' && action_name == 'new' %>
+                 <li class="m-l-r">
+                   <%= link_to 'Ingresar', new_user_session_path, onClick: "ga('send', 'event', 'Home', 'click', 'ingresar-up');", onmouseover: "ga('send', 'event', 'Home', 'pasarRaton', 'ingresar-up');" %>
+                </li>
+              <% #end %>
+
+
+            <% end %>
+          </ul>
+
+  </nav>
+
+</header>

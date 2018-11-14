@@ -1,0 +1,5 @@
+$('#modal_one .modal-dialog').attr('class', 'modal-dialog modal-lg vertical-align-center');
+$('#modal_one .modal-content').html('<%= j render 'workshop_modal' %>');
+$('#modal_one').modal("show");
+App.init();
+<% flash.clear %>

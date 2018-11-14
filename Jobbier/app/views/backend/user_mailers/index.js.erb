@@ -1,0 +1,8 @@
+$('#user_mailer_container').append('<%= j render(@user_mailers, visible: true) %>');
+<% if @user_mailers.next_page %>
+  $('#paginate_container').removeClass('show').html('<%= j will_paginate(@user_mailers) %>');
+<% else %>
+  $('#paginate_container').remove();
+<% end %>
+    
+App.init();

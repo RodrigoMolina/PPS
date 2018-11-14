@@ -1,0 +1,9 @@
+<% if @workshop_comment_created.present? %>
+$('#comments-list-container').prepend('<%= j render 'public/main/workshop_comment', workshop_comment: @workshop_comment_created %>');
+$('#comments-list-form').html('');
+<% else %>
+$('#comments-list-form').html('<%= j render 'public/main/workshop_comment_form', workshop_comment: @workshop_comment %>');
+<% end %>
+
+$(document).trigger('flash:send', <%= raw flash.to_hash.to_json %>);
+<% flash.clear %>

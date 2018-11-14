@@ -1,0 +1,110 @@
+/* Mixins */
+@mixin j-hover {
+  &:focus,
+  &:active,
+  &:hover {
+    color: white !Important;
+    background-color: #dc40dc !important;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+@mixin small-info {
+  font-size: 10px;
+  color: $j-black;
+  padding: 0 0 4px 0;
+  margin: 0;
+}
+@mixin medium-info {
+  font-size: 22px;
+  color: $j-black;
+  padding: 0 0 4px 0;
+  margin: 0;
+  font-family: $roboto;
+  font-weight: 300;
+}
+@mixin bold-info {
+  font-size: 28px;
+  font-weight: 600;
+  color: $j-black;
+}
+
+@mixin action-min {
+  font-size: 14px;
+  padding: 6px 16px;
+}
+
+// Inputs
+@mixin j-input-small {
+  height: 24px;
+  padding: 0 5px;
+  &::placeholder {
+    font-size: 12px;
+  }
+}
+@mixin link-no-decoration {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+@mixin no-outline {
+  &:focus {
+    outline: none;
+  }
+}
+//Texts
+@mixin responsive-text {
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
+  @media (min-width: 992px) {
+    font-size: 20px;
+  }
+  @media (min-width: 1200px) {
+    font-size: 22px;
+  }
+}
+@mixin light-text {
+  font-weight: 300;
+}
+
+// Select 2
+@mixin small-select {
+  .select-custom {
+    height: 24px;
+    font-size: 12px;
+  }
+  .select2-chosen {
+    height: 100%;
+    padding: 0 0 0 6px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width: 374px) {
+      max-width: 60px;
+    }
+  }
+  .select2-arrow {
+    width: 14px;
+    height: 24px;
+  }
+  .select2-arrow > b {
+    background-position: 0px 0px !important;
+  }
+}
+
+@mixin purple-action-header {
+  background: purple;
+  .action {
+    background: white;
+    color: purple;
+    &:hover {
+      background-color: white;
+    }
+  }
+}

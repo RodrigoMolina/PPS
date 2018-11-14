@@ -1,0 +1,27 @@
+<div id="recovery-password-page" class="flex j-c a-c">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+      <div class="m-b-3 flex j-c f-d-c">
+        <h1 class="page-header text-center info-section-bold"><%= t :change_password %></h1>
+          <div class="form-group m-b-2">
+            <div class="">
+              <%= f.label :password, class: 'info-section-small' %>
+              <%= f.password_field :password,  autocomplete: "off", autofocus: true, class: 'j-input form-control', placeholder: 'Nueva contraseña' %>  
+            
+            </div>
+
+            <div class="">
+              <%= f.label :password_confirmation, class: 'info-section-small' %>
+              <%= f.password_field :password,  autocomplete: "off", autofocus: true, class: 'j-input form-control', placeholder: 'Confirmar contraseña' %>  
+            
+            </div>
+
+          </div>
+          <%= f.submit t(:change_password), class: 'action', data: { 'disable-with' => t(:sending)} %>
+      </div>
+
+    <% end %>
+</div>
+
+
+

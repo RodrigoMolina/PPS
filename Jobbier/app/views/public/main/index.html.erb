@@ -1,0 +1,80 @@
+<section class="container-fluid" id="landing">
+  <div id="cont-slogan">
+    <h1 class="title-full-height">
+        Todos tenemos <br>
+        algo que <strong>Enseñar</strong><br>
+        Todos tenemos <br>
+        mucho por <strong>Aprender</strong>
+    </h1>
+    <p>
+      Conectá con aquellos que ya están <br>
+      haciendo eso que te gustaría descubrir
+    </p>
+  </div>
+  <div class="home-video p-t">
+    <video preload="true" autoPlay="autoplay" loop="loop" muted="muted">
+      <source src="<%= image_url('landing-video.mp4') %>" type="video/mp4"></source>
+      <source src="<%= image_url('landing-video.ogg') %>" type="video/ogg"></source>
+      <source src="<%= image_url('landing-video.ogv') %>" type="video/ogv"></source>
+      <source src="<%= image_url('landing-video.webm') %>" type="video/webm"></source>
+      <source src="<%= image_url('landing-video.m4v') %>" type="video/m4v"></source>
+    </video>
+    <img src="<%= image_url('image-backup.jpg') %>" alt="Imagen de artista" id="image-backup" class="hidden-md hidden-lg">
+  </div>
+</section>
+<section class="container p-t-b" id="home-search">
+
+  <h2 class="info-section-medium">¿Qué querés aprender?</h2>
+
+  <%= form_for @filter, as: :filter, url: public_main_search_workshop_path, html: {id: 'filter_form'}, enforce_utf8: false, method: :get do |f| %>
+
+    <%= f.hidden_field :label_old %>
+    <%#= f.hidden_field :label %>
+    <%= f.hidden_field :center_latitude %>
+    <%= f.hidden_field :center_longitude %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+    <%= f.hidden_field :zoom %>
+    <%= f.hidden_field :order %>
+    <%= f.hidden_field :direction %>
+    <%= f.hidden_field :este %>
+    <%= f.hidden_field :oeste %>
+    <%= f.hidden_field :norte %>
+    <%= f.hidden_field :sur %>
+    <%= f.hidden_field :geo_ok %>
+
+    <div class="cont-input  j-s-a">
+
+      <%#= f.text_field :query, class: 'j-input', placeholder: 'Taller de dibujo' %>
+      <%= f.text_field :label, class: 'j-input', placeholder: 'Ej: La Plata' %>
+
+      <%= button_tag type: 'button', id: 'explorar_workshops_index', class: 'j-button' do %>
+        <i class="fa fa-search" aria-hidden="true"></i>
+      <% end %>
+
+
+
+
+
+    </div>
+
+  <% end %>
+
+</section>
+<section class="container m-t-b" style="position:relative">
+  <div class="row p-t-b">
+    <h2 class="col-sm-12 info-section-bold b-b-g p-b">Explorá</h2>
+  </div>
+  <div class="row slide-card-section p-b-2 p-l-r-3"> <!-- Mapear categorias -->
+    <button type="button" name="button" class="j-button left-arrow"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="button" name="button" class="j-button right-arrow"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+    <% @categories.each do |workshop_category| %>
+      <%= render 'shared/components/card_category', workshop_category: workshop_category %>
+    <% end %>
+  </div>
+</section>
+
+<%= render 'shared/components/slide_cards_workshop' %>
+<%= render 'shared/como_funciona' %>
+<%= render 'shared/comunidad' %>
+<%= render 'shared/why_workshop' %>

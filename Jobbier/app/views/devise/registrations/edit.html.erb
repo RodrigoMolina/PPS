@@ -1,0 +1,277 @@
+<section class="container p-t-5 p-b-3 user-account">
+
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.fields_for :normal_profile do |profile| %>
+    <% @normal_profile = profile.object %>
+
+    <article class="row p-t-3 personal-information">
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.email %></div>
+      <% end %>
+
+      <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 p-t-b-2 avatar imageloader-container">
+          <div class="cont-avatar">
+            <div class="avatar-hover">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </div>
+            <% image_obj = (@normal_profile.image.present?) ? @normal_profile.image : Image.new %>
+            <%= profile.fields_for :image, image_obj do |image| %>
+            <%= image.file_field :file, class: 'imageloader-file', style: 'position: absolute; width: 110px; height: 110px; z-index: 9; opacity: 0; cursor: pointer;'  %>
+            <%= image.hidden_field :file_cache if image_obj.file_cache.present? %>                    
+            <img class="imageloader-img" src="<%= image_url @normal_profile.get_image %>" />
+          </div>
+
+
+
+            <% if profile.object.errors[:image].any? %>
+              <p class="text-danger"><%= profile.object.errors[:image].join('') %></p>
+            <% end %>
+          <% end %>
+
+        </div>
+        <div class="col-xs-12 preferences">
+          <div class="box-interest">
+            <div class="interest-list">
+              <%= profile.label :workshop_category_to_learn_ids, class: 'info-section-small' %>
+              <%= profile.collection_select(:workshop_category_to_learn_ids, WorkshopCategory.order_default, :id, :to_s, {}, {multiple: true, class: 'select-custom', placeholder: 'Que querés aprender?'}) %>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="col-xs-12 preferences">
+          <div class="box-interest">
+            <div class="interest-list">
+              <%= profile.label :workshop_category_to_teach_ids, class: 'info-section-small' %>
+              <%= profile.collection_select(:workshop_category_to_teach_ids, WorkshopCategory.order_default, :id, :to_s, {}, {multiple: true, class: 'select-custom', placeholder: 'Que querés enseñar?'}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-9 details-account select_ajax_geo_container">
+        <h2 class="info-section b-b-g p-t-b m-t-2">Datos personales</h2>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :name, class: 'info-section-small' %>
+            <%= profile.text_field :name, autofocus: true, class: 'j-input' %>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :surname, class: 'info-section-small' %>
+            <%= profile.text_field :surname, class: 'j-input' %>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :gender, class: 'info-section-small' %>
+            <%= profile.select :gender, gender_kind_types, {include_blank: true}, {class: 'j-input select-custom', data: {'allow-clear' => true}} %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+            <%= profile.label :birthdate, class: 'info-section-small' %>
+            <%= profile.text_field :birthdate, class: 'j-input datepicker' %>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+            <%= f.label :email, class: 'info-section-small' %>
+            <%= f.email_field :email, class: 'j-input' %>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+            <%= profile.label :phone_number, class: 'info-section-small' %>
+            <%= profile.text_field :phone_number, class: 'j-input' %>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+            <%= profile.label :dni, class: 'info-section-small' %>
+            <%= profile.text_field :dni, class: 'j-input' %>
+            </div>
+          </div>
+        </div>
+
+
+        <h2 class="info-section b-b-g p-t-b m-t-3">Datos de residencia</h2>
+
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group <% if(@normal_profile.errors[:country_id].any?) %>has-error<% end %>">
+              <%= profile.label :country_id, class: 'info-section-small' %>
+              <% country_id, country_name = (@normal_profile.country.nil?) ? [nil, nil] : [@normal_profile.country.id, @normal_profile.country.to_s] %>
+              <%= profile.hidden_field :country_id, data: {kind: 'country', url: '/api/countries', 'record-id' => country_id, 'record-text' => country_name, placeholder: ''}, class: 'select_ajax_geo j-input select-custom' %>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="form-group <% if(@normal_profile.errors[:province_id].any?) %>has-error<% end %>">
+              <%= profile.label :province_id, class: 'info-section-small' %>
+              <% province_id, province_name = (@normal_profile.province.nil?) ? [nil, nil] : [@normal_profile.province.id, @normal_profile.province.to_s] %>
+              <%= profile.hidden_field :province_id, data: {kind: 'province', url: '/api/provinces', 'record-id' => province_id, 'record-text' => province_name, placeholder: ''}, class: 'select_ajax_geo j-input select-custom' %>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            <div class="form-group <% if(@normal_profile.errors[:city_id].any?) %>has-error<% end %>">
+              <%= profile.label :city_id, class: 'info-section-small' %>
+              <% city_id, city_name = (@normal_profile.city.nil?) ? [nil, nil] : [@normal_profile.city.id, @normal_profile.city.to_s] %>
+              <%= profile.hidden_field :city_id, data: {kind: 'city', url: '/api/cities', 'record-id' => city_id, 'record-text' => city_name, placeholder: ''}, class: 'select_ajax_geo j-input select-custom' %>
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="row">
+        
+
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :street, class: 'info-section-small' %>
+            <%= profile.text_field :street, class: 'j-input' %>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+            <%= profile.label :number, class: 'info-section-small' %>
+            <%= profile.text_field :number, class: 'j-input' %>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+            <%= profile.label :floor, class: 'info-section-small' %>
+            <%= profile.text_field :floor, class: 'j-input' %>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+            <%= profile.label :apartment, class: 'info-section-small' %>
+            <%= profile.text_field :apartment, class: 'j-input' %>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+            <%= profile.label :postal_code, class: 'info-section-small' %>
+            <%= profile.text_field :postal_code, class: 'j-input' %>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <h2 class="info-section b-b-g p-t-b m-t-3">Gustos y Preferencias</h2>
+
+
+        <div class="row">
+        
+
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :preference_place, class: 'info-section-small' %>
+            <%= profile.select :preference_place, preference_place_types, {include_blank: true}, {class: 'j-input select-custom', data: {'allow-clear' => true}} %>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :preference_assistance, class: 'info-section-small' %>
+            <%= profile.select :preference_assistance, preference_assistance_types, {include_blank: true}, {class: 'j-input select-custom', data: {'allow-clear' => true}} %>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+            <%= profile.label :preference_time, class: 'info-section-small' %>
+            <%= profile.select :preference_time, preference_time_types, {include_blank: true}, {class: 'j-input select-custom', data: {'allow-clear' => true}} %>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+          <%= profile.label :observation, class: 'info-section-small' %>
+          <%= profile.text_area :observation, class: 'j-input' %>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <%# unless (resource.omniauth_access?) %>
+          <h2 class="info-section b-b-g p-t-b m-t-3">Contraseña</h2>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+              <%= f.label :password, autocomplete: "off", class: 'info-section-small' %>
+              <%= f.password_field :password, class: 'j-input' %>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+              <%= f.label :password_confirmation, autocomplete: "off", class: 'info-section-small' %>
+              <%= f.password_field :password_confirmation, class: 'j-input' %>
+              </div>
+            </div>
+            <!--
+            <div class="col-sm-4">        
+              <div class="form-group">
+              <%= f.label :current_password, autocomplete: "off", class: 'info-section-small' %>
+              <%= f.password_field :current_password, class: 'j-input' %> 
+              </div>
+            </div>
+            -->
+          </div>
+        <%# end %>
+
+
+        <div class="p-t-b-2 action-cont ">
+          <%= button_tag('GUARDAR', type: 'submit', class: 'action center-block m-t-b m-r', data: {'disable-with' => 'GUARDANDO'}) %>
+        </div>
+      </div>
+
+
+
+    </article>
+
+  <% end %>
+  <% end %>
+
+
+</section>
+
+
+
+
+
+         
+
